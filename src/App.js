@@ -1,7 +1,7 @@
 import './App.css';
 import { db  } from './firebase/firebase.js';
 import { useEffect ,useState} from 'react';
-import { collection ,onSnapshot, query } from "firebase/firestore";
+import { collection ,onSnapshot, query,addDoc } from "firebase/firestore";
 
 
 function App() {
@@ -12,6 +12,7 @@ const [mail ,setmail]=useState('');
 
 
 useEffect(()=>{
+  //read data form databast
   const q=query(collection(db,'users'))
   onSnapshot(q,(querySnapshot)=>{   
     setuser(
@@ -24,10 +25,13 @@ useEffect(()=>{
  
 },[])
 
-
+//add to data base value of input
 function handelsubmit(e) {
   e.preventDefault();
-  console.log(name,mail); 
+  const docRef =  addDoc(collection(db, "users"), {
+    name,
+    mail
+  });
 
 }
 
@@ -35,7 +39,7 @@ function handelsubmit(e) {
     <div className="App">
       <form onSubmit={handelsubmit}> 
       <input type={'text'} placeholder="name" value={name} onChange={((e)=>setname(e.target.value))}/>
-      <input type={'text'} placeholder="name" value={mail} onChange={((e)=>setmail(e.target.value))}/>
+      <input type={'text'} placeholder="mail" value={mail} onChange={((e)=>setmail(e.target.value))}/>
       <input type={'submit'} placeholder="submit"/>
         
       </form>
@@ -43,7 +47,11 @@ function handelsubmit(e) {
       {
         user.map((user,i)=>{
           return(
-                      <div key={i}>{user.name}</div>
+            <>
+                  <div key={i}>{user.name}</div>
+                  <div key={i}>{user.mail}</div>
+
+            </>
 
           )
         })
