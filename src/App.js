@@ -42,7 +42,7 @@ function App() {
 
      deleteDoc(deleteuser).then(()=>{
       console.log(`the user ${id} is deletied`);
-     }     )
+     })
     }
 
   return (
