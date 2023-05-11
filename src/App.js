@@ -39,8 +39,8 @@ function App() {
                 );
               })
             }
-
           </Route>
+
           <Route >
             <Route path='/login' element={<LogIn />} />
             <Route path='/signup' element={<SignUp />} />

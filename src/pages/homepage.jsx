@@ -1,9 +1,16 @@
 import React from "react";
+import Button from '@mui/material/Button';
+import NavBar from "../components/navbar";
+
 
 export default function HomePage() {
     return (
         <>
-        Homepage
+         <NavBar/>
+        <Button variant="contained" color="success">
+            Success
+        </Button>
+     
         </>
     );
 }
