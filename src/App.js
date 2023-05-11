@@ -11,21 +11,45 @@ import Profile from './pages/profile';
 
 
 function App() {
-   
+  const pagelist = [
+    {
+      path: '/allproduct',
+      page: <AllProduct />
+    },
+    {
+      path: '/profile',
+      page: <Profile />
+    },
+    {
+      path: '/petpage',
+      page: <PetPage />
+    }
+  ];
+
   return (
     <>
-     <BrowserRouter>
-     <Routes path="./pages/">
-     <Route index element={<HomePage/>}/>
-     <Route  path='/login' element={<LogIn/>}/>
-     <Route  path='/signup' element={<SignUp/>}/>
-     <Route  path='/allproduct' element={<AllProduct/>}/>
-     <Route  path='/profile' element={<Profile/>}/>
-     <Route  path='/petpage' element={<PetPage/>}/>
-     <Route  path='*' element={<NoPage/>}/>
-     </Routes>
-     
-     </BrowserRouter>
+      <BrowserRouter>
+        <Routes path="./pages/">
+          <Route index element={<HomePage />} />
+          <Route>
+            {
+              pagelist.map((page) => {
+                return (
+                  <Route path={page.path} element={page.page} />
+                );
+              })
+            }
+
+          </Route>
+          <Route >
+            <Route path='/login' element={<LogIn />} />
+            <Route path='/signup' element={<SignUp />} />
+          </Route>
+          <Route path='*' element={<NoPage />} />
+
+        </Routes>
+
+      </BrowserRouter>
     </>
   );
 }
