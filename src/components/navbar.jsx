@@ -12,9 +12,12 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-
-
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { Outlet, Link } from "react-router-dom";
+
+
+
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -71,7 +74,8 @@ export default function NavBar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            <Link to={'/'}>LOGO</Link>
+
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
