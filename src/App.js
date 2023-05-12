@@ -1,18 +1,15 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
+import pagelist from './components/pagelist';
 import HomePage from "./pages/homepage";
 import LogIn from './pages/login';
 import SignUp from './pages/signup';
-import pagelist from './components/pagelist';
-
-
 
 function App() {
 
   return (
     <>
-
       <BrowserRouter>
         <Routes path="./pages/">          
           <Route >

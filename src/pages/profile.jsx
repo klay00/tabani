@@ -7,7 +7,6 @@ export default function Profile() {
         <>
         <NavBar/>
 
-        <OverflowCard/><OverflowCard/><OverflowCard/><OverflowCard/><OverflowCard/><OverflowCard/><OverflowCard/><OverflowCard/><OverflowCard/><OverflowCard/>
         </>
     );
 }

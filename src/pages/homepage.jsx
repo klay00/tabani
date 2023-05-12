@@ -1,13 +1,14 @@
 import React from "react";
-import Button from '@mui/material/Button';
+import Grid  from '@mui/material/Grid';
 import NavBar from "../components/navbar";
+import { Box, Container } from "@mui/system";
 
 
 export default function HomePage() {
     return (
         <>
         <NavBar/>
-        fffffffffffff
+
      
         </>
     );
