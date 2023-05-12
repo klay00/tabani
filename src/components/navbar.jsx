@@ -14,6 +14,9 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { Outlet, Link } from "react-router-dom";
+import { NavPages } from './pagelist';
+import { useEffect } from 'react';
+import '../App.css';
 
 
 
@@ -29,7 +32,7 @@ const theme = createTheme({
   }
 });
 
-const pages = ['adoubt animul', 'Pricing', 'Blog'];
+// const pages = ['adoubt animul', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 export default function NavBar() {
@@ -50,6 +53,16 @@ export default function NavBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  useEffect(()=>{
+    
+      NavPages.map(pages=>{
+        return(
+          console.log(pages.name)
+          )
+      })
+    
+  },[])
 
   return (
 
@@ -107,9 +120,11 @@ export default function NavBar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+              {NavPages.map((pages) => (
+                <MenuItem key={pages.name} onClick={handleCloseNavMenu}>                
+                <Link to={pages.path}>
+                  <Typography textAlign="center">{pages.name}</Typography>
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
@@ -131,17 +146,19 @@ export default function NavBar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            <Link to={'/'}>LOGO</Link>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
+            {NavPages.map((pages) => (
+              <Link to={pages.path}>
+                <Button
+                key={pages}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page}
+                {pages.name} 
               </Button>
+             </Link>
             ))}
           </Box>
 
