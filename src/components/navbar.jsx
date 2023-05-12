@@ -13,6 +13,19 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 
+
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#FFA800"
+    },
+    secondary: {
+      main: "#EEE097"
+    }
+  }
+});
+
 const pages = ['adoubt animul', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -36,6 +49,9 @@ export default function NavBar() {
   };
 
   return (
+
+    
+    <ThemeProvider theme={theme}>
     <AppBar position="static" color='secondary'>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -157,5 +173,7 @@ export default function NavBar() {
         </Toolbar>
       </Container>
     </AppBar>
+    </ThemeProvider>
+
   );
 }
