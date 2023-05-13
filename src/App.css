@@ -11,9 +11,9 @@ a{
   pointer-events: none;
 }
 body{
+  background-color: rgb(250, 252, 255);
   font-family: 'Nunito', sans-serif;
-  background-image: url('../public/images/bg.png');
-  
+  /* background-image: url('../public/images/bg.png');   */
   
 }
 
@@ -37,12 +37,34 @@ body{
 .App-link {
   color: #61dafb;
 }
+.main {
+  display: grid;
+  grid-template-columns: repeat(12,1fr);
+  grid-template-rows: 100px 100%;
+  gap: 20px;
+  margin: 20px 10%;
+}
+.main div {
+  border-radius: 30px;
+}
+.main .first {
+  grid-column: 1/13;
+  background-color: white;
+  box-shadow: 0 0px  40px -5px rgba(0, 0, 0, 0.101);
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+}
+.main  .secnde{
+  box-shadow: 0 0px  40px -5px rgba(0, 0, 0, 0.101);
+  grid-column: 1/4;
+  height: auto;
+  background-color: white;
+
+}
+.main .main-display-items{
+  grid-column: 4/13;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  
 }
