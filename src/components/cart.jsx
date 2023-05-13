@@ -7,7 +7,7 @@ import Typography from '@mui/joy/Typography';
 
 export default function OverflowCard() {
   return (
-    <Card variant="outlined" sx={{ width: 320 }}>
+    <Card variant="outlined" sx={{ width: 250 }}>
       <CardOverflow>
         <AspectRatio ratio="2">
           <img
