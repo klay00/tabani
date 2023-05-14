@@ -51,8 +51,11 @@ body{
   grid-column: 1/13;
   background-color: white;
   box-shadow: 0 0px  40px -5px rgba(0, 0, 0, 0.101);
-
-
+  display: flex;
+  align-items: center;
+  padding: 0 30px;
+  gap: 30px;
+  justify-content: space-between;
 }
 .main  .secnde{
   box-shadow: 0 0px  40px -5px rgba(0, 0, 0, 0.101);
@@ -67,4 +70,19 @@ body{
   flex-wrap: wrap;
   gap: 10px;
   
+}
+.main .first :nth-child(1),
+.main .first :nth-child(2){
+  /* background-color: rgb(250, 252, 255); */
+
+}
+.main .first button{
+  
+    border-radius: 30px;
+
+}
+.main .first .input-search{
+  display: flex;
+  align-items: center;
+  gap: 30px;
 }
