@@ -1,7 +1,6 @@
 import { Autocomplete, Button, TextField } from "@mui/material";
 import React from "react";
-import { ThemeProvider } from "@mui/material/styles";
-import theme from "../tools/theem";
+import MainButtom from "./buttom";
 import { options, Location } from "./pagelist";
 
 
@@ -26,15 +25,7 @@ export default function Search() {
             />
          </div>                 
 
-            <ThemeProvider theme={theme}>
-                <Button variant="contained"  color="primary" size="large">
-                    Search
-                </Button>
-            </ThemeProvider>
-
-
-
-
+            <MainButtom name={'search'}/>
         </>
     )
 }
