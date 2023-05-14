@@ -7,7 +7,7 @@ import Typography from '@mui/joy/Typography';
 
 export default function OverflowCard() {
   return (
-    <Card variant="outlined" sx={{ width: 250 }}>
+    <Card variant="outlined" sx={{ width: 250 ,py: 0,mb:2}}>
       <CardOverflow>
         <AspectRatio ratio="1.5">
           <img
@@ -18,10 +18,10 @@ export default function OverflowCard() {
           />
         </AspectRatio>
       </CardOverflow>
-      <Typography level="h2" sx={{ fontSize: 'md', mt: 2 }}>
-        Yosemite National Park
+      <Typography level="h2" sx={{ fontSize: 'md', mt: 1 }}>
+        Yosemite National Park 
       </Typography>
-      <Typography level="body2" sx={{ mt: 0.5, mb: 2 }}>
+      <Typography level="body2" sx={{ mt: 0.5, mb: 1 }}>
         California
       </Typography>
       <Divider />
@@ -30,7 +30,7 @@ export default function OverflowCard() {
         sx={{
           display: 'flex',
           gap: 1.5,
-          py: 1.5,
+          py: 1,
           px: 'var(--Card-padding)',
           bgcolor: 'background.level1',
         }}
