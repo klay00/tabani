@@ -9,10 +9,10 @@ export default function OverflowCard() {
   return (
     <Card variant="outlined" sx={{ width: 250 }}>
       <CardOverflow>
-        <AspectRatio ratio="2">
+        <AspectRatio ratio="1.5">
           <img
-            src="https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318"
-            srcSet="https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318&dpr=2 2x"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzuw3ZNTNZZQgARGpWW7f6hColBKQKZ9qo6eW3giZIawfCbFziSINYfpht19iH8ndNnQA&usqp=CAU"
+            // srcSet="https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318&dpr=2 2x"
             loading="lazy"
             alt=""
           />
