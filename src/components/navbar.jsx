@@ -17,22 +17,9 @@ import { Outlet, Link } from "react-router-dom";
 import { NavPages } from './pagelist';
 import { useEffect } from 'react';
 import '../App.css';
+import theme from '../tools/theem';
 
 
-
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#FFA800"
-    },
-    secondary: {
-      main: "#EEE097"
-    }
-  }
-});
-
-// const pages = ['adoubt animul', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 export default function NavBar() {
