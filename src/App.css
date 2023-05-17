@@ -54,7 +54,6 @@ body{
   display: flex;
   align-items: center;
   padding: 0 30px;
-  gap: 30px;
   justify-content: space-between;
 }
 .main  .secnde{
@@ -71,18 +70,16 @@ body{
   gap: 10px;
   
 }
-.main .first :nth-child(1),
-.main .first :nth-child(2){
-  /* background-color: rgb(250, 252, 255); */
 
-}
 .main .first button{
   
     border-radius: 30px;
 
 }
+
 .main .first .input-search{
   display: flex;
   align-items: center;
   gap: 30px;
+ 
 }

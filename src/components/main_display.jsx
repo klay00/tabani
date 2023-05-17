@@ -1,7 +1,9 @@
 import React from 'react';
 import '../App.css';
+import MainButtom from './buttom';
 import OverflowCard from './cart';
 import Search from './serch';
+
 
 export default function MainDisplay() {
     return(
@@ -10,7 +12,9 @@ export default function MainDisplay() {
             <div className="first">
                 <Search/>
             </div>
-            <div className="secnde"></div>
+            <div className="secnde">
+                <MainButtom name={'hussein'}/>
+            </div>
             <div className="main-display-items">
             <OverflowCard/>
             <OverflowCard/>
