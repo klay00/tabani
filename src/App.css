@@ -90,16 +90,16 @@ body{
  
 }
 .pet-main{
-  height: 85vh;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   margin: 20px 10%;
 }
 .pet-main .pet-images {
-  flex: 1 0 400px;  
+  flex: 2 0 400px;  
   border-radius: 30px;
   height: 100%;
+  max-width: 800px;
   background-color: white;
   box-shadow: 0 0px  40px -5px rgba(0, 0, 0, 0.101);
   display: flex;
@@ -115,15 +115,25 @@ body{
 
 }
 .pet-main .pet-images .chose-image{
-  flex: 1;
+  flex: 1 0 300;
+  overflow: scroll;
+  display: grid;
+  grid-template-columns: repeat(5,1fr);
 }
 .pet-main .pet-images .chose-image img{
-  width: 200px;
-  height: 150px;
-
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  
+}
+.pet-main .pet-images .chose-image button{
+  background-color: transparent;
+  border: none;
+  height: 100px;
 }
 .pet-main .pet-info {
-  flex: 1 0 100px;  
+  flex: 1 0 200px;  
   border-radius: 30px;
   background-color: white;
   box-shadow: 0 0px  40px -5px rgba(0, 0, 0, 0.101);
