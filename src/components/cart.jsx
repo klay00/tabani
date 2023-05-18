@@ -5,7 +5,7 @@ import CardOverflow from '@mui/joy/CardOverflow';
 import Divider from '@mui/joy/Divider';
 import Typography from '@mui/joy/Typography';
 import { Link } from "react-router-dom";
-import { Avatar, ListItem } from '@mui/joy';
+import { Avatar} from '@mui/joy';
 import { Stack } from '@mui/system';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 export default function OverflowCard() {
