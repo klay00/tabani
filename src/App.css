@@ -44,6 +44,7 @@ body{
   gap: 20px;
   margin: 20px 10%;
 }
+
 .main div {
   border-radius: 30px;
 }
@@ -87,4 +88,44 @@ body{
   align-items: center;
   gap: 30px;
  
+}
+.pet-main{
+  height: 85vh;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 20px 10%;
+}
+.pet-main .pet-images {
+  flex: 1 0 400px;  
+  border-radius: 30px;
+  height: 100%;
+  background-color: white;
+  box-shadow: 0 0px  40px -5px rgba(0, 0, 0, 0.101);
+  display: flex;
+  flex-direction: column;  
+}
+.pet-main .pet-images .main-image{
+  flex: 2;
+ padding: 20px; 
+ border-radius: 10px;
+}
+.pet-main .pet-images .main-image img{
+  border-radius: 10px;
+
+}
+.pet-main .pet-images .chose-image{
+  flex: 1;
+}
+.pet-main .pet-images .chose-image img{
+  width: 200px;
+  height: 150px;
+
+}
+.pet-main .pet-info {
+  flex: 1 0 100px;  
+  border-radius: 30px;
+  background-color: white;
+  box-shadow: 0 0px  40px -5px rgba(0, 0, 0, 0.101);
+
 }
