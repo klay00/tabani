@@ -12,27 +12,14 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { Outlet, Link } from "react-router-dom";
+import { ThemeProvider } from "@mui/material/styles";
+import {Link } from "react-router-dom";
 import { NavPages } from './pagelist';
 import { useEffect } from 'react';
 import '../App.css';
+import theme from '../tools/theem';
 
 
-
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#FFA800"
-    },
-    secondary: {
-      main: "#EEE097"
-    }
-  }
-});
-
-// const pages = ['adoubt animul', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 export default function NavBar() {
