@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "../components/navbar";
 import '../App.css';
 import { AspectRatio, Button } from "@mui/joy";
-import { Stack } from "@mui/system";
-import { Grid } from "@mui/material";
+import { catImageList } from "../components/pagelist";
+
 
 export default function PetPage() {
+    const [imgUrl,setImgUrl]=useState([]);
+    // setImgUrl(0);
+    useEffect(()=>{
+        catImageList.map((img)=>{
+            // console.log(img[0]);
+            setImgUrl(img.imgSrc)
+        }) 
+    },[]);
+    function handellUrl(url) {       
+            console.log(url)
+            setImgUrl(url)                                   
+    }
+   
     return (
         <>
             <NavBar />
@@ -14,42 +27,28 @@ export default function PetPage() {
                     <div className="main-image">
                         <AspectRatio ratio="2/1.2" >
                             <img
-                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzuw3ZNTNZZQgARGpWW7f6hColBKQKZ9qo6eW3giZIawfCbFziSINYfpht19iH8ndNnQA&usqp=CAU"
+                                src={imgUrl}
                                 loading="lazy"
                                 alt="pet image"
                             />
                         </AspectRatio>
                     </div>
-                    <div className="chose-image">
-                        <Button>
+                    <div className="chose-image">                      
+                             {
+                                catImageList.map((catimg)=>{
+                                    return(
+                                        <>
+                                        <Button onClick={()=>{handellUrl(catimg.imgSrc)}}>
                                     <img
-                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzuw3ZNTNZZQgARGpWW7f6hColBKQKZ9qo6eW3giZIawfCbFziSINYfpht19iH8ndNnQA&usqp=CAU"
+                                        src={catimg.imgSrc}
                                         loading="lazy"
                                         alt="pet image"
                                     />
                             </Button>
-                            <Button>
-                                    <img
-                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzuw3ZNTNZZQgARGpWW7f6hColBKQKZ9qo6eW3giZIawfCbFziSINYfpht19iH8ndNnQA&usqp=CAU"
-                                        loading="lazy"
-                                        alt="pet image"
-                                    />
-                            </Button>
-                            <Button>
-                                    <img
-                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzuw3ZNTNZZQgARGpWW7f6hColBKQKZ9qo6eW3giZIawfCbFziSINYfpht19iH8ndNnQA&usqp=CAU"
-                                        loading="lazy"
-                                        alt="pet image"
-                                    />
-                            </Button>
-                            <Button>
-                                    <img
-                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzuw3ZNTNZZQgARGpWW7f6hColBKQKZ9qo6eW3giZIawfCbFziSINYfpht19iH8ndNnQA&usqp=CAU"
-                                        loading="lazy"
-                                        alt="pet image"
-                                    />
-                            </Button>
-                            
+                                        </>
+                                    )
+                                })
+                             }
                     </div>
                 </div>
                 <div className="pet-info">
