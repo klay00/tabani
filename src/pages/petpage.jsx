@@ -116,10 +116,14 @@ export default function PetPage() {
                                 <td>yes</td>
 
                                 </tr>
-                                <tr className="but-adobt">
-                                    <MainButtom name={'Adobt Now'}/>
-                                </tr>
+                                
                             </tbody>
+                            <tfoot>
+                            <tr className="but-adobt">
+                                <td> <MainButtom name={'Adobt Now'}/></td>
+                                   
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                     <div className="account">ffffffffff</div>
