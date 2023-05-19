@@ -73,9 +73,6 @@ body{
   width: 100%;
   justify-content: center;
 }
-.main .main-display-items div{
-
-}
 
 .main .first button{
   
@@ -141,9 +138,15 @@ body{
 .pet-main .pet-info table{
   box-shadow: 0 0px  40px -5px rgba(0, 0, 0, 0.101);
   background-color: white;
-  padding: 10px;
+  padding: 20px;
   border-radius: 30px;
-
+  flex: 1;
+}
+.pet-main .pet-info tbody tr td:nth-child(2){
+  text-align: end;
+}
+.pet-main .pet-info tbody tr h4{
+  margin: 5px 0;
 }
 .but-adobt{
   display: flex;
@@ -154,4 +157,6 @@ body{
   background-color: rgb(3, 188, 3);
   border-radius: 30px;
   flex: 1;
+  color: white;
+  font-weight: bold;
 }
