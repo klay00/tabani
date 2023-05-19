@@ -42,8 +42,14 @@ export default function PetPage() {
             <div className="pet-main">
                 <div className="pet-images">
                     <div className="main-image">
-                        <AspectRatio ratio="2/1.2" >
-                            <img
+                        <AspectRatio ratio="2/1.4" >
+                            
+                            <img className="maim-img-pet"
+                                src={imgUrl}
+                                loading="lazy"
+                                alt="pet image"
+                            />
+                            <img className="back-image"
                                 src={imgUrl}
                                 loading="lazy"
                                 alt="pet image"
