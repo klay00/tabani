@@ -3,27 +3,20 @@ import NavBar from "../components/navbar";
 import '../App.css';
 import { AspectRatio, Avatar, Button, Stack } from "@mui/joy";
 import { catImageList } from "../components/pagelist";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 import MainButtom from "../components/buttom";
+import { Link } from "react-router-dom";
+import FullScreenDialog from "../components/adubt_inputs";
 
 export default function PetPage() {
 
-    //   const rows = [
-    //     createData('Type', "Dog"),
-    //     createData('Color', 'white'),
-    //     createData('Age', '2 yers'),
-    //     createData('Sex', 'male'),
-    //     createData('Location', 'krada'),
-    //     createData('Size', '5kg'),
-    //     createData('Vaccination from the disease', 'yes'),
-    //   ];
+    const [open, setOpen] = React.useState(false);
 
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+    const handleClose = () => {
+      setOpen(false);
+    };
 
     const [imgUrl, setImgUrl] = useState([]);
     // setImgUrl(0);
@@ -43,7 +36,7 @@ export default function PetPage() {
                 <div className="pet-images">
                     <div className="main-image">
                         <AspectRatio ratio="2/1.4" >
-                            
+
                             <img className="maim-img-pet"
                                 src={imgUrl}
                                 loading="lazy"
@@ -129,20 +122,22 @@ export default function PetPage() {
 
                         </table>
                         <div className="but-adobt">
-                            <MainButtom name={'Adobt Now'} />
+                            <FullScreenDialog/>
                         </div>
                     </div>
                     <div className="account">
                         <Stack
                             direction={{ xs: 'row', sm: 'row' }}
                             spacing="2"
-                            alignItems="center">   
-                            <Avatar sx={{ marginRight: '20px' }} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzuw3ZNTNZZQgARGpWW7f6hColBKQKZ9qo6eW3giZIawfCbFziSINYfpht19iH8ndNnQA&usqp=CAU'>
-                            </Avatar>                            
+                            alignItems="center">
+                            <Avatar  sx={{ marginRight: '20px' ,width: 65, height: 65 }} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzuw3ZNTNZZQgARGpWW7f6hColBKQKZ9qo6eW3giZIawfCbFziSINYfpht19iH8ndNnQA&usqp=CAU'>
+                            </Avatar>
                             <h2 >the account name</h2>
                         </Stack>
                         <div className="but-adobt">
+                            <Link to={'/profile'}>
                             <MainButtom name={'view Account'} />
+                            </Link>
                         </div>
                     </div>
                 </div>
