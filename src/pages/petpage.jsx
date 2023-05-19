@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "../components/navbar";
 import '../App.css';
-import { AspectRatio, Button } from "@mui/joy";
+import { AspectRatio, Avatar, Button, Stack } from "@mui/joy";
 import { catImageList } from "../components/pagelist";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -89,44 +89,56 @@ export default function PetPage() {
 
                                 </tr>
                                 <tr>
-                                <td ><h4>Age</h4> </td>
-                                <td>2 yers</td>
+                                    <td ><h4>Age</h4> </td>
+                                    <td>2 yers</td>
 
-                                    
-                                </tr>
-                                <tr>
-                                <td ><h4>Sex</h4> </td>
-                                <td>Male</td>
-
-                                    
-                                </tr>
-                                <tr>
-                                <td ><h4>Location</h4> </td>
-                                <td>Dora</td>
-
-                                    
-                                </tr>
-                                <tr>
-                                <td ><h4>Size</h4> </td>
-                                <td>5 kg</td>
 
                                 </tr>
                                 <tr>
-                                <td ><h4>Vaccination from the disease</h4></td>
-                                <td>yes</td>
+                                    <td ><h4>Sex</h4> </td>
+                                    <td>Male</td>
+
 
                                 </tr>
-                                
+                                <tr>
+                                    <td ><h4>Location</h4> </td>
+                                    <td>Dora</td>
+
+
+                                </tr>
+                                <tr>
+                                    <td ><h4>Size</h4> </td>
+                                    <td>5 kg</td>
+
+                                </tr>
+                                <tr>
+                                    <td ><h4>Vaccination from the disease</h4></td>
+                                    <td>yes</td>
+
+                                </tr>
+
                             </tbody>
-                            <tfoot>
-                            <tr className="but-adobt">
-                                <td> <MainButtom name={'Adobt Now'}/></td>
-                                   
-                                </tr>
-                            </tfoot>
+
+
+
                         </table>
+                        <div className="but-adobt">
+                            <MainButtom name={'Adobt Now'} />
+                        </div>
                     </div>
-                    <div className="account">ffffffffff</div>
+                    <div className="account">
+                        <Stack
+                            direction={{ xs: 'row', sm: 'row' }}
+                            spacing="2"
+                            alignItems="center">   
+                            <Avatar sx={{ marginRight: '20px' }} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzuw3ZNTNZZQgARGpWW7f6hColBKQKZ9qo6eW3giZIawfCbFziSINYfpht19iH8ndNnQA&usqp=CAU'>
+                            </Avatar>                            
+                            <h2 >the account name</h2>
+                        </Stack>
+                        <div className="but-adobt">
+                            <MainButtom name={'view Account'} />
+                        </div>
+                    </div>
                 </div>
             </div>
 
