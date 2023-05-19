@@ -96,7 +96,7 @@ body{
   margin: 20px 10%;
 }
 .pet-main .pet-images {
-  flex: 2 0 400px;  
+  
   border-radius: 30px;
   height: 100%;
   max-width: 800px;
@@ -115,10 +115,10 @@ body{
 
 }
 .pet-main .pet-images .chose-image{
-  flex: 1 0 300;
-  overflow: scroll;
-  display: grid;
-  grid-template-columns: repeat(5,1fr);
+  flex: 1 1;
+  overflow: auto;
+  display: flex;
+  /* grid-template-columns: repeat(5,200px); */
 }
 .pet-main .pet-images .chose-image img{
   height: 100%;
@@ -131,11 +131,27 @@ body{
   background-color: transparent;
   border: none;
   height: 100px;
+  aspect-ratio: 2/1;
+  flex: 0 0 200px;
 }
 .pet-main .pet-info {
   flex: 1 0 200px;  
-  border-radius: 30px;
-  background-color: white;
-  box-shadow: 0 0px  40px -5px rgba(0, 0, 0, 0.101);
 
+}
+.pet-main .pet-info table{
+  box-shadow: 0 0px  40px -5px rgba(0, 0, 0, 0.101);
+  background-color: white;
+  padding: 10px;
+  border-radius: 30px;
+
+}
+.but-adobt{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.but-adobt button{
+  background-color: rgb(3, 188, 3);
+  border-radius: 30px;
+  flex: 1;
 }
