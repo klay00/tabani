@@ -106,7 +106,7 @@ body {
   max-width: 800px;
   background-color: white;
   box-shadow: 0 0px 40px -5px rgba(0, 0, 0, 0.101);
-  flex: 1 0 350px;
+  flex: 2 0 350px;
 }
 
 .pet-main .pet-images .main-image {
@@ -193,7 +193,7 @@ body {
 }
 
 .pet-main .pet-info tbody tr h4 {
-  margin: 5px 0;
+  margin: 8px 0;
 }
 
 .but-adobt {
@@ -202,7 +202,12 @@ body {
   align-items: center;
   margin-top: 20px;
 }
-
+.but-adobt  a{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .but-adobt button {
   border-radius: 30px;
   flex: 1;
@@ -212,4 +217,18 @@ body {
 
 .info .but-adobt button {
   background-color: rgb(3, 188, 3);
+}
+
+.adoubt-input {
+  width: 100%;
+}
+.adoubt-input button:first-child{
+  width: 100%;
+ margin: 5px;
+ padding: 10px;
+ font-size: large;
+}
+.adoubt-input button:first-child :hover{
+  background-color: rgb(1, 113, 1);
+
 }
