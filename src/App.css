@@ -1,7 +1,8 @@
 .App {
   text-align: center;
 }
-a{
+
+a {
   text-decoration: none;
   color: inherit;
 }
@@ -10,11 +11,12 @@ a{
   height: 40vmin;
   pointer-events: none;
 }
-body{
+
+body {
   background-color: rgb(250, 252, 255);
   font-family: 'Nunito', sans-serif;
   /* background-image: url('../public/images/bg.png');   */
-  
+
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -37,34 +39,38 @@ body{
 .App-link {
   color: #61dafb;
 }
+
 .main {
   display: grid;
-  grid-template-columns: repeat(12,1fr);
+  grid-template-columns: repeat(12, 1fr);
   grid-template-rows: 100px 100%;
   gap: 20px;
   margin: 20px 10%;
 }
+
 .main div {
   border-radius: 30px;
 }
+
 .main .first {
   grid-column: 1/13;
   background-color: white;
-  box-shadow: 0 0px  40px -5px rgba(0, 0, 0, 0.101);
+  box-shadow: 0 0px 40px -5px rgba(0, 0, 0, 0.101);
   display: flex;
   align-items: center;
   padding: 0 30px;
   justify-content: space-between;
 }
 
-.main  .secnde{
-  box-shadow: 0 0px  40px -5px rgba(0, 0, 0, 0.101);
+.main .secnde {
+  box-shadow: 0 0px 40px -5px rgba(0, 0, 0, 0.101);
   grid-column: 1/4;
   height: auto;
   background-color: white;
 
 }
-.main .main-display-items{
+
+.main .main-display-items {
   grid-column: 1/13;
   display: flex;
   flex-wrap: wrap;
@@ -72,19 +78,196 @@ body{
   width: 100%;
   justify-content: center;
 }
-.main .main-display-items div{
+
+.main .first button {
+
+  border-radius: 30px;
 
 }
 
-.main .first button{
-  
-    border-radius: 30px;
-
-}
-
-.main .first .input-search{
+.main .first .input-search {
   display: flex;
   align-items: center;
   gap: 30px;
- 
+
+}
+
+.pet-main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 20px 10%;
+}
+
+.pet-main .pet-images {
+
+  border-radius: 30px;
+  height: 100%;
+  max-width: 800px;
+  background-color: white;
+  box-shadow: 0 0px 40px -5px rgba(0, 0, 0, 0.101);
+  flex: 2 0 350px;
+}
+
+.pet-main .pet-images .main-image {
+  flex: 2;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+} 
+.pet-main .pet-images .main-image :nth-child(1){
+  border-radius: 10px;
+}
+.pet-main .pet-images .main-image .maim-img-pet{
+  border-radius: 10px;
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  position: absolute;
+}
+.pet-main .pet-images .main-image .back-image{
+  border-radius: 20px;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  filter:blur(10px);
+  z-index: 9;
+  position: absolute;
+}
+.maim-img-pet{
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+}
+
+.pet-main .pet-images .chose-image {
+  flex: 1 1;
+  overflow: auto;
+  display: flex;
+  /* grid-template-columns: repeat(5,200px); */
+}
+
+.pet-main .pet-images .chose-image img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+
+}
+
+.pet-main .pet-images .chose-image button {
+  background-color: transparent;
+  border: none;
+  height: 100px;
+  flex: 0 0 150px;
+}
+
+.pet-main .pet-info {
+  flex: 1 0 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.pet-main .pet-info .info {
+  box-shadow: 0 0px 40px -5px rgba(0, 0, 0, 0.101);
+  background-color: white;
+  padding: 20px;
+  border-radius: 30px;
+}
+
+.pet-main .pet-info table {
+  flex: 1;
+}
+
+.pet-main .pet-info .account {
+  box-shadow: 0 0px 40px -5px rgba(0, 0, 0, 0.101);
+  background-color: white;
+  padding: 20px;
+  border-radius: 30px;
+}
+
+.pet-main .pet-info tbody tr td:nth-child(2) {
+  text-align: end;
+}
+
+.pet-main .pet-info tbody tr h4 {
+  margin: 8px 0;
+}
+
+.but-adobt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+.but-adobt  a{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.but-adobt button {
+  border-radius: 30px;
+  flex: 1;
+  color: white;
+  font-weight: bold;
+}
+
+.info .but-adobt button {
+  background-color: rgb(3, 188, 3);
+}
+
+.adoubt-input {
+  width: 100%;
+}
+.adoubt-input button:first-child{
+  width: 100%;
+ margin: 5px;
+ padding: 10px;
+ font-size: large;
+}
+.adoubt-input button:first-child :hover{
+  background-color: rgb(1, 113, 1);
+
+}
+.formik-dispy{
+  margin: 10px 30px;
+  color: red;
+}
+.formik-dispy  .form-inputs{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.form-inputs  .input-lp{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex:  1 0 300px;
+}
+.form-inputs  .input-lp input{
+  /* flex:  1 0 300px; */
+  padding: 10px;
+  height: 30px;
+  border-radius: 30px;
+  background-color: rgb(210, 217, 227);
+  border: none;
+  outline: 2px solid  rgb(210, 217, 227);
+}
+.form-inputs .input-lp label{
+  color: rgb(255, 170, 0);
+  font-weight: bold;
+}
+.formik-dispy button{
+  padding: 15px 0;
+  width: 250px;
+  border-radius: 50px;
+  margin-top: 20px;
+  background-color: rgb(255, 170, 0);
+  border: none;
+  flex: 1 0 200px;
+  font-weight: bold;
+  font-size: 18px;
 }

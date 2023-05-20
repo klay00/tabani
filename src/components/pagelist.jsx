@@ -98,5 +98,22 @@ export const Location = [
   { id: 40, label: 'Shula' },
   { id: 41, label: 'Yarmouk' }
 ];
-
+export const catImageList=[
+  {
+    imgSrc:'https://www.rd.com/wp-content/uploads/2023/04/Hilarious-Cat-Memes-46.jpg?fit=700,700'
+},
+{
+    imgSrc:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzuw3ZNTNZZQgARGpWW7f6hColBKQKZ9qo6eW3giZIawfCbFziSINYfpht19iH8ndNnQA&usqp=CAU'
+},
+{
+    imgSrc:'https://assets3.thrillist.com/v1/image/2509573/792x456/scale;webp=auto;jpeg_quality=60;progressive.jpg'
+},
+  {
+      imgSrc:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYfNpC3DhexeNcAsMF3mn2OBAiY5kvis2UHg&usqp=CAU'
+  },
+  {
+      imgSrc:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGhCF9j3Snc4VHPQVcT3RwnS5hYCDT0FrvBg&usqp=CAU'
+  },
+  
+];
 export default pagelist;

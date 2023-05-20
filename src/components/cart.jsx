@@ -5,7 +5,7 @@ import CardOverflow from '@mui/joy/CardOverflow';
 import Divider from '@mui/joy/Divider';
 import Typography from '@mui/joy/Typography';
 import { Link } from "react-router-dom";
-import { Avatar, ListItem } from '@mui/joy';
+import { Avatar} from '@mui/joy';
 import { Stack } from '@mui/system';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 export default function OverflowCard() {
@@ -27,6 +27,7 @@ export default function OverflowCard() {
         <Link to={'../petpage'}>
           Yosemite National Park
         </Link>
+        
 
       </Typography>
       <Typography level="body2" sx={{ mt: 0.5, mb: 1 }}>
@@ -36,7 +37,7 @@ export default function OverflowCard() {
             spacing="2"
             alignItems="center"
           >
-            <Avatar src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzuw3ZNTNZZQgARGpWW7f6hColBKQKZ9qo6eW3giZIawfCbFziSINYfpht19iH8ndNnQA&usqp=CAU'></Avatar>
+            <Avatar  sx={{ marginRight: '10px' }} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzuw3ZNTNZZQgARGpWW7f6hColBKQKZ9qo6eW3giZIawfCbFziSINYfpht19iH8ndNnQA&usqp=CAU'></Avatar>
             the accunt name
           </Stack>
         </Link>
