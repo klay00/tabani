@@ -7,6 +7,7 @@ export default function Profile() {
         <>
         <NavBar/>
           profile page 
+          
         </>
     );
 }
