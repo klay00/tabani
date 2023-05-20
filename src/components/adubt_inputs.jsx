@@ -10,7 +10,8 @@ import Slide from '@mui/material/Slide';
 import '../App.css';
 import { ThemeProvider } from "@mui/material/styles";
 import theme from '../tools/theem';
-import TextField from '@mui/material/TextField';
+import { Formik } from 'formik';
+import CompInput from './comp_input';
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -52,23 +53,23 @@ export default function FullScreenDialog() {
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              Sound
-            </Typography>
-            <Button autoFocus color="inherit" onClick={handleClose}>
-              save
-            </Button>
+              Adopt pet
+            </Typography>          
           </Toolbar>
         </AppBar>
-        {/* start inputes */}
+
+        {/* start inputes formik */}
+           
+ 
+
+           
+          <CompInput/>
 
 
-
-        
-
-        {/* end inputes */}
 
       </Dialog>
       </ThemeProvider>
+      
     </div>
   );
 }
