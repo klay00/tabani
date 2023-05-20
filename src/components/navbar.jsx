@@ -15,12 +15,11 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { ThemeProvider } from "@mui/material/styles";
 import {Link } from "react-router-dom";
 import { NavPages } from './pagelist';
-import { useEffect } from 'react';
 import '../App.css';
 import theme from '../tools/theem';
 
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'Add Pet', 'Dashboard', 'Logout'];
 
 export default function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -41,15 +40,6 @@ export default function NavBar() {
     setAnchorElUser(null);
   };
 
-  useEffect(()=>{
-    
-      NavPages.map(pages=>{
-        return(
-          console.log(pages.name)
-          )
-      })
-    
-  },[])
 
   return (
 
@@ -67,14 +57,14 @@ export default function NavBar() {
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
+              // fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
             }}
           >
-            <Link to={'/'}>LOGO</Link>
+            <Link to={'/'}>tabani</Link>
 
           </Typography>
 
@@ -126,14 +116,14 @@ export default function NavBar() {
               mr: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
-              fontFamily: 'monospace',
+              // fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
             }}
           >
-            <Link to={'/'}>LOGO</Link>
+            <Link to={'/'}>tabani</Link>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {NavPages.map((pages) => (
@@ -171,7 +161,7 @@ export default function NavBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
+              {settings.map((setting,i) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
