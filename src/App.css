@@ -69,7 +69,11 @@ body {
   background-color: white;
 
 }
-
+.card-resp{
+  max-height: 42vh;
+   max-width: 35vw;
+   min-width: 200px;
+}
 .main .main-display-items {
   grid-column: 1/13;
   display: flex;
