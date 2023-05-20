@@ -232,3 +232,42 @@ body {
   background-color: rgb(1, 113, 1);
 
 }
+.formik-dispy{
+  margin: 10px 30px;
+  color: red;
+}
+.formik-dispy  .form-inputs{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.form-inputs  .input-lp{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex:  1 0 300px;
+}
+.form-inputs  .input-lp input{
+  /* flex:  1 0 300px; */
+  padding: 10px;
+  height: 30px;
+  border-radius: 30px;
+  background-color: rgb(210, 217, 227);
+  border: none;
+  outline: 2px solid  rgb(210, 217, 227);
+}
+.form-inputs .input-lp label{
+  color: rgb(255, 170, 0);
+  font-weight: bold;
+}
+.formik-dispy button{
+  padding: 15px 0;
+  width: 250px;
+  border-radius: 50px;
+  margin-top: 20px;
+  background-color: rgb(255, 170, 0);
+  border: none;
+  flex: 1 0 200px;
+  font-weight: bold;
+  font-size: 18px;
+}
