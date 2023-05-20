@@ -2,6 +2,7 @@ import React from 'react';
 import '../App.css';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { Alert } from '@mui/material';
 
 const validationSchema = Yup.object().shape({
   fullName: Yup.string().required('Full Name is required'),
@@ -12,16 +13,13 @@ const validationSchema = Yup.object().shape({
   care: Yup.string().required('Care is required'),
 });
 
-const onSubmit = (values) => {
+
+export default function CompInput() {
+  const onSubmit = (values) => {
   alert(JSON.stringify(values, null, 2));
 }; 
 
-export default function CompInput() {
   return (
-
-       
-  
-
 
   <div>
       <h2>Apply to Adopt</h2>
