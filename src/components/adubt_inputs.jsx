@@ -10,7 +10,6 @@ import Slide from '@mui/material/Slide';
 import '../App.css';
 import { ThemeProvider } from "@mui/material/styles";
 import theme from '../tools/theem';
-import { Formik } from 'formik';
 import CompInput from './comp_input';
 
 
