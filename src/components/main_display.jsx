@@ -11,8 +11,6 @@ export default function MainDisplay() {
             <div className="first">
                 <Search/>
             </div>
-            {/* <div className="secnde">
-            </div> */}
             <div className="main-display-items">
             <OverflowCard/>
             <OverflowCard/>
