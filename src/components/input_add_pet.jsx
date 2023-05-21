@@ -104,7 +104,7 @@ export default function InputAddPet() {
               <ErrorMessage name='avcciation' component='div' />
             </div>
 
-            <div className='input-lp'>
+            <div className='input-lp image'>
               <label htmlFor='image'>Pet Image</label>
               <Field
                 type='file'
