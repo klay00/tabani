@@ -19,7 +19,26 @@ import '../App.css';
 import theme from '../tools/theem';
 
 
-const settings = ['Profile', 'Add Pet', 'Dashboard', 'Logout'];
+const settings = [
+  
+  {
+    name:'profile',
+    path:'/profile'
+  },
+  {
+    name:'User Dashbord',
+    path:'/dash_user'
+  },
+  {
+    name:'Admin Dashbord',
+    path:'/admin_dash'
+  },
+  {
+    name:'logout',
+    path:'/login'
+  },
+  
+];
 
 export default function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -163,7 +182,9 @@ export default function NavBar() {
             >
               {settings.map((setting,i) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Link to={setting.path}>
+                  <Typography textAlign="center">{setting.name}</Typography>
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
