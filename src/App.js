@@ -5,6 +5,7 @@ import pagelist from './components/pagelist';
 import DashUser from './pages/dash_user';
 import HomePage from "./pages/homepage";
 import LogIn from './pages/login';
+import NoPage from './pages/nopage';
 import SignUp from './pages/signup';
 
 function App() {
@@ -29,6 +30,8 @@ function App() {
             <Route path='/login' element={<LogIn />} />
             <Route path='/signup' element={<SignUp />} />
             <Route path='/dash_user' element={<DashUser/>} />
+            <Route path='*' element={<NoPage/>} />
+
           </Route>
         </Routes>
 
