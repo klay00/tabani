@@ -5,7 +5,7 @@ export default function NoPage() {
     return (
         <>
             <NavBar />
-           
+           no page
         </>
     );
 }
