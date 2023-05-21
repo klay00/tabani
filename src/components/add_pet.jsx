@@ -11,6 +11,7 @@ import '../App.css';
 import { ThemeProvider } from "@mui/material/styles";
 import theme from '../tools/theem';
 import CompInput from './comp_input';
+import InputAddPet from './input_add_pet';
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -33,7 +34,7 @@ export default function AddPet() {
     <div className='adoubt-input'>
       <ThemeProvider theme={theme}>
       <Button variant="outlined" onClick={handleClickOpen}>
-        Adobt naw
+      Add New Pet
       </Button>
       <Dialog
         fullScreen
@@ -52,17 +53,17 @@ export default function AddPet() {
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              Adopt pet
+              Add New Pet
             </Typography>          
           </Toolbar>
         </AppBar>
 
         {/* start inputes formik */}
            
- 
+          <InputAddPet/>
 
            
-          <CompInput/>
+          {/* <CompInput/> */}
 
 
 
