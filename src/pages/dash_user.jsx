@@ -1,6 +1,7 @@
 import { Button } from "@mui/material";
 import React from "react"
 import '../App.css';
+import AddPet from "../components/add_pet";
 import ValueGetterGrid from "../components/data_table_dash_user";
 import NavBar from "../components/navbar";
 
@@ -35,7 +36,10 @@ export default function DashUser() {
                             <h4>0</h4>
                         </div>
                     </div>
-                    <Button>add new pet</Button>
+                   <div className="buttom-add-pet">
+                    <AddPet/>
+                   </div>
+                    
                 </div>
                 <div className="product">
                     <ValueGetterGrid/>
