@@ -13,7 +13,7 @@ a {
 }
 
 body {
-  background-color: rgb(250, 252, 255);
+  background-color: rgb(241, 247, 255);
   font-family: 'Nunito', sans-serif;
   /* background-image: url('../public/images/bg.png');   */
 
@@ -274,4 +274,86 @@ body {
   flex: 1 0 200px;
   font-weight: bold;
   font-size: 18px;
+}
+
+
+
+.dash{
+  margin:20px 10%;
+}
+.dash .display-info{
+  display: flex;
+  gap: 10px;
+}
+.dash .display-info > div{
+  flex: 1;
+  background-color: white;
+  box-shadow: 0 0px 40px -5px rgba(0, 0, 0, 0.13);
+  display: flex;
+  align-items: center;
+  padding: 0 30px;
+  border-radius: 20px;
+}
+.dash .display-info .pending,
+.dash .display-info .avilble,
+.dash .display-info .adopted
+{
+  gap: 30px;
+}
+.dash .display-info .pending h4{
+  color: orange;
+  font-size: 18px;
+  font-weight: bold;
+}
+.dash .display-info .avilble h4{
+  color: rgb(25, 188, 144);
+  font-size: 18px;
+  font-weight: bold;
+}
+.dash .display-info .adopted h4{
+  color: rgb(54, 219, 255);
+  font-size: 18px;
+  font-weight: bold;
+}
+
+
+.dash .display-info .pending svg{
+  width: 24px;
+    padding: 14px;
+    background: rgba(255, 168, 0, 0.1);
+    fill: rgb(255, 168, 0);
+    border-radius: 8px;
+    display: block;
+}
+
+.dash .display-info .avilble svg{
+  width: 24px;
+  padding: 14px;
+  background: rgba(25, 188, 144, 0.1);
+  fill: rgb(25, 188, 144);
+  border-radius: 8px;
+  display: block;
+}
+
+.dash .display-info .adopted svg{
+  width: 24px;
+  padding: 14px;
+  background: rgba(54, 219, 255, 0.1);
+  fill: rgb(54, 219, 255);
+  border-radius: 8px;
+  display: block;
+}
+
+.tbale-dash-user{
+  background-color: white!important;
+  margin-top: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0px 40px -5px rgba(0, 0, 0, 0.13);
+
+}
+@media screen and (max-width:1000px) {
+  .dash .display-info{
+    flex-direction: column;
+  }
+  
 }
