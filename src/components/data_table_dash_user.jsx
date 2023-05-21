@@ -30,14 +30,15 @@ const columns = [
 
 ];
 
-const rows = [
+export const rows = [
     { id: 1,  firstName: 'Jon',
      imgSrc: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGhCF9j3Snc4VHPQVcT3RwnS5hYCDT0FrvBg&usqp=CAU',
-      age: '2', sex: 'male', type: 'dog', locaton: 'dora', size: '5kg', vacciation: 'yes' ,status:"no" },
-    { id: 2, firstName: 'Cersei', imgSrc: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGhCF9j3Snc4VHPQVcT3RwnS5hYCDT0FrvBg&usqp=CAU', age: '2', sex: 'male', type: 'dog', locaton: 'dora', size: '5kg', vacciation: 'yes' ,status:"no"},
-    { id: 3,  firstName: 'Jaime', imgSrc: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGhCF9j3Snc4VHPQVcT3RwnS5hYCDT0FrvBg&usqp=CAU', age: '2', sex: 'male', type: 'dog', locaton: 'dora', size: '5kg', vacciation: 'yes',status:"yes" },
-    { id: 4, firstName: 'Arya', imgSrc: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGhCF9j3Snc4VHPQVcT3RwnS5hYCDT0FrvBg&usqp=CAU', age: '2', sex: 'male', type: 'dog', locaton: 'dora', size: '5kg', vacciation: 'yes' ,status:"no"},
-    { id: 5, firstName: 'Daenerys', imgSrc: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGhCF9j3Snc4VHPQVcT3RwnS5hYCDT0FrvBg&usqp=CAU', age: '2', sex: 'male', type: 'dog', locaton: 'dora', size: '5kg', vacciation: 'yes',status:"yes"},
+      age: '2', sex: 'male', type: 'dog', locaton: 'dora', size: '5kg', vacciation: 'yes' ,status:"adopt" },
+    { id: 2, firstName: 'Cersei', imgSrc: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGhCF9j3Snc4VHPQVcT3RwnS5hYCDT0FrvBg&usqp=CAU', age: '2', sex: 'male', type: 'dog', locaton: 'dora', size: '5kg', vacciation: 'yes' ,status:"available"},
+    { id: 3,  firstName: 'Jaime', imgSrc: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGhCF9j3Snc4VHPQVcT3RwnS5hYCDT0FrvBg&usqp=CAU', age: '2', sex: 'male', type: 'dog', locaton: 'dora', size: '5kg', vacciation: 'yes',status:"adopt" },
+    { id: 4, firstName: 'Arya', imgSrc: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGhCF9j3Snc4VHPQVcT3RwnS5hYCDT0FrvBg&usqp=CAU', age: '2', sex: 'male', type: 'dog', locaton: 'dora', size: '5kg', vacciation: 'yes' ,status:"available"},
+    { id: 5, firstName: 'Arya5', imgSrc: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGhCF9j3Snc4VHPQVcT3RwnS5hYCDT0FrvBg&usqp=CAU', age: '2', sex: 'male', type: 'dog', locaton: 'dora', size: '5kg', vacciation: 'yes' ,status:"available"},
+    { id: 6, firstName: 'Daenerys', imgSrc: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGhCF9j3Snc4VHPQVcT3RwnS5hYCDT0FrvBg&usqp=CAU', age: '2', sex: 'male', type: 'dog', locaton: 'dora', size: '5kg', vacciation: 'yes',status:"pending"},
 ];
 
 export default function ValueGetterGrid() {
