@@ -2,6 +2,8 @@ import React from 'react';
 import '../App.css';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { collection, addDoc} from "firebase/firestore";
+import { db } from '../firebase/firebase';
 
 const validationSchema = Yup.object().shape({
   fullName: Yup.string().required('Name is required'),
@@ -24,10 +26,22 @@ export default function InputAddPet() {
     image: '',
   };
 
-  const onSubmit = (values) => {
-    console.log(values);
-    alert(JSON.stringify(values, null, 2));
-  };
+const onSubmit = async (values) => {
+  try {
+    const docRef = await addDoc(collection(db, "pets"), {
+      fullName: values.fullName,
+      type: values.type,
+      age: values.age,
+      sex: values.sex,
+      size: values.size,
+      avcciation: values.avcciation,
+      // userId: userId // Add the userId to the document
+    });
+    console.log("Document written with ID: ", docRef.id);
+  } catch (err) {
+    console.error("Error adding document: ", err);
+  }
+};
 
   return (
     <div>
@@ -48,9 +62,9 @@ export default function InputAddPet() {
                 placeholder='Enter Pet name'
               />
               <ErrorMessage name='fullName' component='div' />
-             </div>
+            </div>
 
-           <div className='input-lp'>
+            <div className='input-lp'>
               <label htmlFor='type'>Type</label>
               <Field as='select' id='type' name='type' required>
                 <option value=''>Select</option>
@@ -74,7 +88,7 @@ export default function InputAddPet() {
             </div>
 
             <div className='input-lp'>
-            <label htmlFor='sex'>Pet sex</label>
+              <label htmlFor='sex'>Pet sex</label>
               <Field as='select' id='type' name='sex' required>
                 <option value=''>Select</option>
                 <option value='Male'>Male</option>
@@ -93,9 +107,9 @@ export default function InputAddPet() {
               />
               <ErrorMessage name='size' component='div' />
             </div>
-            
-             <div className='input-lp'>
-            <label htmlFor='avcciation'>Does the Pet Have Avcciation</label>
+
+            <div className='input-lp'>
+              <label htmlFor='avcciation'>Does the Pet Have Avcciation</label>
               <Field as='select' id='avcciation' name='avcciation' required>
                 <option value=''>Select</option>
                 <option value='yes'>Yes</option>
@@ -114,7 +128,7 @@ export default function InputAddPet() {
               />
               <ErrorMessage name='image' component='div' />
             </div>
-          </div> 
+          </div>
           <button type='submit'>Submit</button>
         </Form>
       </Formik>
