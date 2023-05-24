@@ -15,10 +15,8 @@ import { Link } from "react-router-dom";
 import { Location } from "../components/pagelist";
 import { useNavigate } from 'react-router-dom';
 import {  createUserWithEmailAndPassword  } from 'firebase/auth';
-import { auth } from "../firebase/firebase";
+import { auth, db } from "../firebase/firebase";
 import { doc, setDoc } from 'firebase/firestore';
-
-
 
 const validationSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email').required('Email is required'),
@@ -39,22 +37,25 @@ export default function SignUp() {
     const onSubmit = async (values, { setSubmitting }) => {
 
         setSubmitting(false);
-        await createUserWithEmailAndPassword(auth, values.email, values.password)
-        .then((userCredential) => {
-            // Signed in
-            const user = userCredential.user;
-            console.log(user);
-            navigate("/login")
+        
+    try {
+        const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password);
+        const user = userCredential.user;
+        // Save user information to Firestore
+        await setDoc(doc(db, 'users', user.uid), {
+          fullName: values.fullName,
+          location: values.location,
+        });
 
-            // ...
-        })
-        .catch((error) => {
+        navigate('/login');
+        
+      } catch (error) {
             const errorCode = error.code;
             const errorMessage = error.message;
             console.log(errorCode, errorMessage);
-            // ..
-        });
-    };
+    }
+    }; 
+
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
     const handleMouseDownPassword = (event) => {
