@@ -14,7 +14,9 @@ import theme from '../tools/theem';
 import { Link } from "react-router-dom";
 import { Location } from "../components/pagelist";
 import { useNavigate } from 'react-router-dom';
-import {  createUserWithEmailAndPassword  } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, getDocs, query, where, collection } from 'firebase/firestore';
+
 import { auth, db } from "../firebase/firebase";
 import { doc, setDoc } from 'firebase/firestore';
 
@@ -34,28 +36,51 @@ export default function SignUp() {
         location: '',
     };
     const navigate = useNavigate();
+    const [messerr ,setmesserr]=useState('');
+
     const onSubmit = async (values, { setSubmitting }) => {
-
         setSubmitting(false);
+      
+        try {
+          // Check if email is already used
+          const usersRef = collection(db, 'users');
+          const emailQuery = query(usersRef, where('email', '==', values.email));
+          const emailSnapshot = await getDocs(emailQuery);
+      
+          if (!emailSnapshot.empty) {
+            throw new Error('Email is already in use. Please choose a different email.');
+          }
+      
+          // Create user in Firebase Authentication
+          const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password);
+          const user = userCredential.user;
+      
+          // Save user information to Firestore
+          await setDoc(doc(db, 'users', user.uid), {
+            fullName: values.fullName,
+            location: values.location,
+          });
+      
+          navigate('/login');
+        } catch (error) {
+            let errorMessage;
         
-    try {
-        const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password);
-        const user = userCredential.user;
-        // Save user information to Firestore
-        await setDoc(doc(db, 'users', user.uid), {
-          fullName: values.fullName,
-          location: values.location,
-        });
-
-        navigate('/login');
-        
-      } catch (error) {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(errorCode, errorMessage);
-    }
-    }; 
-
+            switch (error.code) {
+              case 'auth/weak-password':
+                errorMessage = 'Weak password. Password should be at least 6 characters.';
+                break;
+              case 'auth/email-already-in-use':
+                errorMessage = 'The email address is already being used. Please choose another email address.';
+                break;
+              // Add more cases for other Firebase error codes as needed
+              default:
+                errorMessage = 'An error occurred. Please try again later.';
+            }
+          
+            console.log(errorMessage);
+            setmesserr(errorMessage);
+        }
+      };
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
     const handleMouseDownPassword = (event) => {
@@ -87,7 +112,7 @@ export default function SignUp() {
                                         name="fullName"
                                         label="fullName"
                                         variant="outlined"
-                                        
+
                                         type="text"
                                         fullWidth
                                     />
@@ -112,6 +137,7 @@ export default function SignUp() {
                                         sx={{ borderRadius: 5 }}
                                         id="password"
                                         name="password"
+                                        type={showPassword ? 'text' : 'password'}
                                         endAdornment={
                                             <InputAdornment position="end">
                                                 <IconButton
@@ -130,7 +156,7 @@ export default function SignUp() {
                                 </FormControl>
                                 <div className="email">
                                     <Field
-                                    as={TextField}
+                                        as={TextField}
                                         id="location"
                                         select
                                         label="location"
@@ -146,6 +172,7 @@ export default function SignUp() {
                                     <ErrorMessage name="fullName" component="div" />
 
                                 </div>
+                                <span>{messerr}</span>
                             </div>
                             <div className="btns">
                                 <Button variant="contained" type="submit">
