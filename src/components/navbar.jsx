@@ -58,7 +58,13 @@ export default function NavBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
+  const token = localStorage.getItem('token');
+  console.log(token);
+  function handelRemovToken(path) {
+       if(path==='/login'){
+        localStorage.removeItem('token');
+       }
+  }
 
   return (
 
@@ -158,37 +164,42 @@ export default function NavBar() {
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting,i) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Link to={setting.path}>
-                  <Typography textAlign="center">{setting.name}</Typography>
-                  </Link>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
+       {
+        token?<Box sx={{ flexGrow: 0 }}>
+        <Tooltip title="Open settings">
+          <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+            <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+          </IconButton>
+        </Tooltip>
+        <Menu
+          sx={{ mt: '45px' }}
+          id="menu-appbar"
+          anchorEl={anchorElUser}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          open={Boolean(anchorElUser)}
+          onClose={handleCloseUserMenu}
+        >
+          {settings.map((setting,i) => (
+            <MenuItem key={setting} onClick={handleCloseUserMenu}>
+
+              <Link to={setting.path} onClick={(()=>handelRemovToken(setting.path))}>
+              <Typography textAlign="center">{setting.name}</Typography>
+              </Link>
+            </MenuItem>
+          ))}
+        </Menu>
+      </Box>:<Link to={'/login'}><Button sx={{color:'white'}} variant="outlined">LogIn</Button></Link>
+       }
+
+          
         </Toolbar>
       </Container>
     </AppBar>
