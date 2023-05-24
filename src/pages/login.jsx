@@ -39,14 +39,36 @@ export default function LogIn() {
         .then((userCredential) => {
             // Signed in
             const user = userCredential.user;
-            navigate("/")
+            // navigate("/")
             console.log(user);
+            user.getIdToken()
+        .then((token) => {
+          // Save the token to local storage
+          localStorage.setItem('token', token);
+
+          navigate('/');
         })
         .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(errorCode, errorMessage)
-            setmesserr(errorMessage)
+          console.error('Error getting user token:', error);
+        });
+        })
+        .catch((error) => {
+          let errorMessage;
+        
+          switch (error.code) {
+            case 'auth/wrong-password':
+              errorMessage = 'Wrong password. Please try again.';
+              break;
+            case 'auth/user-not-found':
+              errorMessage = 'User not found. Please check your credentials.';
+              break;
+            // Add more cases for other Firebase error codes as needed
+            default:
+              errorMessage = 'An error occurred. Please try again later.';
+          }
+        
+          console.log(errorMessage);
+          setmesserr(errorMessage);
         });
     
   };
