@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import '../App.css';
 import IconButton from '@mui/material/IconButton';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -12,6 +12,9 @@ import * as Yup from 'yup';
 import { ThemeProvider } from "@mui/material/styles";
 import theme from '../tools/theem';
 import { Link } from "react-router-dom";
+import {  signInWithEmailAndPassword   } from 'firebase/auth';
+import { NavLink, useNavigate } from 'react-router-dom'
+import { auth } from "../firebase/firebase";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Email is required'),
@@ -25,11 +28,27 @@ export default function LogIn() {
     password: '',
   };
 
+  const navigate = useNavigate();
+  const [messerr ,setmesserr]=useState('');
   const onSubmit = (values, { setSubmitting }) => {
-    console.log(values);
-    alert(JSON.stringify(values, null, 2));
-    setSubmitting(false);
-    window.location.href = '/';
+    // console.log(values);
+    // alert(JSON.stringify(values, null, 2));
+    // setSubmitting(false);
+    // window.location.href = '/';
+    signInWithEmailAndPassword(auth, values.email, values.password)
+        .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            navigate("/")
+            console.log(user);
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorCode, errorMessage)
+            setmesserr(errorMessage)
+        });
+    
   };
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -89,6 +108,7 @@ export default function LogIn() {
                   label="Password"
                 />
                 <ErrorMessage name="password" component="div" />
+                <p>{messerr}</p>
               </FormControl>
             </div> 
             <div className="btns">
