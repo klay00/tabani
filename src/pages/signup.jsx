@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import '../App.css';
 import IconButton from '@mui/material/IconButton';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -13,6 +13,12 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from '../tools/theem';
 import { Link } from "react-router-dom";
 import { Location } from "../components/pagelist";
+import { useNavigate } from 'react-router-dom';
+import {  createUserWithEmailAndPassword  } from 'firebase/auth';
+import { auth } from "../firebase/firebase";
+import { doc, setDoc } from 'firebase/firestore';
+
+
 
 const validationSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email').required('Email is required'),
@@ -29,18 +35,32 @@ export default function SignUp() {
         fullName: '',
         location: '',
     };
+    const navigate = useNavigate();
+    const onSubmit = async (values, { setSubmitting }) => {
 
-    const onSubmit = (values, { setSubmitting }) => {
-        console.log(values);
-        alert(JSON.stringify(values, null, 2));
         setSubmitting(false);
-        window.location.href = '/';
+        await createUserWithEmailAndPassword(auth, values.email, values.password)
+        .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            console.log(user);
+            navigate("/login")
+
+            // ...
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorCode, errorMessage);
+            // ..
+        });
     };
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
+
 
     return (
         <ThemeProvider theme={theme}>
@@ -66,6 +86,7 @@ export default function SignUp() {
                                         name="fullName"
                                         label="fullName"
                                         variant="outlined"
+                                        
                                         type="text"
                                         fullWidth
                                     />
@@ -90,7 +111,6 @@ export default function SignUp() {
                                         sx={{ borderRadius: 5 }}
                                         id="password"
                                         name="password"
-                                        type={showPassword ? 'text' : 'password'}
                                         endAdornment={
                                             <InputAdornment position="end">
                                                 <IconButton
