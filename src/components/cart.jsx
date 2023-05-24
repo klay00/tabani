@@ -10,7 +10,7 @@ import { Stack } from '@mui/system';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 export default function OverflowCard() {
   return (
-    <Card variant="outlined" sx={{ width: 250, py: 0, mb: 2 }}>
+    <Card className={'card-resp'} variant="outlined" sx={{ width: 250, py: 0, mb: 2 }}>
       <CardOverflow fullWidth >
         <AspectRatio ratio="1.5">
           <Link to={'../petpage'}>

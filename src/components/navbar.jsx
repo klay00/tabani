@@ -15,12 +15,30 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { ThemeProvider } from "@mui/material/styles";
 import {Link } from "react-router-dom";
 import { NavPages } from './pagelist';
-import { useEffect } from 'react';
 import '../App.css';
 import theme from '../tools/theem';
 
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = [
+  
+  {
+    name:'profile',
+    path:'/profile'
+  },
+  {
+    name:'User Dashbord',
+    path:'/dash_user'
+  },
+  {
+    name:'Admin Dashbord',
+    path:'/admin_dash'
+  },
+  {
+    name:'logout',
+    path:'/login'
+  },
+  
+];
 
 export default function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -40,16 +58,13 @@ export default function NavBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
-  useEffect(()=>{
-    
-      NavPages.map(pages=>{
-        return(
-          console.log(pages.name)
-          )
-      })
-    
-  },[])
+  const token = localStorage.getItem('token');
+  console.log(token);
+  function handelRemovToken(path) {
+       if(path==='/login'){
+        localStorage.removeItem('token');
+       }
+  }
 
   return (
 
@@ -67,14 +82,14 @@ export default function NavBar() {
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
+              // fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
             }}
           >
-            <Link to={'/'}>LOGO</Link>
+            <Link to={'/'}>tabani</Link>
 
           </Typography>
 
@@ -126,14 +141,14 @@ export default function NavBar() {
               mr: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
-              fontFamily: 'monospace',
+              // fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
             }}
           >
-            <Link to={'/'}>LOGO</Link>
+            <Link to={'/'}>tabani</Link>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {NavPages.map((pages) => (
@@ -149,35 +164,42 @@ export default function NavBar() {
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
+       {
+        token?<Box sx={{ flexGrow: 0 }}>
+        <Tooltip title="Open settings">
+          <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+            <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+          </IconButton>
+        </Tooltip>
+        <Menu
+          sx={{ mt: '45px' }}
+          id="menu-appbar"
+          anchorEl={anchorElUser}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          open={Boolean(anchorElUser)}
+          onClose={handleCloseUserMenu}
+        >
+          {settings.map((setting,i) => (
+            <MenuItem key={setting} onClick={handleCloseUserMenu}>
+
+              <Link to={setting.path} onClick={(()=>handelRemovToken(setting.path))}>
+              <Typography textAlign="center">{setting.name}</Typography>
+              </Link>
+            </MenuItem>
+          ))}
+        </Menu>
+      </Box>:<Link to={'/login'}><Button sx={{color:'white'}} variant="outlined">LogIn</Button></Link>
+       }
+
+          
         </Toolbar>
       </Container>
     </AppBar>
