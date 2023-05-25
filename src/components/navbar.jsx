@@ -17,7 +17,7 @@ import {Link } from "react-router-dom";
 import { NavPages, settings } from './pagelist';
 import '../App.css';
 import theme from '../tools/theem';
-import UserInfo from '../firebase/testingfirestoe';
+import  UserInfo from '../firebase/testingfirestoe';
 import { Stack } from '@mui/material';
 
 

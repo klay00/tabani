@@ -3,9 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { doc, getDoc } from 'firebase/firestore';
 import { auth,db } from './firebase';
 
+
 const UserInfo = ({name}) => {
   const [user, setUser] = useState(null);
-
+ 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (authUser) => {
       if (authUser) {
@@ -29,6 +30,7 @@ const UserInfo = ({name}) => {
       if (snapshot.exists()) {
         const userData = snapshot.data();
         setUser(userData);
+
       } else {
         // User document does not exist
         setUser(null);

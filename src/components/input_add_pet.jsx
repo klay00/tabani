@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect,useState } from 'react';
 import '../App.css';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { collection, addDoc} from "firebase/firestore";
-import { db } from '../firebase/firebase';
+import { auth, db } from '../firebase/firebase';
+import UserInfo from '../firebase/testingfirestoe';
 
 const validationSchema = Yup.object().shape({
   fullName: Yup.string().required('Name is required'),
@@ -26,26 +27,62 @@ export default function InputAddPet() {
     image: '',
   };
 
+// const onSubmit = async (values) => {
+  
+//   try {
+//     const docRef = await addDoc(collection(db, "pets"), {
+//       fullName: values.fullName,
+//       type: values.type,
+//       age: values.age,
+//       sex: values.sex,
+//       size: values.size,
+//       avcciation: values.avcciation,
+
+//     });
+//     console.log("Document written with ID: ", docRef.id);
+//   } catch (err) {
+//     console.error("Error adding document: ", err);
+//   }
+// };
 const onSubmit = async (values) => {
   try {
-    const docRef = await addDoc(collection(db, "pets"), {
-      fullName: values.fullName,
-      type: values.type,
-      age: values.age,
-      sex: values.sex,
-      size: values.size,
-      avcciation: values.avcciation,
-      // userId: userId // Add the userId to the document
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        const userId = user.uid;
+        console.log(userId);
+        try {
+          const docRef = await addDoc(collection(db, "pets"), {
+            userId: userId,
+            fullName: values.fullName,
+            type: values.type,
+            age: values.age,
+            sex: values.sex,
+            size: values.size,
+            avcciation: values.avcciation,
+            status:'Availavle to Adopt'
+          });
+
+          console.log("Document written with ID: ", docRef.id);
+        } catch (err) {
+          console.error("Error adding document: ", err);
+        }
+      } else {
+        console.log("User is not logged in.");
+      }
     });
-    console.log("Document written with ID: ", docRef.id);
+
+    // Clean up the listener
+    unsubscribe();
   } catch (err) {
-    console.error("Error adding document: ", err);
+    console.error("Error getting user: ", err);
   }
 };
+
 
   return (
     <div>
       <h2>Add New Pet</h2>
+      <UserInfo name="userId"  />
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
