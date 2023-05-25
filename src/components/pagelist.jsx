@@ -55,6 +55,32 @@ export const options = [
   { label: 'Rabbit', id: 4 },
   { label: 'Other', id: 4 },
 ];
+
+export const settings = [
+  
+  {
+    name:'profile',
+    path:'/profile'
+  },
+  {
+    name:'User Dashbord',
+    path:'/dash_user'
+  },
+  {
+    name:'Admin Dashbord',
+    path:'/admin_dash'
+  },
+  {
+    name:'logout',
+    path:'/login'
+  },
+  
+];
+
+
+
+
+
 export const Location = [
   { id: 1, label: 'Al-Amil' },
   { id: 2, label: 'Al-Bayaa' },
