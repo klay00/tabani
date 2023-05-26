@@ -1,10 +1,13 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../App.css';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { collection, addDoc} from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
 import { auth, db } from '../firebase/firebase';
 import UserInfo from '../firebase/testingfirestoe';
+import { Stack } from '@mui/system';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
 
 const validationSchema = Yup.object().shape({
   fullName: Yup.string().required('Name is required'),
@@ -26,63 +29,62 @@ export default function InputAddPet() {
     avcciation: '',
     image: '',
   };
+  const [images, setImages] = useState([]);
 
-// const onSubmit = async (values) => {
-  
-//   try {
-//     const docRef = await addDoc(collection(db, "pets"), {
-//       fullName: values.fullName,
-//       type: values.type,
-//       age: values.age,
-//       sex: values.sex,
-//       size: values.size,
-//       avcciation: values.avcciation,
+  const handleImageUpload = (event) => {
+    const fileList = event.target.files;
+    const uploadedImages = Array.from(fileList).map((file) => file);
+    setImages((prevImages) => [...prevImages, ...uploadedImages]);
+    console.log(images);
+  };
+  const onSubmit = async (values) => {
+    console.log(values.image);
+    try {
+      const unsubscribe = auth.onAuthStateChanged(async (user) => {
+        if (user) {
+          const userId = user.uid;
+          console.log(userId);
+          try {
+            const docRef = await addDoc(collection(db, "pets"), {
+              userId: userId,
+              fullName: values.fullName,
+              type: values.type,
+              age: values.age,
+              sex: values.sex,
+              size: values.size,
+              avcciation: values.avcciation,
+              status: 'Availavle to Adopt'
+            });
 
-//     });
-//     console.log("Document written with ID: ", docRef.id);
-//   } catch (err) {
-//     console.error("Error adding document: ", err);
-//   }
-// };
-const onSubmit = async (values) => {
-  try {
-    const unsubscribe = auth.onAuthStateChanged(async (user) => {
-      if (user) {
-        const userId = user.uid;
-        console.log(userId);
-        try {
-          const docRef = await addDoc(collection(db, "pets"), {
-            userId: userId,
-            fullName: values.fullName,
-            type: values.type,
-            age: values.age,
-            sex: values.sex,
-            size: values.size,
-            avcciation: values.avcciation,
-            status:'Availavle to Adopt'
-          });
-
-          console.log("Document written with ID: ", docRef.id);
-        } catch (err) {
-          console.error("Error adding document: ", err);
+            console.log("Document written with ID: ", docRef.id);
+          } catch (err) {
+            console.error("Error adding document: ", err);
+          }
+        } else {
+          console.log("User is not logged in.");
         }
-      } else {
-        console.log("User is not logged in.");
-      }
-    });
+      });
 
-    // Clean up the listener
-    unsubscribe();
-  } catch (err) {
-    console.error("Error getting user: ", err);
-  }
-};
+      // Clean up the listener
+      unsubscribe();
+    } catch (err) {
+      console.error("Error getting user: ", err);
+    }
+  };
+
+
+
 
 
   return (
     <div>
-      <h2>Add New Pet</h2>
-      <UserInfo name="userId"  />
+      <Stack direction={'row'} spacing={2} alignItems={'center'} sx={{ ml: 5 }}>
+        <h2 >Welcome </h2>
+        <h2><UserInfo name="fullName" /></h2>
+        <h2> Add New Pet</h2>
+      </Stack>
+
+
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -156,15 +158,33 @@ const onSubmit = async (values) => {
             </div>
 
             <div className='input-lp image'>
-              <label htmlFor='image'>Pet Image</label>
+              <label htmlFor='image'>Pet Images</label>
               <Field
                 type='file'
                 id='image'
                 name='image'
-                placeholder='Enter Pet Image'
+                placeholder='Enter Pet Images'
+                multiple
+                onChange={handleImageUpload}
               />
               <ErrorMessage name='image' component='div' />
             </div>
+          </div>
+          <div>
+          <ImageList  cols={1}>
+              <Stack direction={'row'} spacing={3} sx={{ flexWrap: 'wrap' }}>
+                {images.map((item, index) => (
+                  <ImageListItem key={index} sx={{ width: 150,height:80 }}>
+                    <img
+                      src={URL.createObjectURL(item)}
+                      alt={item.name}
+                      style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+                      loading="lazy"
+                    />
+                  </ImageListItem>
+                ))}
+              </Stack>
+            </ImageList>
           </div>
           <button type='submit'>Submit</button>
         </Form>
