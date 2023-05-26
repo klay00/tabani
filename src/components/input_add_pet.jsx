@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import '../App.css';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, updateDoc, doc } from "firebase/firestore";
 import { auth, db } from '../firebase/firebase';
 import UserInfo from '../firebase/testingfirestoe';
 import { Stack } from '@mui/system';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
 
 const validationSchema = Yup.object().shape({
   fullName: Yup.string().required('Name is required'),
@@ -16,7 +18,7 @@ const validationSchema = Yup.object().shape({
   sex: Yup.string().required('sex Number is required'),
   size: Yup.string().required('size Number is required'),
   avcciation: Yup.string().required('avcciation is required'),
-  image: Yup.string().required('image is required'),
+  // image: Yup.string().required('image is required'),
 });
 
 export default function InputAddPet() {
@@ -27,7 +29,7 @@ export default function InputAddPet() {
     sex: '',
     size: '',
     avcciation: '',
-    image: '',
+
   };
   const [images, setImages] = useState([]);
 
@@ -37,8 +39,47 @@ export default function InputAddPet() {
     setImages((prevImages) => [...prevImages, ...uploadedImages]);
     console.log(images);
   };
+  // const onSubmit = async (values) => {
+  //   console.log(values.image);
+  //   console.log('-----------------------');
+  //   try {
+  //     const unsubscribe = auth.onAuthStateChanged(async (user) => {
+  //       if (user) {
+  //         const userId = user.uid;
+  //         console.log(userId);
+  //         try {
+  //           const docRef = await addDoc(collection(db, "pets"), {
+  //             userId: userId,
+  //             fullName: values.fullName,
+  //             type: values.type,
+  //             age: values.age,
+  //             sex: values.sex,
+  //             size: values.size,
+  //             avcciation: values.avcciation,
+  //             status: 'Availavle to Adopt'
+  //           });
+
+  //           console.log("Document written with ID: ", docRef.id);
+  //         } catch (err) {
+  //           console.error("Error adding document: ", err);
+  //         }
+  //       } else {
+  //         console.log("User is not logged in.");
+  //       }
+  //     });
+
+  //     // Clean up the listener
+  //     unsubscribe();
+  //   } catch (err) {
+  //     console.error("Error getting user: ", err);
+  //   }
+  // };
+
+
+
   const onSubmit = async (values) => {
     console.log(values.image);
+    console.log('-----------------------');
     try {
       const unsubscribe = auth.onAuthStateChanged(async (user) => {
         if (user) {
@@ -53,10 +94,25 @@ export default function InputAddPet() {
               sex: values.sex,
               size: values.size,
               avcciation: values.avcciation,
-              status: 'Availavle to Adopt'
+              status: 'Available to Adopt',
             });
-
+  
             console.log("Document written with ID: ", docRef.id);
+  
+            const imageUrls = [];
+            const storage = getStorage();
+            for (const file of images) {
+              const storageRef = ref(storage, `images/${docRef.id}/${file.name}`);
+              await uploadBytes(storageRef, file);
+              const imageUrl = await getDownloadURL(storageRef);
+              imageUrls.push(imageUrl);
+            }
+  
+            console.log("Image URLs: ", imageUrls);
+  
+            // Update the document with the image URLs
+            await updateDoc(doc(db, "pets", docRef.id), { images: imageUrls });
+  
           } catch (err) {
             console.error("Error adding document: ", err);
           }
@@ -64,16 +120,13 @@ export default function InputAddPet() {
           console.log("User is not logged in.");
         }
       });
-
+  
       // Clean up the listener
       unsubscribe();
     } catch (err) {
       console.error("Error getting user: ", err);
     }
   };
-
-
-
 
 
   return (
@@ -159,14 +212,21 @@ export default function InputAddPet() {
 
             <div className='input-lp image'>
               <label htmlFor='image'>Pet Images</label>
-              <Field
+              <input type="file"
+               id='image'
+               name='image'
+               placeholder='Enter Pet Images'
+               multiple
+               onChange={handleImageUpload}
+              />
+              {/* <Field
                 type='file'
                 id='image'
                 name='image'
                 placeholder='Enter Pet Images'
                 multiple
                 onChange={handleImageUpload}
-              />
+              /> */}
               <ErrorMessage name='image' component='div' />
             </div>
           </div>
@@ -178,7 +238,7 @@ export default function InputAddPet() {
                     <img
                       src={URL.createObjectURL(item)}
                       alt={item.name}
-                      style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+                      style={{ objectFit:'contain', width: '100%', height: '100%' }}
                       loading="lazy"
                     />
                   </ImageListItem>
