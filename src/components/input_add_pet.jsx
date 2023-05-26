@@ -39,44 +39,6 @@ export default function InputAddPet() {
     setImages((prevImages) => [...prevImages, ...uploadedImages]);
     console.log(images);
   };
-  // const onSubmit = async (values) => {
-  //   console.log(values.image);
-  //   console.log('-----------------------');
-  //   try {
-  //     const unsubscribe = auth.onAuthStateChanged(async (user) => {
-  //       if (user) {
-  //         const userId = user.uid;
-  //         console.log(userId);
-  //         try {
-  //           const docRef = await addDoc(collection(db, "pets"), {
-  //             userId: userId,
-  //             fullName: values.fullName,
-  //             type: values.type,
-  //             age: values.age,
-  //             sex: values.sex,
-  //             size: values.size,
-  //             avcciation: values.avcciation,
-  //             status: 'Availavle to Adopt'
-  //           });
-
-  //           console.log("Document written with ID: ", docRef.id);
-  //         } catch (err) {
-  //           console.error("Error adding document: ", err);
-  //         }
-  //       } else {
-  //         console.log("User is not logged in.");
-  //       }
-  //     });
-
-  //     // Clean up the listener
-  //     unsubscribe();
-  //   } catch (err) {
-  //     console.error("Error getting user: ", err);
-  //   }
-  // };
-
-
-
   const onSubmit = async (values) => {
     console.log(values.image);
     console.log('-----------------------');
@@ -246,7 +208,11 @@ export default function InputAddPet() {
               </Stack>
             </ImageList>
           </div>
-          <button type='submit'>Submit</button>
+          {
+            images.length!==0?<button type='submit'>Submit</button>:<button type='submit'  disabled>Submit</button>
+            
+          }
+          
         </Form>
       </Formik>
     </div>
