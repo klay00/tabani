@@ -9,6 +9,7 @@ import { Stack } from '@mui/system';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import Loding from './loading';
 
 
 const validationSchema = Yup.object().shape({
@@ -107,7 +108,7 @@ export default function InputAddPet() {
         onSubmit={onSubmit}
       >
         {
-          loading?<div>loding . . . </div>:
+          loading?<Loding name={'Adding'}/>:
           <Form className='formik-dispy'>
           <div className='form-inputs'>
             <div className='input-lp'>
