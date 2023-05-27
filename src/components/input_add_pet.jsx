@@ -41,6 +41,63 @@ export default function InputAddPet() {
     setImages((prevImages) => [...prevImages, ...uploadedImages]);
     console.log(images);
   };
+  // const onSubmit = async (values) => {
+  //   setLoading(true);
+  //   console.log('-----------------------');
+  //   try {
+  //     const unsubscribe = auth.onAuthStateChanged(async (user) => {
+  //       if (user) {
+  //         const userId = user.uid;
+  //         console.log(userId);
+  //         try {
+  //           console.log("Document written with ID: ", docRef.id);
+  
+  //           const imageUrls = [];
+  //           const storage = getStorage();
+  //           for (const file of images) {
+  //             const storageRef = ref(storage, `images/${docRef.id}/${file.name}`);
+  //             await uploadBytes(storageRef, file);
+  //             const imageUrl = await getDownloadURL(storageRef);
+  //             imageUrls.push(imageUrl);
+  //           }
+  
+  //           console.log("Image URLs: ", imageUrls);
+
+
+  //           const docRef = await addDoc(collection(db, "pets"), {
+  //             userId: userId,
+  //             fullName: values.fullName,
+  //             type: values.type,
+  //             age: values.age,
+  //             sex: values.sex,
+  //             size: values.size,
+  //             avcciation: values.avcciation,
+  //             status: 'Available to Adopt',
+  //             images: imageUrls
+  //           });
+  
+  //            setLoading(false);
+  //            alert('pet add successfully ')
+  
+  //           // // Update the document with the image URLs
+  //           // await updateDoc(doc(db, "pets", docRef.id), { images: imageUrls });
+  //           //  setLoading(false);
+  //           //  alert('pet add successfully ')
+  //         } catch (err) {
+  //           console.error("Error adding document: ", err);
+  //           alert('Error adding document ')
+  //         }
+  //       } else {
+  //         console.log("User is not logged in.");
+  //       }
+  //     });
+  
+  //     // Clean up the listener
+  //     unsubscribe();
+  //   } catch (err) {
+  //     console.error("Error getting user: ", err);
+  //   }
+  // };
   const onSubmit = async (values) => {
     setLoading(true);
     console.log('-----------------------');
@@ -50,6 +107,18 @@ export default function InputAddPet() {
           const userId = user.uid;
           console.log(userId);
           try {
+            const imageUrls = [];
+            const storage = getStorage();
+  
+            for (const file of images) {
+              const storageRef = ref(storage, `images/${file.name+currentTime}`);
+              await uploadBytes(storageRef, file);
+              const imageUrl = await getDownloadURL(storageRef);
+              imageUrls.push(imageUrl);
+            }
+  
+            console.log("Image URLs: ", imageUrls);
+  
             const docRef = await addDoc(collection(db, "pets"), {
               userId: userId,
               fullName: values.fullName,
@@ -59,40 +128,37 @@ export default function InputAddPet() {
               size: values.size,
               avcciation: values.avcciation,
               status: 'Available to Adopt',
+              images: imageUrls
             });
   
-            console.log("Document written with ID: ", docRef.id);
-  
-            const imageUrls = [];
-            const storage = getStorage();
-            for (const file of images) {
-              const storageRef = ref(storage, `images/${docRef.id}/${file.name}`);
-              await uploadBytes(storageRef, file);
-              const imageUrl = await getDownloadURL(storageRef);
-              imageUrls.push(imageUrl);
-            }
-  
-            console.log("Image URLs: ", imageUrls);
-  
-            // Update the document with the image URLs
-            await updateDoc(doc(db, "pets", docRef.id), { images: imageUrls });
-             setLoading(false);
+            setLoading(false);
+            alert('Pet added successfully');
           } catch (err) {
             console.error("Error adding document: ", err);
+            alert('Error adding document');
           }
         } else {
           console.log("User is not logged in.");
         }
       });
   
-      // Clean up the listener
-      unsubscribe();
+      unsubscribe(); // Clean up the listener
     } catch (err) {
       console.error("Error getting user: ", err);
     }
   };
+  const [currentTime, setCurrentTime] = useState(new Date());
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    },[]);
 
+    return () => {
+      clearInterval(timer);
+      console.log(currentTime);
+    };
+  }, []);
   return (
     <div>
       <Stack direction={'row'} spacing={2} alignItems={'center'} sx={{ ml: 5 }}>
