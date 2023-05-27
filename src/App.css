@@ -340,7 +340,7 @@ body {
 
 
 .dash .display-info .pending svg{
-  width: 24px;
+  width: 50px;
     padding: 14px;
     background: rgba(255, 168, 0, 0.1);
     fill: rgb(255, 168, 0);
@@ -349,7 +349,7 @@ body {
 }
 
 .dash .display-info .avilble svg{
-  width: 24px;
+  width: 50px;
   padding: 14px;
   background: rgba(25, 188, 144, 0.1);
   fill: rgb(25, 188, 144);
@@ -358,7 +358,7 @@ body {
 }
 
 .dash .display-info .adopted svg{
-  width: 24px;
+  width: 50px;
   padding: 14px;
   background: rgba(54, 219, 255, 0.1);
   fill: rgb(54, 219, 255);
