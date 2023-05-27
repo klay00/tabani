@@ -31,7 +31,8 @@ export default function InputAddPet() {
     avcciation: '',
 
   };
-  const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(false); // New loading state
+  const [images, setImages] = useState([]);//save images in ampity array
 
   const handleImageUpload = (event) => {
     const fileList = event.target.files;
@@ -40,7 +41,7 @@ export default function InputAddPet() {
     console.log(images);
   };
   const onSubmit = async (values) => {
-    console.log(values.image);
+    setLoading(true);
     console.log('-----------------------');
     try {
       const unsubscribe = auth.onAuthStateChanged(async (user) => {
@@ -74,7 +75,7 @@ export default function InputAddPet() {
   
             // Update the document with the image URLs
             await updateDoc(doc(db, "pets", docRef.id), { images: imageUrls });
-  
+             setLoading(false);
           } catch (err) {
             console.error("Error adding document: ", err);
           }
@@ -105,7 +106,9 @@ export default function InputAddPet() {
         validationSchema={validationSchema}
         onSubmit={onSubmit}
       >
-        <Form className='formik-dispy'>
+        {
+          loading?<div>loding . . . </div>:
+          <Form className='formik-dispy'>
           <div className='form-inputs'>
             <div className='input-lp'>
               <label htmlFor='fullName'>Name</label>
@@ -214,6 +217,7 @@ export default function InputAddPet() {
           }
           
         </Form>
+        }
       </Formik>
     </div>
   );
