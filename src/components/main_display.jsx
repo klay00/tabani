@@ -1,74 +1,22 @@
-// import { DataUsage } from '@mui/icons-material';
-// import { collection, onSnapshot, query } from 'firebase/firestore';
-// import React, { useEffect, useState } from 'react';
-// import '../App.css';
-// import { db } from '../firebase/firebase';
-// import OverflowCard from './cart';
-// import Search from './serch';
 
-
-// export default function MainDisplay() {
-//     const [dataPet ,setDataPet]=useState([]);
-//     const [dataUser ,setDataUser]=useState([]);
-//       useEffect(() => {
-//     //read data form databast
-//     const q = query(collection(db, 'pets'))
-//     onSnapshot(q, (querySnapshot) => {
-//         setDataPet(
-//         querySnapshot.docs.map((doc) => ({
-//           id: doc.id,
-//           ...doc.data(),
-//         }))
-//       );
-//     })
-
-//     const qq = query(collection(db, 'users'))
-//     onSnapshot(qq, (querySnapshot) => {
-//         setDataUser(
-//         querySnapshot.docs.map((doc) => ({
-//           id: doc.id,
-//           ...doc.data(),
-//         }))
-//       );
-//     })
-//   }, [])
-
-//     return(
-//         <>
-//         <div className="main">
-//             <div className="first">
-//                 <Search/>
-//             </div>
-//             <div className="main-display-items">
-//                 {
-//                   dataUser.map((user)=>{
-//                     dataPet.map((pet)=>{
-//                         if(pet.userId===user.userId){
-//                           return(
-//                             <OverflowCard petname={pet.fullName} user={user.fullName} petImage={pet.images[0]} userLocation={user.location} petState={pet.status}/>
-                        
-//                           )
-//                         }
-//                     })
-//                   })
-//                 }
-//             </div>
-//         </div>
-//         </>
-//     )
-// }
 import { collection, getDocs, onSnapshot, query } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import '../App.css';
 import { db } from '../firebase/firebase';
 import OverflowCard from './cart';
 import Search from './serch';
+import Skeleton from '@mui/material/Skeleton';
+import Stack from '@mui/material/Stack';
+
+
 
 export default function MainDisplay() {
+  const count =[1,3,4,5,6,7,8,9,1,11,12,12];
   const [dataPet, setDataPet] = useState([]);
   const [dataUser, setDataUser] = useState([]);
-
+  const [loding,setloding]=useState(false)
   useEffect(() => {
+    setloding(true)
     // Read data from database
     const fetchPetData = async () => {
       const petQuerySnapshot = await getDocs(collection(db, 'pets'));
@@ -86,6 +34,7 @@ export default function MainDisplay() {
         ...doc.data(),
       }));
       setDataUser(userData);
+      setloding(false);
     };
 
     fetchPetData();
@@ -98,23 +47,42 @@ export default function MainDisplay() {
         <Search />
       </div>
       <div className="main-display-items">
-        {dataUser.map((user) =>
-          dataPet.map((pet) => {
-            if (pet.userId === user.userId) {
-              return (
-                <OverflowCard
-                  key={pet.id} // Add a unique key for each card
-                  petname={pet.fullName}
-                  user={user.fullName}
-                  petImage={pet.images[0]}
-                  userLocation={user.location}
-                  petState={pet.status}
-                />
-              );
-            }
-            return null; // Return null if the condition is not met
+        {
+          loding?    
+          count.map(()=>{
+            return(
+              <Stack spacing={1} borderRadius={5}>
+              {/* For variant="text", adjust the height via font-size */}
+              <Skeleton variant="rectangular" width={250} height={100} borderRadius={20} />
+              <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
+              {/* For other variants, adjust the size with `width` and `height` */}
+              <Skeleton variant="circular" width={40} height={40} />
+              <Skeleton variant="rounded" width={250} height={60} borderRadius={5}/>
+            </Stack>
+            )
           })
-        )}
+          
+          
+          :<>
+          {dataUser.map((user) =>
+            dataPet.map((pet) => {
+              if (pet.userId === user.userId) {
+                return (
+                  <OverflowCard
+                    key={pet.id} // Add a unique key for each card
+                    petname={pet.fullName}
+                    user={user.fullName}
+                    petImage={pet.images[0]}
+                    userLocation={user.location}
+                    petState={pet.status}
+                  />
+                );
+              }
+              return null; // Return null if the condition is not met
+            })
+          )}</>
+        }
+          
       </div>
     </div>
   );
