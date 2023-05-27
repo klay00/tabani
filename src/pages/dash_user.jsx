@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import '../App.css';
 import AddPet from "../components/add_pet";
-import ValueGetterGrid, { rows } from "../components/data_table_dash_user";
+import ValueGetterGrid, { rows1 } from "../components/data_table_dash_user";
 import NavBar from "../components/navbar";
 
 export default function DashUser() {
@@ -17,8 +17,7 @@ export default function DashUser() {
         useEffect(() => {
           function checkPets() {
             const updatedCounts = { ...initialCounts };
-      
-            rows.forEach(row => {
+            rows1.forEach(row => {
               if (row.status === 'available') {
                 updatedCounts.available++;
               } else if (row.status === 'adopt') {
