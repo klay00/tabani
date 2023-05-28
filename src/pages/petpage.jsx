@@ -25,22 +25,26 @@ export default function PetPage() {
     };
 
 
-    const [imgUrl, setImgUrl] = useState([]);
-    // setImgUrl(0);
-    useEffect(() => {
-        catImageList.map((img) => {
-            setImgUrl(img.imgSrc)
-        })
-    }, []);
-    function handellUrl(url) {
-        setImgUrl(url)
-    }
+ 
     const location = useLocation();
     const [pet, setpet] = useState([]);
     useEffect(() => {
         setpet(location.state);
+        console.log(location.state);
     }, []);
     console.log(pet);
+
+
+   const [imgUrl, setImgUrl] = useState([]);
+    useEffect(() => {
+        if (pet.images && pet.images.length > 0) {
+          setImgUrl(pet.images[0]);
+        }
+      }, [pet]);
+    function handellUrl(url) {
+        setImgUrl(url)
+    }
+
     return (
         <>
             <NavBar />
@@ -63,34 +67,17 @@ export default function PetPage() {
                     </div>
                     <div className="chose-image">
                         {
-
-
-                            // pet.map((petObj, index) => (
-                            //     <div key={index}>
-                            //         {petObj.images.map((imageUrl, imageIndex) => (
-                            //             <Button onClick={() => { handellUrl(imageUrl[imageIndex]) }}>
-                            //                 <img
-                            //                     src={imageUrl[imageIndex]}
-                            //                     loading="lazy"
-                            //                     alt="pet image"
-                            //                 />
-                            //             </Button>
-                            //         ))}
-                            //     </div>
-                            // ))
-
-                            //         return (
-                            //             <>
-                            //                 <Button onClick={() => { handellUrl(catimg[i]) }}>
-                            //                     <img
-                            //                         src={catimg[i]}
-                            //                         loading="lazy"
-                            //                         alt="pet image"
-                            //                     />
-                            //                 </Button>
-                            //             </>
-                            //         )
-                            //     })
+                            pet.images && pet.images.map((image, i) => (
+                                // <img  src={image} alt={`Image ${index + 1}`} />
+                                <Button onClick={() => { handellUrl(image) }}>
+                                                 <img
+                                                 key={i}
+                                                   src={image}
+                                                     loading="lazy"
+                                                     alt="pet image" 
+                                                     />
+                                             </Button>
+                            ))
                         }
                     </div>
                 </div>
