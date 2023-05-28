@@ -5,13 +5,11 @@ import '../App.css';
 import { db } from '../firebase/firebase';
 import OverflowCard from './cart';
 import Search from './serch';
-import Skeleton from '@mui/material/Skeleton';
-import Stack from '@mui/material/Stack';
+import { SkeltonCard } from './skelton_card';
 
 
 
 export default function MainDisplay() {
-  const count =[1,3,4,5,6,7,8,9,1,11,12,12];
   const [dataPet, setDataPet] = useState([]);
   const [dataUser, setDataUser] = useState([]);
   const [loding,setloding]=useState(false)
@@ -49,20 +47,7 @@ export default function MainDisplay() {
       <div className="main-display-items">
         {
           loding?    
-          count.map(()=>{
-            return(
-              <Stack spacing={1} borderRadius={5}>
-              {/* For variant="text", adjust the height via font-size */}
-              <Skeleton variant="rectangular" width={250} height={100} borderRadius={20} />
-              <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
-              {/* For other variants, adjust the size with `width` and `height` */}
-              <Skeleton variant="circular" width={40} height={40} />
-              <Skeleton variant="rounded" width={250} height={60} borderRadius={5}/>
-            </Stack>
-            )
-          })
-          
-          
+         <SkeltonCard/>          
           :<>
           {dataUser.map((user) =>
             dataPet.map((pet) => {
@@ -71,12 +56,13 @@ export default function MainDisplay() {
                   <OverflowCard
                     key={pet.id} // Add a unique key for each card
                     petname={pet.fullName}
-                    user={user.fullName}
+                    userfullName={user.fullName}
                     petImage={pet.images[0]}
                     userLocation={user.location}
                     petState={pet.status}
                     petId={pet.id}
                     pet={pet}
+                    user={user}
                   />
                   </>
                 );
