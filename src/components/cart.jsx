@@ -10,12 +10,12 @@ import { Stack } from '@mui/system';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 
-export default function OverflowCard({petname, user, petImage, userLocation, petState}) {
+export default function OverflowCard({petname, user, petImage, userLocation, petState,petId,pet}) {
   return (
     <Card className={'card-resp'} variant="outlined" sx={{ width: 250, py: 0, mb: 2 }}>
       <CardOverflow fullWidth >
         <AspectRatio ratio="1.5">
-          <Link to={'../petpage'}>
+          <Link to={'../petpage'} state={pet}>
             <img
               src={petImage}
               // srcSet="https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318&dpr=2 2x"
@@ -68,6 +68,7 @@ export default function OverflowCard({petname, user, petImage, userLocation, pet
         {petState}
         </Typography>
       </CardOverflow>
+      <button onClick={(()=>{console.log(petId)})}>id</button>
     </Card>
   );
 }
