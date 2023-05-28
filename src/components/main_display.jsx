@@ -67,7 +67,7 @@ export default function MainDisplay() {
           {dataUser.map((user) =>
             dataPet.map((pet) => {
               if (pet.userId === user.userId) {
-                return (
+                return (<>
                   <OverflowCard
                     key={pet.id} // Add a unique key for each card
                     petname={pet.fullName}
@@ -75,7 +75,10 @@ export default function MainDisplay() {
                     petImage={pet.images[0]}
                     userLocation={user.location}
                     petState={pet.status}
+                    petId={pet.id}
+                    pet={pet}
                   />
+                  </>
                 );
               }
               return null; // Return null if the condition is not met
