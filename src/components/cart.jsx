@@ -10,7 +10,7 @@ import { Stack } from '@mui/system';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 
-export default function OverflowCard({petname, user, petImage, userLocation, petState,petId,pet}) {
+export default function OverflowCard({petname,userfullName, user, petImage, userLocation, petState,pet}) {
   return (
     <Card className={'card-resp'} variant="outlined" sx={{ width: 250, py: 0, mb: 2 }}>
       <CardOverflow fullWidth >
@@ -18,7 +18,6 @@ export default function OverflowCard({petname, user, petImage, userLocation, pet
           <Link to={'../petpage'} state={pet}>
             <img
               src={petImage}
-              // srcSet="https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318&dpr=2 2x"
               loading="lazy"
               alt=""
             />
@@ -33,14 +32,14 @@ export default function OverflowCard({petname, user, petImage, userLocation, pet
 
       </Typography>
       <Typography level="body2" sx={{ mt: 0.5, mb: 1 }}>
-        <Link to={'../profile'}>
+        <Link to={'../profile'} state={user}>
           <Stack
             direction={{ xs: 'row', sm: 'row' }}
             spacing="2"
             alignItems="center"
           >
             <Avatar  sx={{ marginRight: '10px' }} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzuw3ZNTNZZQgARGpWW7f6hColBKQKZ9qo6eW3giZIawfCbFziSINYfpht19iH8ndNnQA&usqp=CAU'></Avatar>
-            {user}
+            {userfullName}
           </Stack>
         </Link>
       </Typography>
@@ -68,7 +67,6 @@ export default function OverflowCard({petname, user, petImage, userLocation, pet
         {petState}
         </Typography>
       </CardOverflow>
-      <button onClick={(()=>{console.log(petId)})}>id</button>
     </Card>
   );
 }
