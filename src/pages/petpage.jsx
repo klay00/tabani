@@ -9,6 +9,7 @@ import FullScreenDialog from "../components/adubt_inputs";
 import { collection, getDocs, onSnapshot, query } from 'firebase/firestore';
 import '../App.css';
 import { db } from '../firebase/firebase';
+import { async } from "@firebase/util";
 
 
 
@@ -25,26 +26,37 @@ export default function PetPage() {
     };
 
 
- 
+
     const location = useLocation();
     const [pet, setpet] = useState([]);
     useEffect(() => {
         setpet(location.state);
         console.log(location.state);
+        featchUserData()
     }, []);
     console.log(pet);
 
 
-   const [imgUrl, setImgUrl] = useState([]);
+    const [imgUrl, setImgUrl] = useState([]);
     useEffect(() => {
         if (pet.images && pet.images.length > 0) {
-          setImgUrl(pet.images[0]);
+            setImgUrl(pet.images[0]);
+            featchUserData()
         }
-      }, [pet]);
+    }, [pet]);
     function handellUrl(url) {
         setImgUrl(url)
     }
-
+    const [userData, setUserData] = useState([]);
+    const featchUserData = async () => {
+        const q = await getDocs(collection(db, 'users'));
+        const userData = q.docs.filter((doc) => doc.data().userId === pet.userId)
+            .map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+            }));
+        setUserData(...userData)
+    }
     return (
         <>
             <NavBar />
@@ -70,13 +82,13 @@ export default function PetPage() {
                             pet.images && pet.images.map((image, i) => (
                                 // <img  src={image} alt={`Image ${index + 1}`} />
                                 <Button onClick={() => { handellUrl(image) }}>
-                                                 <img
-                                                 key={i}
-                                                   src={image}
-                                                     loading="lazy"
-                                                     alt="pet image" 
-                                                     />
-                                             </Button>
+                                    <img
+                                        key={i}
+                                        src={image}
+                                        loading="lazy"
+                                        alt="pet image"
+                                    />
+                                </Button>
                             ))
                         }
                     </div>
@@ -110,7 +122,7 @@ export default function PetPage() {
                                 </tr>
                                 <tr>
                                     <td ><h4>Location</h4> </td>
-                                    <td>{pet.status}</td>
+                                    <td>{userData.location}</td>
 
 
                                 </tr>
@@ -141,10 +153,10 @@ export default function PetPage() {
                             alignItems="center">
                             <Avatar sx={{ marginRight: '20px', width: 65, height: 65 }} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzuw3ZNTNZZQgARGpWW7f6hColBKQKZ9qo6eW3giZIawfCbFziSINYfpht19iH8ndNnQA&usqp=CAU'>
                             </Avatar>
-                            <h2 >the account name</h2>
+                            <h2 >{userData.fullName}</h2>
                         </Stack>
                         <div className="but-adobt">
-                            <Link to={'/profile'}>
+                            <Link to={'/profile'} state={userData}>
                                 <MainButtom name={'view Account'} />
                             </Link>
                         </div>
