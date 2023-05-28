@@ -74,9 +74,9 @@ export default function ValueGetterGrid() {
   return (
     <Box className={"tbale-dash-user"} sx={{ height: 400, width: '100%' }}>
       {!loading ? (
-        <DataGrid rows={petDataI} columns={columns} />
+         <DataGrid rows={petDataI} columns={columns} />
       ) : (
-        <Loding name={'relod'}/>
+        <Loding name={'reload'}/>
       )}
     </Box>
   );
