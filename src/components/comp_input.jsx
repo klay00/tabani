@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../App.css';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { collection, addDoc} from "firebase/firestore";
+import { db } from '../firebase/firebase';
 
 const validationSchema = Yup.object().shape({
   fullName: Yup.string().required('Full Name is required'),
@@ -11,17 +13,32 @@ const validationSchema = Yup.object().shape({
   placement: Yup.string().required('Placement is required'),
   care: Yup.string().required('Care is required'),
 });
+export default function CompInput({pet}) {
 
-const onSubmit = (values) => {
-  alert(JSON.stringify(values, null, 2));
-}; 
-
-export default function CompInput() {
-  return (
-
-       
+const onSubmit = async (values) => {
+  try{
+    const addOrder=await addDoc(collection(db,'order'),{
+    fullName:values.fullName,
+    email:values.email,
+    phoneNumber:values.phoneNumber,
+    placement:values.placement,
+    care:values.care,
+    petId:pet.id,
+    petName:pet.fullName,
+  })
+  alert('adobt secssfuley')
+  }catch(e){
+    console.log(`error with add order ${e}`);
+  }
   
 
+}; 
+
+  useEffect(()=>{
+    console.log(pet.userId);
+   }) 
+  
+  return (
 
   <div>
       <h2>Apply to Adopt</h2>
