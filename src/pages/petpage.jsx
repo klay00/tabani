@@ -143,7 +143,7 @@ export default function PetPage() {
 
                         </table>
                         <div className="but-adobt">
-                            <FullScreenDialog />
+                            <FullScreenDialog pet={location.state} />
                         </div>
                     </div>
                     <div className="account">
