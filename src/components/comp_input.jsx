@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../App.css';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { collection, addDoc} from "firebase/firestore";
 import { db } from '../firebase/firebase';
+import Loding from './loading';
 
 const validationSchema = Yup.object().shape({
   fullName: Yup.string().required('Full Name is required'),
@@ -14,9 +15,10 @@ const validationSchema = Yup.object().shape({
   care: Yup.string().required('Care is required'),
 });
 export default function CompInput({pet}) {
-
+const [loding ,setloding]=useState(false);
 const onSubmit = async (values) => {
   try{
+    setloding(true);
     const addOrder=await addDoc(collection(db,'order'),{
     fullName:values.fullName,
     email:values.email,
@@ -26,6 +28,7 @@ const onSubmit = async (values) => {
     petId:pet.id,
     petName:pet.fullName,
   })
+  setloding(false);
   alert('adobt secssfuley')
   }catch(e){
     console.log(`error with add order ${e}`);
@@ -42,7 +45,9 @@ const onSubmit = async (values) => {
 
   <div>
       <h2>Apply to Adopt</h2>
-      <Formik
+      {
+        loding?<Loding/>:
+        <Formik
         initialValues={{
           fullName: '',
           email: '',
@@ -108,6 +113,7 @@ const onSubmit = async (values) => {
           <button type="submit">Submit</button>
         </Form>
       </Formik>
+      }
     </div>
   )
 
