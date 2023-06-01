@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../App.css';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { collection, addDoc} from "firebase/firestore";
+import { auth, db } from '../firebase/firebase';
+import Loding from './loading';
+
 
 const validationSchema = Yup.object().shape({
   fullName: Yup.string().required('Full Name is required'),
@@ -11,21 +15,37 @@ const validationSchema = Yup.object().shape({
   placement: Yup.string().required('Placement is required'),
   care: Yup.string().required('Care is required'),
 });
-
-const onSubmit = (values) => {
-  alert(JSON.stringify(values, null, 2));
-}; 
-
-export default function CompInput() {
-  return (
-
-       
+export default function CompInput({pet}) {
+const [loding ,setloding]=useState(false);
+const onSubmit = async (values) => {
+  try{
+    setloding(true);
+    const addOrder=await addDoc(collection(db,'order'),{
+    fullName:values.fullName,
+    email:values.email,
+    phoneNumber:values.phoneNumber,
+    placement:values.placement,
+    care:values.care,
+    petId:pet.id,
+    petName:pet.fullName,
+  })
+  setloding(false);
+  alert('adobt secssfuley')
+  }catch(e){
+    console.log(`error with add order ${e}`);
+  }
   
 
+}; 
+
+  
+  return (
 
   <div>
       <h2>Apply to Adopt</h2>
-      <Formik
+      {
+        loding?<Loding/>:
+        <Formik
         initialValues={{
           fullName: '',
           email: '',
@@ -91,6 +111,7 @@ export default function CompInput() {
           <button type="submit">Submit</button>
         </Form>
       </Formik>
+      }
     </div>
   )
 

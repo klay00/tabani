@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -14,31 +14,12 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { ThemeProvider } from "@mui/material/styles";
 import {Link } from "react-router-dom";
-import { NavPages } from './pagelist';
+import { NavPages, settings } from './pagelist';
 import '../App.css';
 import theme from '../tools/theem';
+import  UserInfo from '../firebase/testingfirestoe';
+import { Stack } from '@mui/material';
 
-
-const settings = [
-  
-  {
-    name:'profile',
-    path:'/profile'
-  },
-  {
-    name:'User Dashbord',
-    path:'/dash_user'
-  },
-  {
-    name:'Admin Dashbord',
-    path:'/admin_dash'
-  },
-  {
-    name:'logout',
-    path:'/login'
-  },
-  
-];
 
 export default function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -59,12 +40,14 @@ export default function NavBar() {
     setAnchorElUser(null);
   };
   const token = localStorage.getItem('token');
-  console.log(token);
+ // console.log(token);
   function handelRemovToken(path) {
        if(path==='/login'){
         localStorage.removeItem('token');
        }
   }
+  
+
 
   return (
 
@@ -166,7 +149,11 @@ export default function NavBar() {
 
        {
         token?<Box sx={{ flexGrow: 0 }}>
-        <Tooltip title="Open settings">
+          
+          <Stack direction="row" alignItems={"center"} spacing={2}>
+            <UserInfo name={"fullName"}/>
+       <div>
+       <Tooltip title="Open settings">
           <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
             <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
           </IconButton>
@@ -196,6 +183,8 @@ export default function NavBar() {
             </MenuItem>
           ))}
         </Menu>
+       </div>
+        </Stack>
       </Box>:<Link to={'/login'}><Button sx={{color:'white'}} variant="outlined">LogIn</Button></Link>
        }
 

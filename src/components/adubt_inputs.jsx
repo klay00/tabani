@@ -11,13 +11,14 @@ import '../App.css';
 import { ThemeProvider } from "@mui/material/styles";
 import theme from '../tools/theem';
 import CompInput from './comp_input';
+import AlartMessageLogin from './alert_message_login';
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function FullScreenDialog() {
+export default function FullScreenDialog({pet}) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -35,6 +36,9 @@ export default function FullScreenDialog() {
       <Button variant="outlined" onClick={handleClickOpen}>
         Adobt naw
       </Button>
+      {
+        
+      }
       <Dialog
         fullScreen
         open={open}
@@ -61,8 +65,9 @@ export default function FullScreenDialog() {
            
  
 
+           <CompInput pet={pet}/>
            
-          <CompInput/>
+          
 
 
 

@@ -59,6 +59,8 @@ export default function SignUp() {
           await setDoc(doc(db, 'users', user.uid), {
             fullName: values.fullName,
             location: values.location,
+            email:values.email,
+            userId:user.uid
           });
       
           navigate('/login');
