@@ -3,8 +3,9 @@ import '../App.css';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { collection, addDoc} from "firebase/firestore";
-import { db } from '../firebase/firebase';
+import { auth, db } from '../firebase/firebase';
 import Loding from './loading';
+
 
 const validationSchema = Yup.object().shape({
   fullName: Yup.string().required('Full Name is required'),
@@ -37,9 +38,6 @@ const onSubmit = async (values) => {
 
 }; 
 
-  useEffect(()=>{
-    console.log(pet.userId);
-   }) 
   
   return (
 

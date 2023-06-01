@@ -10,6 +10,7 @@ import { collection, getDocs, onSnapshot, query } from 'firebase/firestore';
 import '../App.css';
 import { db } from '../firebase/firebase';
 import { async } from "@firebase/util";
+import AlartMessageLogin from "../components/alert_message_login";
 
 
 
@@ -25,6 +26,7 @@ export default function PetPage() {
         setOpen(false);
     };
 
+    const token=localStorage.getItem('token');
 
 
     const location = useLocation();
@@ -143,7 +145,9 @@ export default function PetPage() {
 
                         </table>
                         <div className="but-adobt">
-                            <FullScreenDialog pet={location.state} />
+                            {
+                                token?<FullScreenDialog pet={location.state} />:<AlartMessageLogin/>
+                            }
                         </div>
                     </div>
                     <div className="account">
