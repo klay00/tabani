@@ -42,6 +42,7 @@ export default function ValueGetterGrid() {
         console.log(authUser.uid);
         setUserId(authUser.uid);
         fetchPetData();
+        
       } else {
         console.log('xxxxxxxxxxxx');
       }
@@ -62,19 +63,22 @@ export default function ValueGetterGrid() {
       }));
     setPetData(petData);
     setLoading(false);
-    console.log(petData);
+    rows1.push(...petData)
   };
 
   useEffect(() => {
     if (petDataI.length === 0 && !loading) {
       fetchPetData();
+      
     }
   }, [petDataI, loading]);
-
+console.log(rows1);
   return (
     <Box className={"tbale-dash-user"} sx={{ height: 400, width: '100%' }}>
       {!loading ? (
-         <DataGrid rows={petDataI} columns={columns} />
+        <>         
+        <DataGrid rows={petDataI} columns={columns} />
+        </>
       ) : (
         <Loding name={'reload'}/>
       )}
