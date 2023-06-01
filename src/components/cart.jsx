@@ -25,7 +25,7 @@ export default function OverflowCard({petname,userfullName, user, petImage, user
         </AspectRatio>
       </CardOverflow>
       <Typography level="h2" sx={{ fontSize: 'md', mt: 1 }}>
-        <Link to={'../petpage'}>
+        <Link to={'../petpage'} state={pet}>
           {[petname]}
         </Link>
         
