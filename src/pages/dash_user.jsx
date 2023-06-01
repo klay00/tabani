@@ -18,7 +18,8 @@ export default function DashUser() {
           function checkPets() {
             const updatedCounts = { ...initialCounts };
             rows1.forEach(row => {
-              if (row.status === 'available') {
+
+              if (row.status === 'Available to Adopt') {
                 updatedCounts.available++;
               } else if (row.status === 'adopt') {
                 updatedCounts.adopted++;
