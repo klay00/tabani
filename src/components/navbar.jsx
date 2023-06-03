@@ -19,9 +19,51 @@ import '../App.css';
 import theme from '../tools/theem';
 import  UserInfo from '../firebase/testingfirestoe';
 import { Stack } from '@mui/material';
+import { doc, getDoc } from 'firebase/firestore';
+import { auth,db } from "../firebase/firebase";
 
 
 export default function NavBar() {
+
+  const [user, setUser] = useState(null);
+ 
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(async (authUser) => {
+      if (authUser) {
+        // User is logged in, fetch user information from Firestore
+        fetchUserData(authUser.uid);
+      } else {
+        // User is not logged in
+        setUser(null);
+      }
+    });
+
+    // Clean up the listener
+    return () => unsubscribe();
+  }, []);
+
+  const fetchUserData = async (userId) => {
+    try {
+      const userRef = doc(db, 'users', userId);
+      const snapshot = await getDoc(userRef);
+
+      if (snapshot.exists()) {
+        const userData = snapshot.data();
+        setUser(userData);
+
+      } else {
+        // User document does not exist
+        setUser(null);
+      }
+    } catch (error) {
+      console.log('Error fetching user data:', error);
+    }
+  };
+console.log(user);
+
+
+
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -177,7 +219,7 @@ export default function NavBar() {
           {settings.map((setting,i) => (
             <MenuItem key={setting} onClick={handleCloseUserMenu}>
 
-              <Link to={setting.path} onClick={(()=>handelRemovToken(setting.path))}>
+              <Link to={setting.path} onClick={(()=>handelRemovToken(setting.path))} state={user}>
               <Typography textAlign="center">{setting.name}</Typography>
               </Link>
             </MenuItem>
