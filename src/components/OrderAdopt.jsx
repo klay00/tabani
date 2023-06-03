@@ -1,0 +1,8 @@
+
+function OrderAdopt({order}) {
+    return(
+        <>
+        
+        </>
+    )
+}
