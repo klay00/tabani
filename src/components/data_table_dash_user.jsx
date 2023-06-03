@@ -12,6 +12,7 @@ import Loding from './loading';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
+import OrderAdopt from './OrderAdopt';
 
 function handeldelet(id) {
   console.log(id);
@@ -64,24 +65,24 @@ export default function ValueGetterGrid() {
 
     }
   }, [petDataI, loading]);
-  const [petOrderData,setOrderData]=useState([])
-const fetchOrder= async()=>{
-  const q=await getDocs(collection(db,'order'));
-  const orderData=q.docs.map((doc)=>({
-    id:doc.id,
-    ...doc.data(),
-  })) 
-  setOrderData(orderData);
-}
-const [open, setOpen] = React.useState(false);
+  const [petOrderData, setOrderData] = useState([])
+  const fetchOrder = async () => {
+    const q = await getDocs(collection(db, 'order'));
+    const orderData = q.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }))
+    setOrderData(orderData);
+  }
+  const [open, setOpen] = React.useState(false);
 
-const handleClickOpen = () => {
-  setOpen(true);
-};
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
-const handleClose = () => {
-  setOpen(false);
-};
+  const handleClose = () => {
+    setOpen(false);
+  };
   const columns = [
     { field: 'images', headerName: 'Image', width: 80, renderCell: (params) => <Avatar src={params.value} /> },
     { field: 'fullName', headerName: 'Pet Name', width: 100 },
@@ -94,53 +95,53 @@ const handleClose = () => {
     {
       field: 'order', headerName: 'Pet Order', width: 120,
       renderCell: (params) =>
-      petOrderData.some((order) => order.petId === params.row.id) ? (
-        <>
-        <IconButton onClick={() => handelViewOrder(params.row)} aria-label="order">
-          <PetsIcon />
-        </IconButton>
-      <Dialog
-        open={open}
-        TransitionComponent={Transition}
-        keepMounted
-        onClose={handleClose}
-        aria-describedby="alert-dialog-slide-description"
-      >
-      <div>{orderPetData.fullName}</div>
-      <div>{orderPetData.email}</div>
-      dkdkdk
-      </Dialog>
-        </>
-        
-      ) : null,
-  
+        petOrderData.some((order) => order.petId === params.row.id) ? (
+          <>
+            <IconButton onClick={() => handelViewOrder(params.row)} aria-label="order">
+              <PetsIcon />
+            </IconButton>
+            <Dialog
+              open={open}
+              TransitionComponent={Transition}
+              keepMounted
+              onClose={handleClose}
+              aria-describedby="alert-dialog-slide-description"
+            >
+              {orderPetData.map((order) => (
+                <OrderAdopt order={order}/>
+              ))}
+            </Dialog>
+          </>
+
+        ) : null,
+
     },
     {
       field: 'delet', headerName: 'Delete pet', width: 120,
-      renderCell: (params) => 
+      renderCell: (params) =>
         <IconButton onClick={() => handeldelet(params.value)} aria-label="delete">
-        <DeleteIcon />
-      </IconButton>
-      
+          <DeleteIcon />
+        </IconButton>
+
     },
   ];
 
- const [orderPetData,setOrderPetData]=useState([]);
+  const [orderPetData, setOrderPetData] = useState([]);
   function handelViewOrder(params) {
     const matchingOrderData = petOrderData.filter((order) => order.petId === params.id);
     setOrderPetData(matchingOrderData);
     handleClickOpen();
-    
+
   }
 
   return (
     <Box className={"tbale-dash-user"} sx={{ height: 400, width: '100%' }}>
       {!loading ? (
-        <>         
-        <DataGrid rows={petDataI} columns={columns} />
+        <>
+          <DataGrid rows={petDataI} columns={columns} />
         </>
       ) : (
-        <Loding name={'reload'}/>
+        <Loding name={'reload'} />
       )}
     </Box>
   );
