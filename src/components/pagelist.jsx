@@ -53,7 +53,7 @@ export const options = [
   { label: 'Cat', id: 2 },
   { label: 'Reabt', id: 3 },
   { label: 'Rabbit', id: 4 },
-  { label: 'Other', id: 4 },
+  { label: 'Other', id: 5 },
 ];
 
 export const settings = [
