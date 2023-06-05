@@ -28,6 +28,7 @@ const onSubmit = async (values) => {
     care:values.care,
     petId:pet.id,
     petName:pet.fullName,
+    status:'pending',
   })
   setloding(false);
   alert('adobt secssfuley')
