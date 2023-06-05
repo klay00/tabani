@@ -39,6 +39,9 @@ export default function OrderAdopt({ order }) {
             await updateDoc(doc(db, "order", order.id), {
                 status: 'Adopt'
             });
+            await updateDoc(doc(db, "pets", order.petId), {
+                status: 'Adopt'
+            });
             console.log('updata data success done');
 
         } catch (e) {
