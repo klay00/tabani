@@ -22,7 +22,7 @@ import { Stack } from '@mui/material';
 import { doc, getDoc } from 'firebase/firestore';
 import { auth,db } from "../firebase/firebase";
 
-
+export const userInfo=[];
 export default function NavBar() {
 
   const [user, setUser] = useState(null);
@@ -50,7 +50,7 @@ export default function NavBar() {
       if (snapshot.exists()) {
         const userData = snapshot.data();
         setUser(userData);
-
+        userInfo.push(userData);
       } else {
         // User document does not exist
         setUser(null);
