@@ -9,7 +9,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { collection, getDocs } from 'firebase/firestore';
 import { auth, db } from '../firebase/firebase';
 import Loding from './loading';
-import Button from '@mui/material/Button';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
 import OrderAdopt from './OrderAdopt';
@@ -97,24 +97,35 @@ export default function ValueGetterGrid() {
       renderCell: (params) =>
         petOrderData.some((order) => order.petId === params.row.id) ? (
           <>
-            <IconButton onClick={() => handelViewOrder(params.row)} aria-label="order">
-              <PetsIcon />
-            </IconButton>
-            <Dialog
-              open={open}
-              TransitionComponent={Transition}
-              keepMounted
-              onClose={handleClose}
-              aria-describedby="alert-dialog-slide-description"
-            >
-              {orderPetData.map((order) => (
-                <OrderAdopt order={order}/>
-              ))}
-            </Dialog>
+            {
+              petOrderData.map((order) => {
+                if (order.petId === params.row.id) {
+                  return order.status === 'pending' ? (
+                    <>
+                      <IconButton onClick={() => handelViewOrder(params.row)} aria-label="order">
+                        <PetsIcon />
+                      </IconButton>
+                      <Dialog
+                        open={open}
+                        TransitionComponent={Transition}
+                        keepMounted
+                        onClose={handleClose}
+                        aria-describedby="alert-dialog-slide-description"
+                      >
+                        {orderPetData.map((order) => (
+                          <OrderAdopt order={order} />
+                        ))}
+                      </Dialog>
+                    </>
+                  ) : (
+                    <CheckCircleIcon />
+                  );
+                }
+                return null;
+              })
+            }
           </>
-
-        ) : null,
-
+        ) : null
     },
     {
       field: 'delet', headerName: 'Delete pet', width: 120,
