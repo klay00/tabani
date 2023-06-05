@@ -12,19 +12,47 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import HomeIcon from '@mui/icons-material/Home';
 import MailIcon from '@mui/icons-material/Mail';
 import InfoIcon from '@mui/icons-material/Info';
+import { db } from '../firebase/firebase';
+import { collection, doc, updateDoc, setDoc, deleteDoc } from 'firebase/firestore';
+import { async } from '@firebase/util';
+
 const style = {
     width: '100%',
     maxWidth: 560,
     bgcolor: 'background.paper',
-    borderRadius:'20px'
+    borderRadius: '20px'
 };
 
 export default function OrderAdopt({ order }) {
+
+    async function handelDeleteOrder() {
+        try {
+            await deleteDoc(doc(db, "order", order.id));
+            console.log('delete success');
+        } catch (e) {
+            console.log(e);
+        }
+    }
+    async function handelupDataData() {
+        console.log('updata data');
+        try {
+            await updateDoc(doc(db, "order", order.id), {
+                status: 'Adopt'
+            });
+            console.log('updata data success done');
+
+        } catch (e) {
+            console.log(e);
+        }
+
+
+    }
+
     return (
         <>
             <ThemeProvider theme={theme}>
                 <List sx={style} component="nav" aria-label="mailbox folders">
-                <ListItem  divider>
+                    <ListItem divider>
                         <Stack direction="row" spacing={3} alignItems={'center'}>
                             <PersonIcon color='primary' />
                             <ListItemText primary={order.fullName} />
@@ -44,30 +72,30 @@ export default function OrderAdopt({ order }) {
                         </Stack>
                     </ListItem>
                     <Divider light />
-                    <ListItem  divider>
+                    <ListItem divider>
                         <Stack direction="row" spacing={3} alignItems={'center'}>
                             <PhoneIcon color='primary' />
                             <ListItemText primary={order.phoneNumber} />
                         </Stack>
                     </ListItem>
-                    <ListItem  divider>
+                    <ListItem divider>
                         <Stack direction="row" spacing={3} alignItems={'center'}>
                             <HomeIcon color='primary' />
                             <ListItemText primary={order.placement} />
                         </Stack>
                     </ListItem>
-                    <ListItem  divider>
+                    <ListItem divider>
                         <Stack direction="row" spacing={3} alignItems={'center'}>
                             <InfoIcon color='primary' />
                             <ListItemText primary={order.care} />
                         </Stack>
                     </ListItem>
-                   
-                        <Stack direction="row" spacing={3} alignItems={'center'} justifyContent="flex-end" sx={{m:1}}>
-                            
-                            <Button variant='outlined' sx={{borderRadius:20}}>Refuse adoption</Button>
-                            <Button variant='contained'sx={{borderRadius:20}}>Adoption confirmation</Button>
-                        </Stack>
+
+                    <Stack direction="row" spacing={3} alignItems={'center'} justifyContent="flex-end" sx={{ m: 1 }}>
+
+                        <Button variant='outlined' onClick={(() => handelDeleteOrder())} sx={{ borderRadius: 20 }}>Refuse adoption</Button>
+                        <Button variant='contained' onClick={(() => handelupDataData())} sx={{ borderRadius: 20 }}>Adoption confirmation</Button>
+                    </Stack>
 
                 </List>
             </ThemeProvider>
