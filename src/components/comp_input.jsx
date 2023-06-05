@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { collection, addDoc} from "firebase/firestore";
 import { auth, db } from '../firebase/firebase';
 import Loding from './loading';
+import { userInfo } from './navbar';
 
 
 const validationSchema = Yup.object().shape({
@@ -29,17 +30,22 @@ const onSubmit = async (values) => {
     petId:pet.id,
     petName:pet.fullName,
     status:'pending',
+    orderUserId:userId.userId,
   })
   setloding(false);
   alert('adobt secssfuley')
   }catch(e){
     console.log(`error with add order ${e}`);
   }
-  
 
 }; 
+const [userId,setUsetId]=useState('')
+useEffect(()=>{
+userInfo.map((user)=>{
+  setUsetId(user)
+})
+},[])
 
-  
   return (
 
   <div>
