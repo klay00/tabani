@@ -13,7 +13,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import MailIcon from '@mui/icons-material/Mail';
 import InfoIcon from '@mui/icons-material/Info';
 import { db } from '../firebase/firebase';
-import { collection, doc, updateDoc, setDoc, deleteDoc } from 'firebase/firestore';
+import { collection, doc, updateDoc, setDoc, deleteDoc, addDoc } from 'firebase/firestore';
 import { async } from '@firebase/util';
 
 const style = {
@@ -29,6 +29,7 @@ export default function OrderAdopt({ order }) {
         try {
             await deleteDoc(doc(db, "order", order.id));
             console.log('delete success');
+            alert('order pet delet')
         } catch (e) {
             console.log(e);
         }
@@ -42,7 +43,14 @@ export default function OrderAdopt({ order }) {
             await updateDoc(doc(db, "pets", order.petId), {
                 status: 'Adopt'
             });
+            await addDoc(collection(db,"notif"),{
+                userOrderId:order.orderUserId,
+                petName:order.petName,
+                status:true,
+                petId:order.petId,
+            })
             console.log('updata data success done');
+            alert('pet pen adobt ')
 
         } catch (e) {
             console.log(e);
