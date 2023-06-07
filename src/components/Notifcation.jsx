@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
 import { Badge, IconButton, ThemeProvider } from "@mui/material";
 import theme from "../tools/theem";
-import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+import NotificationMessage from "./NotificationMessage";
+import '../App.css';
 
-export default function Notfcation() {
+
+export default function Notfcation({data}) {
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -16,16 +17,11 @@ export default function Notfcation() {
     const handleClose = () => {
         setAnchorEl(null);
     };
-
+    console.log(data.length);
     return (
         <>
             <ThemeProvider theme={theme}>
-                {/* <Badge badgeContent={4} color={'red1'} >
-                    <CircleNotificationsIcon color={'white1'}/>
-                </Badge> */}
-
                 <div>
-
                     <IconButton
                         id="basic-button"
                         aria-controls={open ? 'basic-menu' : undefined}
@@ -33,7 +29,7 @@ export default function Notfcation() {
                         aria-expanded={open ? 'true' : undefined}
                         onClick={handleClick}
                     >
-                        <Badge badgeContent={4} color={'red1'} >
+                        <Badge badgeContent={data.length} color={'red1'} >
                             <CircleNotificationsIcon color={'white1'} />
                         </Badge>
                     </IconButton>
@@ -46,9 +42,24 @@ export default function Notfcation() {
                             'aria-labelledby': 'basic-button',
                         }}
                     >
-                        <MenuItem onClick={handleClose}>Profile</MenuItem>
-                        <MenuItem onClick={handleClose}>My account</MenuItem>
-                        <MenuItem onClick={handleClose}>Logout</MenuItem>
+                        {
+                            data.length===0?
+                            <>
+                            <div className="noNote">
+                                <div className="image"></div>
+                                <h3 className="text">you haven't note</h3>
+                            </div>
+                            </>:
+                            data.map((data)=>{
+                                return(
+                                    <>
+                                    <NotificationMessage data={data}/>
+                                    
+                                    </>
+                                )
+                                
+                            })
+                        }
                     </Menu>
                 </div>
             </ThemeProvider>
