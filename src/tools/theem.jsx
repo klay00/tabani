@@ -6,6 +6,12 @@ import {  createTheme } from "@mui/material/styles";
       },
       secondary: {
         main: "#FFA800"
+      },
+      white1:{
+         main:'#ffffff'
+      },
+      red1:{
+        main:'#FA3E3E'
       }
     }
   });
