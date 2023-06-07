@@ -21,6 +21,7 @@ import  UserInfo from '../firebase/testingfirestoe';
 import { Stack } from '@mui/material';
 import { doc, getDoc } from 'firebase/firestore';
 import { auth,db } from "../firebase/firebase";
+import Notfcation from './Notifcation';
 
 export const userInfo=[];
 export default function NavBar() {
@@ -193,7 +194,9 @@ console.log(user);
         token?<Box sx={{ flexGrow: 0 }}>
           
           <Stack direction="row" alignItems={"center"} spacing={2}>
+            <Notfcation/>
             <UserInfo name={"fullName"}/>
+            
        <div>
        <Tooltip title="Open settings">
           <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
