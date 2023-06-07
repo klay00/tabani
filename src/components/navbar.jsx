@@ -19,7 +19,7 @@ import '../App.css';
 import theme from '../tools/theem';
 import  UserInfo from '../firebase/testingfirestoe';
 import { Stack } from '@mui/material';
-import { doc, getDoc } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
 import { auth,db } from "../firebase/firebase";
 import Notfcation from './Notifcation';
 
@@ -33,6 +33,7 @@ export default function NavBar() {
       if (authUser) {
         // User is logged in, fetch user information from Firestore
         fetchUserData(authUser.uid);
+        fetchNotifData(authUser.uid)
       } else {
         // User is not logged in
         setUser(null);
@@ -60,10 +61,21 @@ export default function NavBar() {
       console.log('Error fetching user data:', error);
     }
   };
-console.log(user);
-
-
-
+const [notifc ,setNotifc]=useState([]);
+const fetchNotifData=async (userId)=>{
+  try{
+    const q = await getDocs(collection(db, 'notif'));
+    const notif = q.docs.filter((doc) => doc.data().userOrderId ===userId &&doc.data().status===true)
+        .map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+        }));
+        setNotifc(notif)
+  }catch(e){
+    console.log(e);
+  }
+}
+// console.log(notifc);
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -194,7 +206,7 @@ console.log(user);
         token?<Box sx={{ flexGrow: 0 }}>
           
           <Stack direction="row" alignItems={"center"} spacing={2}>
-            <Notfcation/>
+            <Notfcation data={notifc}/>
             <UserInfo name={"fullName"}/>
             
        <div>
