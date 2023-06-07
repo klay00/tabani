@@ -48,6 +48,7 @@ export default function OrderAdopt({ order }) {
                 petName:order.petName,
                 status:true,
                 petId:order.petId,
+                onerPhone:order.onerPhone,
             })
             console.log('updata data success done');
             alert('pet pen adobt ')
