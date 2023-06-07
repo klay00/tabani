@@ -454,4 +454,16 @@ body {
   }
 }
 
-
+.noNote{
+  height: 300px;
+  width: 200px;
+}
+.noNote .image{
+  width: 200px;
+  height: 80%;
+  background: url('../public/images/noNoteDog.gif')center no-repeat;
+  background-size: calc(450px);
+}
+.noNote .text{
+  text-align: center;
+}

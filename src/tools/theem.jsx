@@ -12,6 +12,9 @@ import {  createTheme } from "@mui/material/styles";
       },
       red1:{
         main:'#FA3E3E'
+      },
+      black1:{
+        main:'#0000aa'
       }
     }
   });
