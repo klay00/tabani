@@ -56,8 +56,8 @@ export default function ValueGetterGrid() {
     setPetData(petData);
     setLoading(false);
     rows1.push(...petData)
+    console.log(petData.onerPhone);
   };
-
   useEffect(() => {
     if (petDataI.length === 0 && !loading) {
       fetchPetData();
@@ -114,6 +114,7 @@ export default function ValueGetterGrid() {
                       >
                         {orderPetData.map((order) => (
                           <OrderAdopt order={order} />
+
                         ))}
                       </Dialog>
                     </>
