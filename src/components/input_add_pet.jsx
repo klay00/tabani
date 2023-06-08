@@ -19,7 +19,9 @@ const validationSchema = Yup.object().shape({
   sex: Yup.string().required('sex Number is required'),
   size: Yup.string().required('size Number is required'),
   avcciation: Yup.string().required('avcciation is required'),
-   onerPhone: Yup.string().required('Oner Phone Number is required'),
+   onerPhone: Yup.string()
+   .required('Phone Number is required')
+   .matches(/^07[3-9]\d{8}$/, 'Invalid Iraqi phone number'),
 });
 
 export default function InputAddPet() {

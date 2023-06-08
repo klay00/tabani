@@ -53,9 +53,9 @@ export default function NotificationMessage({ data }) {
         <div>
             <ThemeProvider theme={theme}>
                 <div className='noNote'>
-                    
+
                   <Button onClick={handleClickOpen}>
-                    {data.petName}
+                   Pet request accepted {data.petName}
                 </Button>  
                 </div>
                 

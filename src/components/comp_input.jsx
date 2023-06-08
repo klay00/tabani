@@ -12,7 +12,10 @@ const validationSchema = Yup.object().shape({
   fullName: Yup.string().required('Full Name is required'),
   email: Yup.string().email('Invalid email').required('Email is required'),
   address: Yup.string().required('Address is required'),
-  phoneNumber: Yup.string().required('Phone Number is required'),
+  // phoneNumber: Yup.string().required('Phone Number is required'),
+  phoneNumber: Yup.string()
+    .required('Phone Number is required')
+    .matches(/^07[3-9]\d{8}$/, 'Invalid Iraqi phone number'),
   placement: Yup.string().required('Placement is required'),
   care: Yup.string().required('Care is required'),
 });
