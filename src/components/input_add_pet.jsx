@@ -129,7 +129,8 @@ export default function InputAddPet() {
               size: values.size,
               avcciation: values.avcciation,
               status: 'Available to Adopt',
-              images: imageUrls
+              images: imageUrls,
+              onerPhone:values.onerPhone,       
             });
   
             setLoading(false);
