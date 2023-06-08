@@ -6,17 +6,17 @@ import { Avatar } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import PetsIcon from '@mui/icons-material/Pets';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { collection, getDocs } from 'firebase/firestore';
-import { auth, db } from '../firebase/firebase';
+import { collection, getDocs,doc, deleteDoc } from 'firebase/firestore';
+import { ref, deleteObject } from 'firebase/storage';
+import { auth, db,storage } from '../firebase/firebase';
 import Loding from './loading';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
 import OrderAdopt from './OrderAdopt';
+import Alert from '@mui/material/Alert';
 
-function handeldelet(id) {
-  console.log(id);
-}
+
 export const rows1 = [];
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -131,7 +131,7 @@ export default function ValueGetterGrid() {
     {
       field: 'delet', headerName: 'Delete pet', width: 120,
       renderCell: (params) =>
-        <IconButton onClick={() => handeldelet(params.value)} aria-label="delete">
+        <IconButton onClick={() => handeldelet(params.row)} aria-label="delete">
           <DeleteIcon />
         </IconButton>
 
@@ -145,7 +145,50 @@ export default function ValueGetterGrid() {
     handleClickOpen();
 
   }
+  //delet  pet 
+  const deleteDocument = async (documentId) => {
+    try {
+      await deleteDoc(doc(db, 'pets', documentId));
+      console.log('Document deleted successfully');
+    } catch (error) {
+      console.error('Error deleting document:', error);
+    }
+  };
 
+  //delete image pet
+  const deleteImages = async (imageUrls) => {
+    try {
+      const promises = imageUrls.map((url) => {
+        const imageUrl = decodeURIComponent(url); // Decode the URL if necessary
+        const imageRef = ref(storage, imageUrl);
+        return deleteObject(imageRef);
+      });
+      await Promise.all(promises);
+      console.log('Images deleted successfully');
+    } catch (error) {
+      console.error('Error deleting images:', error);
+    }
+  };
+
+  async function handeldelet(pet) {
+    try {
+      console.log(pet);
+      await deleteImages(pet.images);
+      await deleteDocument(pet.id);
+  
+      // Display success alert
+      const successAlert = (
+        <Alert variant="outlined" severity="success">
+          This is a success alert — check it out!
+        </Alert>
+      );
+
+      window.location.reload();
+    } catch (error) {
+      console.error('Error deleting pet:', error);
+      // Handle error and display an error alert if necessary
+    }
+  }
   return (
     <Box className={"tbale-dash-user"} sx={{ height: 400, width: '100%' }}>
       {!loading ? (
