@@ -246,7 +246,7 @@ export default function InputAddPet() {
             <div className='input-lp'>
               <label htmlFor='size'>Oner Phone</label>
               <Field
-                type='number'
+                type='text'
                 id='onerPhone'
                 name='onerPhone'
                 placeholder='Enter Oner PhoneNumber'
