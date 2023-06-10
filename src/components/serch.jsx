@@ -4,6 +4,9 @@ import theme from "../tools/theem";
 import { options, Location } from "./pagelist";
 import Box from '@mui/material/Box';
 import SearchIcon from '@mui/icons-material/Search';
+export let searchPetValue = '';
+export let searchLocationValue = '';
+
 
 export default function Search() {
     const [petValue, setPetValue] = useState('');
@@ -11,12 +14,14 @@ export default function Search() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log('Pet:', petValue);
-        console.log('Location:', locationValue);
+        searchPetValue = petValue.label;
+        searchLocationValue = locationValue.label;
+
+
     };
 
     return (
-        <div style={{ width:'100%'}}>
+        <div style={{ width: '100%' }}>
             <ThemeProvider theme={theme}>
                 <form onSubmit={handleSubmit} >
                     <div className="input-search" >
@@ -52,7 +57,7 @@ export default function Search() {
                         </Box>
 
                         <Button type="submit" variant="contained" sx={{ fontSize: 'md', pl: 5, pr: 5 }}>
-                         <SearchIcon/>   Search
+                            <SearchIcon />   Search
                         </Button>
                     </div>
                 </form>

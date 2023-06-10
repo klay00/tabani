@@ -1,12 +1,11 @@
 
-import { collection, getDocs, onSnapshot, query } from 'firebase/firestore';
+import { collection, getDocs } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import '../App.css';
 import { db } from '../firebase/firebase';
 import OverflowCard from './cart';
-import Search from './serch';
+import Search, { searchLocationValue } from './serch';
 import { SkeltonCard } from './skelton_card';
-
 
 
 export default function MainDisplay() {
@@ -38,7 +37,7 @@ export default function MainDisplay() {
     fetchPetData();
     fetchUserData();
   }, []);
-
+console.log(searchLocationValue.label);
   return (
     <div className="main">
       <div className="first">
