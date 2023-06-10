@@ -453,6 +453,15 @@ body {
     transform: translate(-50% ,-50%);
   }
 }
+@media screen and (max-width:850px) {
+  .main .first .input-search {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    
+  
+  }
+}
 
 .noNote{
   height: 300px;
