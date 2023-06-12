@@ -8,7 +8,8 @@ import { useLocation } from "react-router-dom";
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 import { SkeltonCard } from "../components/skelton_card";
-
+import { Button, IconButton } from "@mui/joy";
+import EditIcon from '@mui/icons-material/Edit';
 export default function Profile() {
   const data=useLocation();
   const userData=data.state;
@@ -39,10 +40,15 @@ console.log(loding);
         <div className="first">
           <Stack
             direction={{ xs: 'row', sm: 'row' }}
-            spacing="2"
+            spacing={2}
           >
+            <Stack direction={'column'} spacing={1} >
             <Avatar sx={{ marginRight: '20px', width: 65, height: 65 }} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzuw3ZNTNZZQgARGpWW7f6hColBKQKZ9qo6eW3giZIawfCbFziSINYfpht19iH8ndNnQA&usqp=CAU'>
             </Avatar>
+            <IconButton color="warning" sx={{pl:1,pr:1,width:60}}>
+              <EditIcon/>
+            </IconButton>
+            </Stack>
             <div>
               <h2 >{userData.fullName}</h2>
               <Stack direction={{ xs: 'row', sm: 'row' }}
