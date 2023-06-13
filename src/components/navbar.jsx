@@ -75,7 +75,7 @@ const fetchNotifData=async (userId)=>{
     console.log(e);
   }
 }
-// console.log(notifc);
+console.log(user);
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -99,6 +99,7 @@ const fetchNotifData=async (userId)=>{
   function handelRemovToken(path) {
        if(path==='/login'){
         localStorage.removeItem('token');
+        userInfo.push('');
        }
   }
   
@@ -212,7 +213,10 @@ const fetchNotifData=async (userId)=>{
        <div>
        <Tooltip title="Open settings">
           <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-            <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+            {
+             user?<Avatar src={user.profileImage} alt='profile image'/>:<Avatar  alt='profile image'/>
+              
+            }
           </IconButton>
         </Tooltip>
         <Menu
