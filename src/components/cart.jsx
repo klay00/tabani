@@ -10,7 +10,7 @@ import { Stack } from '@mui/system';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 
-export default function OverflowCard({petname,userfullName, user, petImage, userLocation, petState,pet}) {
+export default function OverflowCard({petname,userfullName, user, petImage, userLocation, petState,pet,userImage}) {
   return (
     <Card className={'card-resp'} variant="outlined" sx={{ width: 250, py: 0, mb: 2 }}>
       <CardOverflow fullWidth >
@@ -38,7 +38,7 @@ export default function OverflowCard({petname,userfullName, user, petImage, user
             spacing="2"
             alignItems="center"
           >
-            <Avatar  sx={{ marginRight: '10px' }} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzuw3ZNTNZZQgARGpWW7f6hColBKQKZ9qo6eW3giZIawfCbFziSINYfpht19iH8ndNnQA&usqp=CAU'></Avatar>
+            <Avatar  sx={{ marginRight: '10px' }} src={userImage}></Avatar>
             {userfullName}
           </Stack>
         </Link>
