@@ -41,13 +41,24 @@ export default function NotificationMessage({ data }) {
     const [copied, setCopied] = useState(false);
 
     const handleCopy = (phoneNumber) => {
-        navigator.clipboard.writeText(phoneNumber)
-            .then(() => {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(phoneNumber)
+              .then(() => {
                 setCopied(true);
-            })
-            .catch((error) => {
+              })
+              .catch((error) => {
                 console.log('Copy failed:', error);
-            });
+              });
+          } else {
+            // Fallback for browsers that do not support clipboard API
+            const textField = document.createElement('textarea');
+            textField.innerText = phoneNumber;
+            document.body.appendChild(textField);
+            textField.select();
+            document.execCommand('copy');
+            textField.remove();
+            setCopied(true);
+          }
     };
     return (
         <div>
