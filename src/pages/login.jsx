@@ -15,6 +15,7 @@ import { Link } from "react-router-dom";
 import {  signInWithEmailAndPassword   } from 'firebase/auth';
 import { NavLink, useNavigate } from 'react-router-dom'
 import { auth } from "../firebase/firebase";
+import Lodaer from "../components/loader";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Email is required'),
@@ -30,11 +31,9 @@ export default function LogIn() {
 
   const navigate = useNavigate();
   const [messerr ,setmesserr]=useState('');
+  const [loding ,setLoding]=useState(false)
   const onSubmit = (values, { setSubmitting }) => {
-    // console.log(values);
-    // alert(JSON.stringify(values, null, 2));
-    // setSubmitting(false);
-    // window.location.href = '/';
+    setLoding(true)
     signInWithEmailAndPassword(auth, values.email, values.password)
         .then((userCredential) => {
             // Signed in
@@ -45,11 +44,14 @@ export default function LogIn() {
         .then((token) => {
           // Save the token to local storage
           localStorage.setItem('token', token);
-
+          setLoding(false);
           navigate('/');
+          
         })
         .catch((error) => {
           console.error('Error getting user token:', error);
+          setLoding(false);
+
         });
         })
         .catch((error) => {
@@ -66,7 +68,7 @@ export default function LogIn() {
             default:
               errorMessage = 'An error occurred. Please try again later.';
           }
-        
+          setLoding(false);
           console.log(errorMessage);
           setmesserr(errorMessage);
         });
@@ -135,7 +137,7 @@ export default function LogIn() {
             </div> 
             <div className="btns">
                     <Button variant="contained" type="submit">
-                      Login
+                      {loding ? <Lodaer/>: "Login"}
                     </Button>                                  
               <Link to={'/signup'}>
               <Button variant="outlined">Register</Button>

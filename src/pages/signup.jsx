@@ -19,6 +19,7 @@ import { signInWithEmailAndPassword, getDocs, query, where, collection } from 'f
 
 import { auth, db } from "../firebase/firebase";
 import { doc, setDoc } from 'firebase/firestore';
+import Lodaer from "../components/loader";
 
 const validationSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email').required('Email is required'),
@@ -28,6 +29,7 @@ const validationSchema = Yup.object().shape({
 });
 
 export default function SignUp() {
+    const [loding ,setLoding]=useState(false)
     const [showPassword, setShowPassword] = React.useState(false);
     const initialValues = {
         email: '',
@@ -40,7 +42,7 @@ export default function SignUp() {
 
     const onSubmit = async (values, { setSubmitting }) => {
         setSubmitting(false);
-      
+        setLoding(true)
         try {
           // Check if email is already used
           const usersRef = collection(db, 'users');
@@ -62,7 +64,7 @@ export default function SignUp() {
             email:values.email,
             userId:user.uid
           });
-      
+          setLoding(false);
           navigate('/login');
         } catch (error) {
             let errorMessage;
@@ -78,7 +80,7 @@ export default function SignUp() {
               default:
                 errorMessage = 'An error occurred. Please try again later.';
             }
-          
+            setLoding(false);
             console.log(errorMessage);
             setmesserr(errorMessage);
         }
@@ -178,7 +180,7 @@ export default function SignUp() {
                             </div>
                             <div className="btns">
                                 <Button variant="contained" type="submit">
-                                    SignUp
+                                    {loding?<Lodaer/>:"SignUp"}
                                 </Button>
                                 <Link to={'/login'}>
                                     <Button variant="outlined">Login</Button>
