@@ -131,6 +131,7 @@ export default function MainDisplay() {
                     petId={pet.id}
                     pet={pet}
                     user={user}
+                    userImage={user.profileImage}
                   />
                   </>
                 );
