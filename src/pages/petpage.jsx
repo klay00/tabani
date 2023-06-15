@@ -81,7 +81,7 @@ export default function PetPage() {
                         {
                             pet.images && pet.images.map((image, i) => (
                                 // <img  src={image} alt={`Image ${index + 1}`} />
-                                <Button onClick={() => { handellUrl(image) }}>
+                                <Button sx={{padding:0,margin:1}} onClick={() => { handellUrl(image) }}>
                                     <img
                                         key={i}
                                         src={image}

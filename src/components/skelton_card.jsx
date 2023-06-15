@@ -1,6 +1,7 @@
 import React from "react"
 import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
+import { Box } from "@mui/system";
 export function SkeltonCard() {
     const count =[1,2,3,4,5,6,7,8];
     return(
@@ -8,6 +9,22 @@ export function SkeltonCard() {
         {
              count.map(()=>{
                 return(
+                  <Box
+                  sx={{
+                    width: {
+                      sm:170,
+                      md: 230, // For medium screens (md)
+                      lg: 260, // For large screens (lg)
+                    },
+                    maxHeight:{
+                      sm:"36vh",
+                      md:"45vh",
+                      lg:"42vh"
+                    },
+                    overflow:'hidden',
+                    padding:1,
+                  }}>              
+                  
                   <Stack spacing={1} borderRadius={5}>
                   {/* For variant="text", adjust the height via font-size */}
                   <Skeleton variant="rectangular" width={250} height={100} borderRadius={20} />
@@ -16,6 +33,7 @@ export function SkeltonCard() {
                   <Skeleton variant="circular" width={40} height={40} />
                   <Skeleton variant="rounded" width={250} height={60} borderRadius={5}/>
                 </Stack>
+                </Box>
                 )
               })
         }

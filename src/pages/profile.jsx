@@ -9,7 +9,7 @@ import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
 import { auth, db } from '../firebase/firebase';
 import { SkeltonCard } from "../components/skelton_card";
 import EditProfile from "../components/EditProfile";
-
+import "../App.css"
 
 
 export default function Profile() {
@@ -82,8 +82,11 @@ export default function Profile() {
             spacing={2}
           >
             <Stack direction={'column'} spacing={1} >
-              <Avatar sx={{ marginRight: '20px', width: 65, height: 65 }} src={userData.profileImage}>
-              </Avatar>
+              <div className="avatarprofile">
+               <Avatar sx={{ marginRight: '20px', width: 65, height: 65}} src={userData.profileImage}>
+              </Avatar> 
+              </div>
+              
               {
                 user?.userId === userData?.userId ? <EditProfile userId={userData?.userId} /> : null
               }
