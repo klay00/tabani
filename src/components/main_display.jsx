@@ -16,11 +16,8 @@ export default function MainDisplay() {
   const [dataPet, setDataPet] = useState([]);
   const [dataUser, setDataUser] = useState([]);
   const [loding,setloding]=useState(false)
-  useEffect(() => {
-    
-    setloding(true)
-    // Read data from database
-    const fetchPetData = async () => {
+     // Read data from database
+     const fetchPetData = async () => {
       const petQuerySnapshot = await getDocs(collection(db, 'pets'));
       const petData = petQuerySnapshot.docs.map((doc) => ({
         id: doc.id,
@@ -40,6 +37,10 @@ export default function MainDisplay() {
       setDataUser(userData);
       setloding(false);
     };
+  useEffect(() => {
+    
+    setloding(true)
+ 
 
     fetchPetData();
     fetchUserData();
@@ -52,13 +53,13 @@ export default function MainDisplay() {
       event.preventDefault();
 
       if (!petValue && !locationValue) {
-        console.log('--------------------');
+        
       } else {
         setloding(true)
         console.log(petValue ? petValue.label : 'Pet value is empty');
-        console.log(locationValue ? locationValue.label : 'Location value is empty');
-        console.log('xxxxxxxxxxxxxx');
-    
+       if(petValue.label==='All Pet'){
+        fetchPetData()
+       }else{
         const petQuerySnapshot = await getDocs(collection(db, 'pets'));
         const petData = petQuerySnapshot.docs
           .filter((doc) => doc.data().type === petValue.label)
@@ -67,6 +68,9 @@ export default function MainDisplay() {
             ...doc.data(),
           }));
           setDataPet(petData);
+       }
+        
+        
           setloding(false)
       }
   };
