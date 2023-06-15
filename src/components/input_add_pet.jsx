@@ -114,7 +114,7 @@ export default function InputAddPet() {
             const storage = getStorage();
   
             for (const file of images) {
-              const storageRef = ref(storage, `images/${file.name+currentTime}`);
+              const storageRef = ref(storage, `images/${currentTime+file.name}`);
               await uploadBytes(storageRef, file);
               const imageUrl = await getDownloadURL(storageRef);
               imageUrls.push(imageUrl);
