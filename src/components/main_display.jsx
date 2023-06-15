@@ -1,15 +1,16 @@
 
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import '../App.css';
 import { db } from '../firebase/firebase';
 import OverflowCard from './cart';
 import { SkeltonCard } from './skelton_card';
-import { Autocomplete, Button, TextField, ThemeProvider } from "@mui/material";
+import { Autocomplete, Button, Stack, TextField, ThemeProvider } from "@mui/material";
 import theme from "../tools/theem";
 import { options, Location } from "./pagelist";
 import Box from '@mui/material/Box';
 import SearchIcon from '@mui/icons-material/Search';
+import Lodaer from './loader';
 
 export default function MainDisplay() {
   const [dataPet, setDataPet] = useState([]);
@@ -26,6 +27,7 @@ export default function MainDisplay() {
         ...doc.data(),
       }));
       setDataPet(petData);
+      console.log(petData);
     };
 
     const fetchUserData = async () => {
@@ -46,7 +48,7 @@ export default function MainDisplay() {
   const [petValue, setPetValue] = useState("");
   const [locationValue, setLocationValue] = useState("");
 
-  const handleSubmit =async (event) => {
+      const handleSubmit =async (event) => {
       event.preventDefault();
 
       if (!petValue && !locationValue) {
@@ -56,11 +58,15 @@ export default function MainDisplay() {
         console.log(petValue ? petValue.label : 'Pet value is empty');
         console.log(locationValue ? locationValue.label : 'Location value is empty');
         console.log('xxxxxxxxxxxxxx');
-        
-        const filteredPets = dataPet.filter((pet) => pet.type === petValue.label);
-        console.log(filteredPets);
-          
-        
+    
+        const petQuerySnapshot = await getDocs(collection(db, 'pets'));
+        const petData = petQuerySnapshot.docs
+          .filter((doc) => doc.data().type === petValue.label)
+          .map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          setDataPet(petData);
           setloding(false)
       }
   };
@@ -89,7 +95,7 @@ export default function MainDisplay() {
                                 renderInput={(params) => <TextField {...params} label="Pet" />}
                             />
                         </Box>
-                        <Box
+                        {/* <Box
                             sx={{
                                 width: "100%",
                             }}
@@ -103,9 +109,11 @@ export default function MainDisplay() {
                                 onChange={(event, newValue) => setLocationValue(newValue)}
                                 renderInput={(params) => <TextField {...params} label="Location" />}
                             />
-                        </Box>                          
+                        </Box>                           */}
                         <Button type="submit" variant="contained" sx={{ fontSize: 'md', pl: 5, pr: 5 }}>
-                            <SearchIcon />   Search
+                        {
+                           loding? <Lodaer/>: <Stack direction={'row'}><SearchIcon />Search</Stack>
+                        }    
                         </Button>
                     </div>
                 </form>
