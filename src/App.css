@@ -259,9 +259,9 @@ body {
   padding:0px 10px;
   height: 50px;
   border-radius: 30px;
-  background-color: rgb(210, 217, 227);
+  background-color: rgb(233, 236, 241);
   border: none;
-  outline: 2px solid  rgb(210, 217, 227);
+  background-color: rgb(233, 236, 241);
 }
 .form-inputs .image input{
   background-color: transparent;
@@ -464,9 +464,10 @@ body {
 }
 
 @media screen and (max-width:650px) {
-  .pet-main,.main {
+  .pet-main,.main , .dash{
     margin: 20px 10px;
   }
+  
   
 }
 
