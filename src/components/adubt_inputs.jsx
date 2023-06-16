@@ -32,7 +32,7 @@ export default function FullScreenDialog({pet}) {
     <div className='adoubt-input'>
       <ThemeProvider theme={theme}>
       <Button variant="outlined" onClick={handleClickOpen}>
-        Adobt naw
+        Adobt now
       </Button>
       {
         
