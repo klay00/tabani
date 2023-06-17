@@ -19,7 +19,8 @@ export default function MainDisplay() {
      // Read data from database
      const fetchPetData = async () => {
       const petQuerySnapshot = await getDocs(collection(db, 'pets'));
-      const petData = petQuerySnapshot.docs.map((doc) => ({
+      const petData = petQuerySnapshot.docs.filter(doc=>doc.data().status==='Available to Adopt')
+      .map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
@@ -63,6 +64,7 @@ export default function MainDisplay() {
         const petQuerySnapshot = await getDocs(collection(db, 'pets'));
         const petData = petQuerySnapshot.docs
           .filter((doc) => doc.data().type === petValue.label)
+          .filter(doc=>doc.data().status==='Available to Adopt')
           .map((doc) => ({
             id: doc.id,
             ...doc.data(),
