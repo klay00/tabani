@@ -3,7 +3,7 @@ import '../App.css';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { collection, addDoc} from "firebase/firestore";
-import { auth, db } from '../firebase/firebase';
+import { db } from '../firebase/firebase';
 import Loding from './loading';
 import { userInfo } from './navbar';
 
@@ -38,6 +38,7 @@ const onSubmit = async (values) => {
   })
   setloding(false);
   alert('adobt secssfuley')
+  window.location.reload();
   }catch(e){
     console.log(`error with add order ${e}`);
   }

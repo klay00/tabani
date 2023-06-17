@@ -4,7 +4,6 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { collection, addDoc } from "firebase/firestore";
 import { auth, db } from '../firebase/firebase';
-import UserInfo from '../firebase/testingfirestoe';
 import { Stack } from '@mui/system';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
@@ -137,6 +136,7 @@ export default function InputAddPet() {
   
             setLoading(false);
             alert('Pet added successfully');
+            window.location.reload();
           } catch (err) {
             console.error("Error adding document: ", err);
             alert('Error adding document');

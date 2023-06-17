@@ -112,7 +112,7 @@ console.log(user);
     <AppBar position="static" color='secondary'>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
           <Typography
             variant="h6"
             noWrap
@@ -121,7 +121,7 @@ console.log(user);
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
-              // fontFamily: 'monospace',
+              fontFamily: 'inherit',
               fontWeight: 700,
               letterSpacing: '.3rem',
               color: 'inherit',
@@ -170,7 +170,7 @@ console.log(user);
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
           <Typography
             variant="h5"
             noWrap
