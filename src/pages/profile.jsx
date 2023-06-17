@@ -21,7 +21,10 @@ export default function Profile() {
   const featchUserData = async () => {
     setLoding(true);
     const q = await getDocs(collection(db, 'pets'));
-    const petData = q.docs.filter((doc) => doc.data().userId === userData.userId)
+    const petData = q.docs
+    .filter((doc) => doc.data().userId === userData.userId)
+    .filter(doc=>doc.data().status==='Available to Adopt')
+
       .map((doc) => ({
         id: doc.id,
         ...doc.data(),

@@ -14,8 +14,8 @@ import theme from '../tools/theem';
 import { Link } from "react-router-dom";
 import { Location } from "../components/pagelist";
 import { useNavigate } from 'react-router-dom';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { signInWithEmailAndPassword, getDocs, query, where, collection } from 'firebase/firestore';
+import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
+import { getDocs, query, where, collection } from 'firebase/firestore';
 
 import { auth, db } from "../firebase/firebase";
 import { doc, setDoc } from 'firebase/firestore';
@@ -56,7 +56,8 @@ export default function SignUp() {
           // Create user in Firebase Authentication
           const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password);
           const user = userCredential.user;
-      
+
+          
           // Save user information to Firestore
           await setDoc(doc(db, 'users', user.uid), {
             fullName: values.fullName,
