@@ -49,22 +49,22 @@ export default function SignUp() {
           const emailQuery = query(usersRef, where('email', '==', values.email));
           const emailSnapshot = await getDocs(emailQuery);
       
-          if (!emailSnapshot.empty) {
-            throw new Error('Email is already in use. Please choose a different email.');
-          }
-      
           // Create user in Firebase Authentication
           const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password);
           const user = userCredential.user;
 
-          
-          // Save user information to Firestore
-          await setDoc(doc(db, 'users', user.uid), {
-            fullName: values.fullName,
-            location: values.location,
-            email:values.email,
-            userId:user.uid
-          });
+          await sendEmailVerification(user);
+          alert('check your email address and confirmation with the link')
+         
+            // Save user information to Firestore
+            await setDoc(doc(db, 'users', user.uid), {
+                fullName: values.fullName,
+                location: values.location,
+                email:values.email,
+                userId:user.uid,
+                status:'user',
+              });
+              
           setLoding(false);
           navigate('/login');
         } catch (error) {
