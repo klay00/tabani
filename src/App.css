@@ -448,7 +448,7 @@ body {
 @media screen and (max-width:1200px) {
   .main-log .platform{
     left: 50%;
-    top: 40%;
+    top: 50%;
     margin: 0;
     transform: translate(-50% ,-50%);
   }
