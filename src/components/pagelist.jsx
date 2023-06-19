@@ -4,7 +4,11 @@ import NoPage from '../pages/nopage';
 import PetPage from '../pages/petpage';
 import Profile from '../pages/profile';
 import HomePage from '../pages/homepage';
-
+import HomeIcon from '@mui/icons-material/Home';
+import PersonIcon from '@mui/icons-material/Person';
+import PetsIcon from '@mui/icons-material/Pets';
+import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
+import WebIcon from '@mui/icons-material/Web';
 const pagelist = [
   {
     path: '/allproduct',
@@ -27,25 +31,25 @@ const pagelist = [
 
 export const NavPages = [
   {
-    name:'Blog',
+    name:'Home',
     path: '/',
     page: <HomePage />
   },
-  {
-    name:'All Pets',
-    path: '/allproduct',
-    page: <AllProduct />
-  },
-  {
-    name:'Cats',
-    path: '/allproduct',
-    page: <AllProduct />
-  },
-  {
-    name:'Dogs',
-    path: '/allproduct',
-    page: <AllProduct />
-  },
+  // {
+  //   name:'All Pets',
+  //   path: '/allproduct',
+  //   page: <AllProduct />
+  // },
+  // {
+  //   name:'Cats',
+  //   path: '/allproduct',
+  //   page: <AllProduct />
+  // },
+  // {
+  //   name:'Dogs',
+  //   path: '/allproduct',
+  //   page: <AllProduct />
+  // },
 ];
 
 export const options = [
@@ -79,7 +83,32 @@ export const settings = [
 
 
 
-
+export const listPgeAdmin=[
+  {
+      text:'Home',
+       path:'/admin_dash',
+       icon:<HomeIcon/>
+  },{
+      text:'Users',
+       path:'/admin_dashdd',
+       icon:<PersonIcon/>
+  },
+  {
+      text:'Pets',
+       path:'/admin_dash',
+       icon:<PetsIcon/>
+  },
+  {
+      text:'Orders',
+       path:'/admin_dash',
+       icon:<LocalGroceryStoreIcon/>
+  },
+  {
+    text:'Back to tabani',
+     path:'/',
+     icon:<WebIcon/>
+},
+]
 
 export const Location = [
   { id: 1, label: 'Al-Amil' },
