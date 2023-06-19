@@ -41,9 +41,9 @@ export default function Loding({name}) {
          
       </div>
       <div className="loding-text"> 
-      <h2 className="adding">{name}</h2>
+      {/* <h2 className="adding">{name}</h2>
 
-      <h2>please wait</h2>
+      <h2>please wait</h2> */}
       </div>
         </>
     )

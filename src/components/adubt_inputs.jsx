@@ -11,8 +11,6 @@ import '../App.css';
 import { ThemeProvider } from "@mui/material/styles";
 import theme from '../tools/theem';
 import CompInput from './comp_input';
-import AlartMessageLogin from './alert_message_login';
-
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -34,7 +32,7 @@ export default function FullScreenDialog({pet}) {
     <div className='adoubt-input'>
       <ThemeProvider theme={theme}>
       <Button variant="outlined" onClick={handleClickOpen}>
-        Adobt naw
+        Adobt now
       </Button>
       {
         

@@ -3,15 +3,19 @@ import '../App.css';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { collection, addDoc} from "firebase/firestore";
-import { auth, db } from '../firebase/firebase';
+import { db } from '../firebase/firebase';
 import Loding from './loading';
+import { userInfo } from './navbar';
 
 
 const validationSchema = Yup.object().shape({
   fullName: Yup.string().required('Full Name is required'),
   email: Yup.string().email('Invalid email').required('Email is required'),
   address: Yup.string().required('Address is required'),
-  phoneNumber: Yup.string().required('Phone Number is required'),
+  // phoneNumber: Yup.string().required('Phone Number is required'),
+  phoneNumber: Yup.string()
+    .required('Phone Number is required')
+    .matches(/^07[3-9]\d{8}$/, 'Invalid Iraqi phone number'),
   placement: Yup.string().required('Placement is required'),
   care: Yup.string().required('Care is required'),
 });
@@ -28,17 +32,25 @@ const onSubmit = async (values) => {
     care:values.care,
     petId:pet.id,
     petName:pet.fullName,
+    status:'pending',
+    orderUserId:userId.userId,
+    onerPhone:pet.onerPhone,
   })
   setloding(false);
   alert('adobt secssfuley')
+  window.location.reload();
   }catch(e){
     console.log(`error with add order ${e}`);
   }
-  
 
 }; 
+const [userId,setUsetId]=useState('')
+useEffect(()=>{
+userInfo.map((user)=>{
+  setUsetId(user)
+})
+},[])
 
-  
   return (
 
   <div>

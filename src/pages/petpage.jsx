@@ -2,14 +2,12 @@ import React, { useEffect, useState } from "react";
 import NavBar from "../components/navbar";
 import '../App.css';
 import { AspectRatio, Avatar, Button, Stack } from "@mui/joy";
-import { catImageList } from "../components/pagelist";
 import MainButtom from "../components/buttom";
 import { Link, useLocation } from "react-router-dom";
 import FullScreenDialog from "../components/adubt_inputs";
-import { collection, getDocs, onSnapshot, query } from 'firebase/firestore';
+import { collection, getDocs } from 'firebase/firestore';
 import '../App.css';
 import { db } from '../firebase/firebase';
-import { async } from "@firebase/util";
 import AlartMessageLogin from "../components/alert_message_login";
 
 
@@ -83,7 +81,7 @@ export default function PetPage() {
                         {
                             pet.images && pet.images.map((image, i) => (
                                 // <img  src={image} alt={`Image ${index + 1}`} />
-                                <Button onClick={() => { handellUrl(image) }}>
+                                <Button sx={{padding:0,margin:1}} onClick={() => { handellUrl(image) }}>
                                     <img
                                         key={i}
                                         src={image}
@@ -155,7 +153,7 @@ export default function PetPage() {
                             direction={{ xs: 'row', sm: 'row' }}
                             spacing="2"
                             alignItems="center">
-                            <Avatar sx={{ marginRight: '20px', width: 65, height: 65 }} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzuw3ZNTNZZQgARGpWW7f6hColBKQKZ9qo6eW3giZIawfCbFziSINYfpht19iH8ndNnQA&usqp=CAU'>
+                            <Avatar sx={{ marginRight: '20px', width: 65, height: 65 }} src={userData.profileImage}>
                             </Avatar>
                             <h2 >{userData.fullName}</h2>
                         </Stack>

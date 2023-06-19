@@ -14,11 +14,12 @@ import theme from '../tools/theem';
 import { Link } from "react-router-dom";
 import { Location } from "../components/pagelist";
 import { useNavigate } from 'react-router-dom';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { signInWithEmailAndPassword, getDocs, query, where, collection } from 'firebase/firestore';
+import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
+import { getDocs, query, where, collection } from 'firebase/firestore';
 
 import { auth, db } from "../firebase/firebase";
 import { doc, setDoc } from 'firebase/firestore';
+import Lodaer from "../components/loader";
 
 const validationSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email').required('Email is required'),
@@ -28,6 +29,7 @@ const validationSchema = Yup.object().shape({
 });
 
 export default function SignUp() {
+    const [loding ,setLoding]=useState(false)
     const [showPassword, setShowPassword] = React.useState(false);
     const initialValues = {
         email: '',
@@ -40,29 +42,30 @@ export default function SignUp() {
 
     const onSubmit = async (values, { setSubmitting }) => {
         setSubmitting(false);
-      
+        setLoding(true)
         try {
           // Check if email is already used
           const usersRef = collection(db, 'users');
           const emailQuery = query(usersRef, where('email', '==', values.email));
           const emailSnapshot = await getDocs(emailQuery);
       
-          if (!emailSnapshot.empty) {
-            throw new Error('Email is already in use. Please choose a different email.');
-          }
-      
           // Create user in Firebase Authentication
           const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password);
           const user = userCredential.user;
-      
-          // Save user information to Firestore
-          await setDoc(doc(db, 'users', user.uid), {
-            fullName: values.fullName,
-            location: values.location,
-            email:values.email,
-            userId:user.uid
-          });
-      
+
+          await sendEmailVerification(user);
+          alert('check your email address and confirmation with the link')
+         
+            // Save user information to Firestore
+            await setDoc(doc(db, 'users', user.uid), {
+                fullName: values.fullName,
+                location: values.location,
+                email:values.email,
+                userId:user.uid,
+                status:'user',
+              });
+              
+          setLoding(false);
           navigate('/login');
         } catch (error) {
             let errorMessage;
@@ -78,7 +81,7 @@ export default function SignUp() {
               default:
                 errorMessage = 'An error occurred. Please try again later.';
             }
-          
+            setLoding(false);
             console.log(errorMessage);
             setmesserr(errorMessage);
         }
@@ -178,7 +181,7 @@ export default function SignUp() {
                             </div>
                             <div className="btns">
                                 <Button variant="contained" type="submit">
-                                    SignUp
+                                    {loding?<Lodaer/>:"SignUp"}
                                 </Button>
                                 <Link to={'/login'}>
                                     <Button variant="outlined">Login</Button>

@@ -15,6 +15,7 @@ import { Link } from "react-router-dom";
 import {  signInWithEmailAndPassword   } from 'firebase/auth';
 import { NavLink, useNavigate } from 'react-router-dom'
 import { auth } from "../firebase/firebase";
+import Lodaer from "../components/loader";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Email is required'),
@@ -29,49 +30,56 @@ export default function LogIn() {
   };
 
   const navigate = useNavigate();
-  const [messerr ,setmesserr]=useState('');
-  const onSubmit = (values, { setSubmitting }) => {
-    // console.log(values);
-    // alert(JSON.stringify(values, null, 2));
-    // setSubmitting(false);
-    // window.location.href = '/';
-    signInWithEmailAndPassword(auth, values.email, values.password)
-        .then((userCredential) => {
-            // Signed in
-            const user = userCredential.user;
-            // navigate("/")
-            console.log(user);
-            user.getIdToken()
+const [messerr, setMesserr] = useState('');
+const [loding ,setLoding]=useState(false)
+
+const onSubmit = async (values, { setSubmitting }) => {
+  setSubmitting(false);
+  setLoding(true);
+  
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, values.email, values.password);
+    const user = userCredential.user;
+
+    if (user.emailVerified) {
+      user.getIdToken()
         .then((token) => {
           // Save the token to local storage
           localStorage.setItem('token', token);
-
+          setLoding(false);
           navigate('/');
         })
         .catch((error) => {
           console.error('Error getting user token:', error);
+          setLoding(false);
         });
-        })
-        .catch((error) => {
-          let errorMessage;
-        
-          switch (error.code) {
-            case 'auth/wrong-password':
-              errorMessage = 'Wrong password. Please try again.';
-              break;
-            case 'auth/user-not-found':
-              errorMessage = 'User not found. Please check your credentials.';
-              break;
-            // Add more cases for other Firebase error codes as needed
-            default:
-              errorMessage = 'An error occurred. Please try again later.';
-          }
-        
-          console.log(errorMessage);
-          setmesserr(errorMessage);
-        });
+    } else {
+      setLoding(false);
+      setMesserr('Please verify your email address before logging in.');
+    }
+  } catch (error) {
+    let errorMessage;
     
-  };
+    switch (error.code) {
+      case 'auth/wrong-password':
+        errorMessage = 'Wrong password. Please try again.';
+        break;
+      case 'auth/user-not-found':
+        errorMessage = 'User not found. Please check your credentials.';
+        break;
+      // Add more cases for other Firebase error codes as needed
+      default:
+        errorMessage = 'An error occurred. Please try again later.';
+    }
+    
+    setLoding(false);
+    console.log(errorMessage);
+    setMesserr(errorMessage);
+  }
+};
+
+// Rest of the code...
+
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleMouseDownPassword = (event) => {
@@ -135,7 +143,7 @@ export default function LogIn() {
             </div> 
             <div className="btns">
                     <Button variant="contained" type="submit">
-                      Login
+                      {loding ? <Lodaer/>: "Login"}
                     </Button>                                  
               <Link to={'/signup'}>
               <Button variant="outlined">Register</Button>

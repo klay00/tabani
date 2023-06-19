@@ -19,9 +19,64 @@ import '../App.css';
 import theme from '../tools/theem';
 import  UserInfo from '../firebase/testingfirestoe';
 import { Stack } from '@mui/material';
+import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
+import { auth,db } from "../firebase/firebase";
+import Notfcation from './Notifcation';
 
-
+export const userInfo=[];
 export default function NavBar() {
+
+  const [user, setUser] = useState(null);
+ 
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(async (authUser) => {
+      if (authUser) {
+        // User is logged in, fetch user information from Firestore
+        fetchUserData(authUser.uid);
+        fetchNotifData(authUser.uid)
+      } else {
+        // User is not logged in
+        setUser(null);
+      }
+    });
+
+    // Clean up the listener
+    return () => unsubscribe();
+  }, []);
+
+  const fetchUserData = async (userId) => {
+    try {
+      const userRef = doc(db, 'users', userId);
+      const snapshot = await getDoc(userRef);
+
+      if (snapshot.exists()) {
+        const userData = snapshot.data();
+        setUser(userData);
+        userInfo.push(userData);
+      } else {
+        // User document does not exist
+        setUser(null);
+      }
+    } catch (error) {
+      console.log('Error fetching user data:', error);
+    }
+  };
+const [notifc ,setNotifc]=useState([]);
+const fetchNotifData=async (userId)=>{
+  try{
+    const q = await getDocs(collection(db, 'notif'));
+    const notif = q.docs.filter((doc) => doc.data().userOrderId ===userId &&doc.data().status===true)
+        .map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+        }));
+        setNotifc(notif)
+  }catch(e){
+    console.log(e);
+  }
+}
+console.log(user);
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -44,6 +99,7 @@ export default function NavBar() {
   function handelRemovToken(path) {
        if(path==='/login'){
         localStorage.removeItem('token');
+        userInfo.push('');
        }
   }
   
@@ -56,7 +112,7 @@ export default function NavBar() {
     <AppBar position="static" color='secondary'>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
           <Typography
             variant="h6"
             noWrap
@@ -65,7 +121,7 @@ export default function NavBar() {
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
-              // fontFamily: 'monospace',
+              fontFamily: 'inherit',
               fontWeight: 700,
               letterSpacing: '.3rem',
               color: 'inherit',
@@ -114,7 +170,7 @@ export default function NavBar() {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
           <Typography
             variant="h5"
             noWrap
@@ -151,11 +207,16 @@ export default function NavBar() {
         token?<Box sx={{ flexGrow: 0 }}>
           
           <Stack direction="row" alignItems={"center"} spacing={2}>
+            <Notfcation data={notifc}/>
             <UserInfo name={"fullName"}/>
+            
        <div>
        <Tooltip title="Open settings">
           <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-            <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+            {
+             user?<Avatar src={user.profileImage} alt='profile image'/>:<Avatar  alt='profile image'/>
+              
+            }
           </IconButton>
         </Tooltip>
         <Menu
@@ -177,7 +238,7 @@ export default function NavBar() {
           {settings.map((setting,i) => (
             <MenuItem key={setting} onClick={handleCloseUserMenu}>
 
-              <Link to={setting.path} onClick={(()=>handelRemovToken(setting.path))}>
+              <Link to={setting.path} onClick={(()=>handelRemovToken(setting.path))} state={user}>
               <Typography textAlign="center">{setting.name}</Typography>
               </Link>
             </MenuItem>
