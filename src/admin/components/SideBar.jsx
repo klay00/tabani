@@ -20,6 +20,8 @@ import { useEffect,useState } from 'react';
 import { listPgeAdmin } from '../../components/pagelist';
 import { Avatar, Button, Stack } from '@mui/joy';
 import { Link } from 'react-router-dom';
+import { auth, db } from '../../firebase/firebase';
+import { doc, getDoc } from 'firebase/firestore';
 
 const drawerWidth = 240;
 
@@ -89,6 +91,37 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function SideBar() {
+    const [user, setUser] = useState(null);
+ 
+    useEffect(() => {
+      const unsubscribe = auth.onAuthStateChanged(async (authUser) => {
+        if (authUser) {
+          // User is logged in, fetch user information from Firestore
+          fetchUserData(authUser.uid)
+        } else {
+          // User is not logged in
+          setUser(null);
+        }
+      });
+      const fetchUserData = async (userId) => {
+        try {
+          const userRef = doc(db, 'users', userId);
+          const snapshot = await getDoc(userRef);
+    
+          if (snapshot.exists()) {
+            const userData = snapshot.data();
+            setUser(userData);
+          } else {
+            // User document does not exist
+            setUser(null);
+          }
+        } catch (error) {
+          console.log('Error fetching user data:', error);
+        }
+      };
+      // Clean up the listener
+      return () => unsubscribe();
+    }, []);
    
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -125,8 +158,12 @@ export default function SideBar() {
           </Typography>
         </Toolbar>
             <Stack direction={'row'} alignItems={'center'} spacing={2}>
-                <h4>hussein</h4> 
-              <Avatar/>
+              {
+                user?<h4>{user.fullName}</h4> :<h4>loding. . .</h4>
+              }  
+              {
+                 user?<Avatar src={user.profileImage} alt='profile image'/>:<Avatar  alt='profile image'/>
+                }
              
             </Stack>
             
