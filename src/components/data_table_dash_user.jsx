@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import '../App.css';
-import { Avatar} from '@mui/material';
+import { Alert, Avatar, Snackbar} from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import PetsIcon from '@mui/icons-material/Pets';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -176,7 +176,6 @@ export default function ValueGetterGrid() {
       console.error('Error deleting images:', error);
     }
   };
-
   async function handeldelet(pet) {
     setLoading(true);
     try {
@@ -184,7 +183,6 @@ export default function ValueGetterGrid() {
       await deleteImages(pet.images);
       await deleteDocument(pet.id);
       setLoading(false);
-     
      window.location.reload();
     } catch (error) {
       setLoading(false);
@@ -198,6 +196,7 @@ export default function ValueGetterGrid() {
       {!loading ? (
         <>
           <DataGrid rows={petDataI} columns={columns} />
+        
         </>
       ) : (
         <Loding name={'reload'} />
