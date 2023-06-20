@@ -223,6 +223,28 @@ body {
   background-color: rgb(3, 188, 3);
 }
 
+
+
+.but-adobt2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+.but-adobt2  a{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.but-adobt2 button {
+  border-radius: 30px;
+  flex: 1;
+  color: white;
+  font-weight: bold;
+}
+
+
 .adoubt-input {
   width: 100%;
 }
