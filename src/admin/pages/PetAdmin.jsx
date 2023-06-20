@@ -15,10 +15,7 @@ import { auth, db, storage } from "../../firebase/firebase";
 import Loding from "../../components/loading";
 import theme from "../../tools/theem";
 import Dialog from '@mui/material/Dialog';
-import ListItemText from '@mui/material/ListItemText';
-import ListItem from '@mui/material/ListItem';
 import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -33,7 +30,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function PetAdmin() {
 
-    const [userId1, setUserId] = useState('');
   const [petDataI, setPetData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -41,7 +37,6 @@ export default function PetAdmin() {
     const unsubscribe = auth.onAuthStateChanged(async (authUser) => {
       if (authUser) {
         console.log(authUser.uid);
-        setUserId(authUser.uid);
         fetchPetData();
         fetchOrder();
       } else {
@@ -58,17 +53,14 @@ export default function PetAdmin() {
 
     const petQuerySnapshot = await getDocs(collection(db, 'pets'));
     const petData = petQuerySnapshot.docs
-    //   .filter((doc) => doc.data().userId === userId1)
       .map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
     setPetData(petData);
     setLoading(false);
-    rows1.push(...petData)
-    console.log(petData.onerPhone);
-
   };
+
   useEffect(() => {
     if (petDataI.length === 0 && !loading) {
       fetchPetData();
@@ -86,8 +78,10 @@ export default function PetAdmin() {
     setOrderData(orderData);
   }
   const [open, setOpen] = React.useState(false);
+  const [data, setData] = React.useState([]);
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (petdata) => {
+    setData(petdata)
     setOpen(true);
   };
 
@@ -105,9 +99,8 @@ export default function PetAdmin() {
     { field: 'avcciation', headerName: 'The vacciation', width: 160 },
     { field: 'status', headerName: 'The Status', width: 170 ,
     renderCell: (params) =>
-
     <>
-    <Button onClick={handleClickOpen}>
+    <Button onClick={(()=>handleClickOpen(params.row))}>
     {params.value}
   </Button>
   <Dialog
@@ -117,7 +110,7 @@ export default function PetAdmin() {
     TransitionComponent={Transition}
   >
     
-    <AppBar sx={{ position: 'relative' }}>
+    <AppBar sx={{ position: 'relative' ,backgroundColor:"#FFA800"}}>
       <Toolbar>
         <IconButton
           edge="start"
@@ -133,7 +126,7 @@ export default function PetAdmin() {
       </Toolbar>
     </AppBar>
     <List>
-     <PetDisplayAdmin petData={params.row}/>
+     <PetDisplayAdmin petData={data}/>
     </List>
   </Dialog>
 </>
