@@ -129,7 +129,7 @@ export default function InputAddPet() {
               sex: values.sex,
               size: values.size,
               avcciation: values.avcciation,
-              status: 'Available to Adopt',
+              status: 'pending',
               images: imageUrls,
               onerPhone:values.onerPhone,       
             });
