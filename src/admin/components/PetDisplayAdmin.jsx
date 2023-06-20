@@ -1,25 +1,15 @@
 import React, { useEffect, useState } from "react";
 import '../../App.css';
-import { AspectRatio, Avatar, Button, Stack } from "@mui/joy";
-import { Link, useLocation } from "react-router-dom";
-import { collection, getDocs } from 'firebase/firestore';
-import MainButtom from "../../components/buttom";
+import { AspectRatio, Avatar, Stack } from "@mui/joy";
+import { collection, doc, getDocs, updateDoc } from 'firebase/firestore';
 import { db } from "../../firebase/firebase";
-
+import { Button } from "@mui/material";
+import Lodaer from "../../components/loader";
 
 
 export default function PetDisplayAdmin({ petData }) {
 
-    const [open, setOpen] = React.useState(false);
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-    const handleClose = () => {
-        setOpen(false);
-    };
-
-  
+    const [loding ,setLoding]=useState(false)
     const [pet, setpet] = useState([]);
     useEffect(() => {
         setpet(petData);
@@ -49,6 +39,40 @@ export default function PetDisplayAdmin({ petData }) {
             }));
         setUserData(...userData)
     }
+    const handelPost = async (id) => {
+        setLoding(true);
+        try {
+
+            const documentRef = doc(db, 'pets', id);
+            const updatedData = {
+                status: 'Available to Adopt'
+            };
+            await updateDoc(documentRef, updatedData);
+            window.location.reload();
+            alert('Pet Hase been Posted')
+            setLoding(false);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+
+    const handelStopPost = async (id) => {
+        setLoding(true);
+        try {
+
+            const documentRef = doc(db, 'pets', id);
+            const updatedData = {
+                status: 'pending'
+            };
+            await updateDoc(documentRef, updatedData);
+            window.location.reload();
+            setLoding(false);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
     return (
         <>
             <div className="pet-main">
@@ -71,7 +95,6 @@ export default function PetDisplayAdmin({ petData }) {
                     <div className="chose-image">
                         {
                             pet.images && pet.images.map((image, i) => (
-                                // <img  src={image} alt={`Image ${index + 1}`} />
                                 <Button sx={{ padding: 0, margin: 1 }} onClick={() => { handellUrl(image) }}>
                                     <img
                                         key={i}
@@ -125,18 +148,51 @@ export default function PetDisplayAdmin({ petData }) {
                                 <tr>
                                     <td ><h4>Vaccination from the disease</h4></td>
                                     <td>{pet.avcciation}</td>
-
                                 </tr>
-
                             </tbody>
-
-
-
                         </table>
-                        <div className="but-adobt">
-                        {
-                            pet.status===''?<MainButtom name={'Accebt Pet'} />:<MainButtom name={'Accebt Pet'} />
-                        }
+                        <div className="but-adobt2">
+                            {
+                                pet.status === 'Adopt' ?
+                                    <>
+
+                                    </>
+                                    : <>
+
+                                        {
+                                            pet.status === 'pending' ?
+
+                                                 <>
+                                                 {
+                                                    loding?
+                                                    <Button
+                                                    color="success"
+                                                    disabled
+                                                    variant="contained"><Lodaer/></Button>
+                                                    :
+                                                    <Button
+                                                    color="success"
+                                                    onClick={(() => handelPost(pet.id))}
+                                                    variant="contained">Post Pet</Button>
+                                                    
+                                                 }
+                                                 </>                                               
+                                                : <>
+                                                {
+                                                    loding?
+                                                    <Button
+                                                    color="secondary"
+                                                    disabled
+                                                    variant="contained"><Lodaer/></Button>
+                                                    :<Button
+                                                    color="secondary"
+                                                    onClick={(() => handelStopPost(pet.id))}
+                                                    variant="contained">Stop posting</Button>
+                                                }
+                                                </>
+                                        }
+                                    </>
+                            }
                         </div>
                     </div>
                     <div className="account">
@@ -148,11 +204,6 @@ export default function PetDisplayAdmin({ petData }) {
                             </Avatar>
                             <h2 >{userData.fullName}</h2>
                         </Stack>
-                        {/* <div className="but-adobt">
-                            <Link to={'/profile'} state={userData}>
-                                <MainButtom name={'view Account'} />
-                            </Link>
-                        </div> */}
                     </div>
                 </div>
             </div>
