@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom";
 import '../App.css';
 import AddPet from "../components/add_pet";
-import ValueGetterGrid, { rows1 } from "../components/data_table_dash_user";
+import ValueGetterGrid from "../components/data_table_dash_user";
 import NavBar from "../components/navbar";
 import { db } from "../firebase/firebase";
 
@@ -20,7 +20,7 @@ export default function DashUser() {
     pending: 0
   };
   
-  const [counts, setCounts] = useState(initialCounts); // Initialize counts as an object
+  const [counts, setCounts] = useState(initialCounts); 
   
   useEffect(() => {
     async function checkPets() {
@@ -32,9 +32,9 @@ export default function DashUser() {
           ...doc.data(),
         }));
       
-      setCounts(petData.length); // Update counts with the length of petData
+      setCounts(petData.length); 
   
-      const updatedCounts = { ...initialCounts }; // Initialize updatedCounts as a copy of initialCounts
+      const updatedCounts = { ...initialCounts }; 
       petData.forEach(row => {
         if (row.status === 'Available to Adopt') {
           updatedCounts.available++;
@@ -50,10 +50,7 @@ export default function DashUser() {
   
     checkPets();
   }, []);
-  
-  console.log(counts.pending + ' pending');
-  console.log(counts.adopted + ' adopt');
-  console.log(counts.available + ' available');
+
   return (
     <>
       <NavBar />
