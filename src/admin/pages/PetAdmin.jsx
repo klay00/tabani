@@ -65,7 +65,6 @@ export default function PetAdmin() {
     if (petDataI.length === 0 && !loading) {
       fetchPetData();
       fetchOrder();
-
     }
   }, [petDataI, loading]);
   const [petOrderData, setOrderData] = useState([])
@@ -96,6 +95,7 @@ export default function PetAdmin() {
     { field: 'age', headerName: 'The Age', width: 100 },
     { field: 'sex', headerName: 'The Sex', width: 100 },
     { field: 'size', headerName: 'The size', width: 100 },
+    { field: 'onerPhone', headerName: 'Phone Number', width: 140 },
     { field: 'avcciation', headerName: 'The vacciation', width: 160 },
     { field: 'status', headerName: 'The Status', width: 170 ,
     renderCell: (params) =>
