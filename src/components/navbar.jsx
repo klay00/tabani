@@ -100,6 +100,8 @@ console.log(user);
        if(path==='/login'){
         localStorage.removeItem('token');
         userInfo.push('');
+        setUser(null)
+        console.log('token deleted');
        }
   }
   
