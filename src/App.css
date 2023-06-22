@@ -10,6 +10,7 @@ a {
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+
 }
 
 body {
@@ -487,4 +488,5 @@ body {
 }
 .avatarprofile{
   border-radius: 50%!important;
+  
 }
