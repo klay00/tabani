@@ -120,21 +120,9 @@ export default function AdminHome() {
                 </Stack>
 
                 <Stack direction={'row'} sx={{ flexWrap: 'wrap', gap: 2 }}>
-                    <Box
-                        sx={{
-                            width: 250,
-                            height: 350,
-                            borderRadius: 3,
-                            flexGrow: 1,
-                            display: 'flex',
-                            flexDirection: 'column',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
-                        }}
-                    >
-                        {/* <OrderLine/> */}
-                    </Box>
+                    
+                         <OrderLine/> 
+                    
                     <div>
                         <CharCircle pet={pet.length} user={user.length} order={order.length} />
                     </div>
