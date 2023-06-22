@@ -72,7 +72,8 @@ export const settings = [
   },
   {
     name:'Admin Dashbord',
-    path:'/admin_dash'
+    path:'/admin_dash',
+    requiredRole: 'Admin'
   },
   {
     name:'logout',
