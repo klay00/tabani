@@ -2,52 +2,59 @@ import { Stack } from "@mui/joy";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import SideBar from "../components/SideBar";
-import { auth, db } from '../../firebase/firebase';
-import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
-
-
-
+import { db } from '../../firebase/firebase';
+import { collection, getDocs } from 'firebase/firestore';
+import CharCircle from "../components/CharCircle";
+import OrderLine from "../components/OrderLine";
+export const Orders = [];
+export const Pets = [];
+export const Users = [];
 export default function AdminHome() {
-    const [pet,setPet]=useState([]);
-    const [user,setUser]=useState([]);
-    const [order,setOrder]=useState([]);
-    const [loding,setLoding]=useState(false);
+    const [pet, setPet] = useState([]);
+    const [user, setUser] = useState([]);
+    const [order, setOrder] = useState([]);
+
 
     useEffect(() => {
-        setLoding(true)
+
         fetchPetData();
         fetchUserData();
         fetchOrderData();
-        setLoding(false);
-      }, []);
+
+    }, []);
 
     const fetchPetData = async () => {
         const petQuerySnapshot = await getDocs(collection(db, 'pets'));
-        const petData = petQuerySnapshot.docs.filter(doc=>doc.data() )
-        .map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
+        const petData = petQuerySnapshot.docs.filter(doc => doc.data())
+            .map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+            }));
         setPet(petData);
-      };
-      const fetchUserData = async () => {
+        Pets.push(petData)
+    };
+    const fetchUserData = async () => {
         const petQuerySnapshot = await getDocs(collection(db, 'users'));
-        const userdata = petQuerySnapshot.docs.filter(doc=>doc.data() )
-        .map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
+        const userdata = petQuerySnapshot.docs.filter(doc => doc.data())
+            .map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+            }));
         setUser(userdata);
-      };
-      const fetchOrderData = async () => {
+        Users.push(userdata);
+
+    };
+    const fetchOrderData = async () => {
         const petQuerySnapshot = await getDocs(collection(db, 'order'));
-        const orderdata = petQuerySnapshot.docs.filter(doc=>doc.data() )
-        .map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
+        const orderdata = petQuerySnapshot.docs.filter(doc => doc.data())
+            .map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+            }));
         setOrder(orderdata);
-      };
+        Orders.push(orderdata)
+    };
+
     return (
         <>
             <SideBar />
@@ -59,7 +66,7 @@ export default function AdminHome() {
                 }}
             >
 
-                <Stack direction={'row'} sx={{ flexWrap: 'wrap', gap: 2 }}>
+                <Stack direction={'row'} sx={{ flexWrap: 'wrap', gap: 2, marginBottom: 2 }}>
                     <Box
                         sx={{
                             background: 'linear-gradient(45deg, #FF6B6B, #FF8E53)',
@@ -109,6 +116,30 @@ export default function AdminHome() {
                     >
                         <h2 style={{ margin: 0, fontSize: '24px', color: '#FFF' }}>Orders : {order.length}</h2>
                     </Box>
+
+                </Stack>
+
+                <Stack direction={'row'} sx={{ flexWrap: 'wrap', gap: 2 }}>
+                    <Box
+                        sx={{
+                            width: 250,
+                            height: 350,
+                            borderRadius: 3,
+                            flexGrow: 1,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
+                        }}
+                    >
+                        {/* <OrderLine/> */}
+                    </Box>
+                    <div>
+                        <CharCircle pet={pet.length} user={user.length} order={order.length} />
+                    </div>
+
+
                 </Stack>
             </Box>
         </>
