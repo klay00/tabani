@@ -15,7 +15,6 @@ a {
 body {
   background-color: rgb(244 244 244);
   font-family: 'Nunito', sans-serif;
-  /* background-image: url('../public/images/bg.png');   */
 
 }
 
@@ -311,9 +310,11 @@ body {
 .formik-dispy button:disabled{
   background-color: rgb(202, 171, 109);
 }
+ 
 
-
-
+.input-lp .image input{
+  display: none;
+}
 .dash{
   margin:20px 10%;
 }
@@ -510,3 +511,18 @@ body {
 .avatarprofile{
   border-radius: 50%!important;
 }
+.in-image{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 22px;
+  background-color: rgb(233, 236, 241);;
+  border: 2px dashed #FFA800;
+  border-radius: 80px;
+}
+.in-image label{
+  margin: 0px!important;
+  cursor: pointer;
+  width: 100%;
+  font-size: 23px;
+ }
