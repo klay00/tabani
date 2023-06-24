@@ -6,9 +6,7 @@ import { db } from '../../firebase/firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import CharCircle from "../components/CharCircle";
 import OrderLine from "../components/OrderLine";
-export const Orders = [];
-export const Pets = [];
-export const Users = [];
+ import '../../App.css';
 export default function AdminHome() {
     const [pet, setPet] = useState([]);
     const [user, setUser] = useState([]);
@@ -31,8 +29,7 @@ export default function AdminHome() {
                 ...doc.data(),
             }));
         setPet(petData);
-        Pets.push(petData)
-    };
+     };
     const fetchUserData = async () => {
         const petQuerySnapshot = await getDocs(collection(db, 'users'));
         const userdata = petQuerySnapshot.docs.filter(doc => doc.data())
@@ -41,8 +38,7 @@ export default function AdminHome() {
                 ...doc.data(),
             }));
         setUser(userdata);
-        Users.push(userdata);
-
+ 
     };
     const fetchOrderData = async () => {
         const petQuerySnapshot = await getDocs(collection(db, 'order'));
@@ -52,8 +48,7 @@ export default function AdminHome() {
                 ...doc.data(),
             }));
         setOrder(orderdata);
-        Orders.push(orderdata)
-    };
+     };
 
     return (
         <>
