@@ -3,7 +3,7 @@ import SideBar from "../components/SideBar";
 import React, { useState, useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import '../../App.css';
-import { Avatar, Button, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
+import { Alert, AlertTitle, Avatar, Button, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { collection, getDocs, doc, deleteDoc, updateDoc } from 'firebase/firestore';
@@ -70,6 +70,8 @@ export default function UserAdmin() {
     }
     const [open, setOpen] = useState(false);
     const [user, setUser] = useState([]);
+    const [successMessage, setSuccessMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleClickOpen = (data) => {
         setUser(null)
@@ -93,10 +95,16 @@ export default function UserAdmin() {
                 };
                 await updateDoc(documentRef, updatedData);
                 window.location.reload();
-                alert('User hase been upgraded to Admin')
+                setSuccessMessage('User hase been upgraded to Admin');
+                setTimeout(() => {
+                    setSuccessMessage('')
+                }, 5000);
                 setLoading(false);
             } catch (e) {
-                console.log(e);
+                setSuccessMessage('error with upgraded  User to Admin');
+                setTimeout(() => {
+                    setSuccessMessage('')
+                }, 5000);
             }
         } else {
             try {
@@ -107,10 +115,16 @@ export default function UserAdmin() {
                 };
                 await updateDoc(documentRef, updatedData);
                 window.location.reload();
-                alert('Admin hase been return to User')
                 setLoading(false);
+                setSuccessMessage('Admin hase been return to User');
+                setTimeout(() => {
+                    setSuccessMessage('')
+                }, 5000);
             } catch (e) {
-                console.log(e);
+                setErrorMessage('error with return  Admin to user');
+                setTimeout(() => {
+                    setErrorMessage('')
+                }, 5000);
             }
         }
 
@@ -224,10 +238,10 @@ export default function UserAdmin() {
     async function handelPetDelet(petdata) {
         setLoading(true);
         try {
-            petdata.map(async (pet,i) => {
+            petdata.map(async (pet, i) => {
                 await deletePetImages(pet.images);
                 await deletePetDocument(pet.id);
-                
+
             })
 
             setLoading(false);
@@ -250,7 +264,7 @@ export default function UserAdmin() {
     const deletePetImages = async (imageUrls) => {
         try {
             const promises = imageUrls.map((url) => {
-                const imageUrl = decodeURIComponent(url); 
+                const imageUrl = decodeURIComponent(url);
                 const imageRef = ref(storage, imageUrl);
                 return deleteObject(imageRef);
             });
@@ -277,17 +291,19 @@ export default function UserAdmin() {
     async function handeldelet(user) {
         setLoading(true);
         try {
-            
+
             await featchPetUser(user.id)
             if (user.profileImage) {
                 await deleteImages(user.id);
             }
-            
-            
+
+
             await deleteDocument(user.id);
-            
+
             setLoading(false);
-            window.location.reload();
+            setTimeout(() => {
+                window.location.reload();
+            }, 5000);
         } catch (error) {
             setLoading(false);
 
@@ -306,6 +322,19 @@ export default function UserAdmin() {
                     marginRight: 3,
                 }}
             >
+                {successMessage && (
+                    <Alert severity="success" sx={{ position: 'fixed', top: 40, right: '50%', transform: "translatex(50% )", width: '300px', zIndex: 9999 }}>
+                        <AlertTitle>Success</AlertTitle>
+                        <div>{successMessage}</div>
+                    </Alert>
+                )}
+
+                {errorMessage && (
+                    <Alert severity="error" sx={{ position: 'fixed', top: 40, right: '50%', transform: "translatex(50% )", width: '300px', zIndex: 9999 }}>
+                        <AlertTitle>Error</AlertTitle>
+                        {errorMessage}
+                    </Alert>
+                )}
                 <h2>Users</h2>
                 <Box className={"tbale-dash-user"} sx={{ height: '78vh', width: '100%' }}>
                     {!loading ? (
