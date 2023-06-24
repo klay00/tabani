@@ -47,7 +47,7 @@ export default function SignUp() {
           // Check if email is already used
           const usersRef = collection(db, 'users');
           const emailQuery = query(usersRef, where('email', '==', values.email));
-          const emailSnapshot = await getDocs(emailQuery);
+            await getDocs(emailQuery);
       
           // Create user in Firebase Authentication
           const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password);
