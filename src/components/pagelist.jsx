@@ -72,7 +72,8 @@ export const settings = [
   },
   {
     name:'Admin Dashbord',
-    path:'/admin_dash'
+    path:'/admin_dash',
+    requiredRole: 'Admin'
   },
   {
     name:'logout',
@@ -90,17 +91,17 @@ export const listPgeAdmin=[
        icon:<HomeIcon/>
   },{
       text:'Users',
-       path:'/admin_dashdd',
+       path:'/user_admin',
        icon:<PersonIcon/>
   },
   {
       text:'Pets',
-       path:'/admin_dash',
+       path:'/pet_admin',
        icon:<PetsIcon/>
   },
   {
       text:'Orders',
-       path:'/admin_dash',
+       path:'/order_admin',
        icon:<LocalGroceryStoreIcon/>
   },
   {

@@ -41,35 +41,26 @@ export default function NotificationMessage({ data }) {
     const [copied, setCopied] = useState(false);
 
     const handleCopy = (phoneNumber) => {
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(phoneNumber)
-              .then(() => {
-                setCopied(true);
-              })
-              .catch((error) => {
-                console.log('Copy failed:', error);
-              });
-          } else {
-            // Fallback for browsers that do not support clipboard API
-            const textField = document.createElement('textarea');
-            textField.innerText = phoneNumber;
-            document.body.appendChild(textField);
-            textField.select();
-            document.execCommand('copy');
-            textField.remove();
-            setCopied(true);
-          }
+
+
+        if (phoneNumber.startsWith('0') && phoneNumber.length >= 11) {
+            const num = phoneNumber.substring(1);
+
+             const whatsappUrl = `https://wa.me/${num}`;
+            // // Open WhatsApp in a new window or tab
+             window.open(whatsappUrl);
+        }
+
     };
     return (
         <div>
             <ThemeProvider theme={theme}>
-                <div className='noNote'>
-
-                  <Button onClick={handleClickOpen}>
-                   Pet request accepted {data.petName}
-                </Button>  
+                <div >
+                    <Button onClick={handleClickOpen}>
+                        Pet request accepted {data.petName}
+                    </Button>
                 </div>
-                
+
                 <Dialog
                     open={open}
                     TransitionComponent={Transition}
@@ -77,19 +68,20 @@ export default function NotificationMessage({ data }) {
                     onClose={handleClose}
                     aria-describedby="alert-dialog-slide-description"
                 >
-                    <DialogTitle>{"Your Adopte Pet hase ben accebtrd"}</DialogTitle>
+                    <DialogTitle>{"Your Adopte Pet hase ben accepted"}</DialogTitle>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-slide-description">
-                            thanke you to adobt
-                            <h3 color='secondary'>
-                                {data.petName}
+                           <h3 color='secondary'> 
+                           thanke you to adobt
+                            
+                              <span style={{paddingLeft:8,paddingRight:8 ,color:'red'}}>{data.petName}</span>  
+                           
+                            this my phone number to contact with me to get the pet 
                             </h3>
-                            this my phone number to contact with me to get the pet
-                            {/* <h3>{data.onerPhone}</h3> */}
+                            <h3>Click the number to open in WhatsApp</h3>
                             <h3 onClick={() => handleCopy(data.onerPhone)} style={{ cursor: 'pointer', color: "#FFA800" }} >
                                 {data.onerPhone}
                             </h3>
-                            {copied && <p style={{ color: "#FFA000" }}>Phone number copied!</p>}
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>

@@ -6,15 +6,16 @@ import Divider from '@mui/material/Divider';
 import { Stack } from '@mui/system';
 import PersonIcon from '@mui/icons-material/Person';
 import theme from '../tools/theem';
-import { Button, ThemeProvider } from '@mui/material';
+import { Alert, AlertTitle, Button, CircularProgress, ThemeProvider } from '@mui/material';
 import PetsIcon from '@mui/icons-material/Pets';
 import PhoneIcon from '@mui/icons-material/Phone';
 import HomeIcon from '@mui/icons-material/Home';
 import MailIcon from '@mui/icons-material/Mail';
 import InfoIcon from '@mui/icons-material/Info';
 import { db } from '../firebase/firebase';
-import { collection, doc, updateDoc, setDoc, deleteDoc, addDoc } from 'firebase/firestore';
-import { async } from '@firebase/util';
+import { collection, doc, updateDoc, deleteDoc, addDoc } from 'firebase/firestore';
+import { useState } from 'react';
+import Lodaer from './loader';
 
 const style = {
     width: '100%',
@@ -24,18 +25,29 @@ const style = {
 };
 
 export default function OrderAdopt({ order }) {
-
+    const [loding, setloding] = useState(false);
+    const [loding2, setloding2] = useState(false);
+    const [successMessage, setSuccessMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
     async function handelDeleteOrder() {
+        setloding(true);
         try {
             await deleteDoc(doc(db, "order", order.id));
-            console.log('delete success');
-            alert('order pet delet')
+            setloding(false);
+            setSuccessMessage('Order Delete successfully')
+            setTimeout(() => {
+                setSuccessMessage('')
+            }, 5000);
         } catch (e) {
-            console.log(e);
+            setloding(false);
+            setErrorMessage('Error deleting order please try again later')
+            setTimeout(() => {
+                setErrorMessage('')
+            }, 5000);
         }
     }
     async function handelupDataData() {
-        console.log('updata data');
+        setloding2(true);
         try {
             await updateDoc(doc(db, "order", order.id), {
                 status: 'Adopt'
@@ -43,18 +55,27 @@ export default function OrderAdopt({ order }) {
             await updateDoc(doc(db, "pets", order.petId), {
                 status: 'Adopt'
             });
-            await addDoc(collection(db,"notif"),{
-                userOrderId:order.orderUserId,
-                petName:order.petName,
-                status:true,
-                petId:order.petId,
-                onerPhone:order.onerPhone,
+            await addDoc(collection(db, "notif"), {
+                userOrderId: order.orderUserId,
+                petName: order.petName,
+                status: true,
+                petId: order.petId,
+                onerPhone: order.onerPhone,
             })
-            console.log('updata data success done');
-            alert('pet pen adobt ')
+            setloding2(false);
+            setSuccessMessage('Pet successfully Adopted');
+            setTimeout(() => {
+                setSuccessMessage('')
+                window.location.reload();
+            }, 5000);
 
         } catch (e) {
-            console.log(e);
+            setloding2(false);
+            setErrorMessage('Error Adopt pet please try again later')
+            setTimeout(() => {
+                setErrorMessage('')
+                window.location.reload();
+            }, 5000);
         }
 
 
@@ -62,6 +83,19 @@ export default function OrderAdopt({ order }) {
 
     return (
         <>
+            {successMessage && (
+                <Alert severity="success" sx={{ position: 'fixed', top: 40, right: '50%', transform: "translatex(50% )", width: '300px', zIndex: 9999 }}>
+                    <AlertTitle>Success</AlertTitle>
+                        <div>{successMessage}</div>
+                </Alert>
+            )}
+
+            {errorMessage && (
+                <Alert severity="error" sx={{ position: 'fixed', top: 40, right: '50%', transform: "translatex(50% )", width: '300px', zIndex: 9999 }}>
+                    <AlertTitle>Error</AlertTitle>
+                    {errorMessage}
+                </Alert>
+            )}
             <ThemeProvider theme={theme}>
                 <List sx={style} component="nav" aria-label="mailbox folders">
                     <ListItem divider>
@@ -104,9 +138,16 @@ export default function OrderAdopt({ order }) {
                     </ListItem>
 
                     <Stack direction="row" spacing={3} alignItems={'center'} justifyContent="flex-end" sx={{ m: 1 }}>
-
-                        <Button variant='outlined' onClick={(() => handelDeleteOrder())} sx={{ borderRadius: 20 }}>Refuse adoption</Button>
-                        <Button variant='contained' onClick={(() => handelupDataData())} sx={{ borderRadius: 20 }}>Adoption confirmation</Button>
+                        {
+                            loding ? <Button variant='outlined' disabled sx={{ borderRadius: 20 }}><CircularProgress /></Button>
+                                :
+                                <Button variant='outlined' onClick={(() => handelDeleteOrder())} sx={{ borderRadius: 20 }}>Delete the Order</Button>
+                        }
+                        {
+                            loding2 ? <Button variant='contained' disabled sx={{ borderRadius: 20 }}><Lodaer /></Button>
+                                :
+                                <Button variant='contained' onClick={(() => handelupDataData())} sx={{ borderRadius: 20 }}>Adoption confirmation</Button>
+                        }
                     </Stack>
 
                 </List>

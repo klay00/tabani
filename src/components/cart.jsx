@@ -26,10 +26,11 @@ export default function OverflowCard({ petname, userfullName, user, petImage, us
       },
       overflow: 'hidden',
       padding: 1,
+      border:'10px solid white'
     }}>
 
       <CardOverflow fullWidth >
-        <AspectRatio ratio="1.5">
+        <AspectRatio ratio="1.5" >
           <Link to={'../petpage'} state={pet}>
             <img
               src={petImage}

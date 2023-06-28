@@ -1,19 +1,26 @@
+import { Box } from "@mui/system";
+import SideBar from "../components/SideBar";
 import React, { useState, useEffect } from 'react';
-import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
-import '../App.css';
-import { Alert, Avatar, Snackbar} from '@mui/material';
+import '../../App.css';
+import { Avatar, Button, ThemeProvider} from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import PetsIcon from '@mui/icons-material/Pets';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore';
 import { ref, deleteObject } from 'firebase/storage';
-import { auth, db, storage } from '../firebase/firebase';
-import Loding from './loading';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
-import OrderAdopt from './OrderAdopt';
+import { auth, db, storage } from "../../firebase/firebase";
+import Loding from "../../components/loading";
+import theme from "../../tools/theem";
+import Dialog from '@mui/material/Dialog';
+import List from '@mui/material/List';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import CloseIcon from '@mui/icons-material/Close';
+import PetDisplayAdmin from "../components/PetDisplayAdmin";
 
 export const rows1 = [];
 
@@ -21,8 +28,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function ValueGetterGrid() {
-  const [userId1, setUserId] = useState('');
+export default function PetAdmin() {
+
   const [petDataI, setPetData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -30,7 +37,6 @@ export default function ValueGetterGrid() {
     const unsubscribe = auth.onAuthStateChanged(async (authUser) => {
       if (authUser) {
         console.log(authUser.uid);
-        setUserId(authUser.uid);
         fetchPetData();
         fetchOrder();
       } else {
@@ -47,22 +53,18 @@ export default function ValueGetterGrid() {
 
     const petQuerySnapshot = await getDocs(collection(db, 'pets'));
     const petData = petQuerySnapshot.docs
-      .filter((doc) => doc.data().userId === userId1)
       .map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
     setPetData(petData);
     setLoading(false);
-    rows1.push(...petData)
-    console.log(petData.onerPhone);
-
   };
+
   useEffect(() => {
     if (petDataI.length === 0 && !loading) {
       fetchPetData();
       fetchOrder();
-
     }
   }, [petDataI, loading]);
   const [petOrderData, setOrderData] = useState([])
@@ -75,8 +77,10 @@ export default function ValueGetterGrid() {
     setOrderData(orderData);
   }
   const [open, setOpen] = React.useState(false);
+  const [data, setData] = React.useState([]);
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (petdata) => {
+    setData(petdata)
     setOpen(true);
   };
 
@@ -91,8 +95,43 @@ export default function ValueGetterGrid() {
     { field: 'age', headerName: 'The Age', width: 100 },
     { field: 'sex', headerName: 'The Sex', width: 100 },
     { field: 'size', headerName: 'The size', width: 100 },
+    { field: 'onerPhone', headerName: 'Phone Number', width: 140 },
     { field: 'avcciation', headerName: 'The vacciation', width: 160 },
-    { field: 'status', headerName: 'The Status', width: 170 },
+    { field: 'status', headerName: 'The Status', width: 170 ,
+    renderCell: (params) =>
+    <>
+    <Button onClick={(()=>handleClickOpen(params.row))}>
+    {params.value}
+  </Button>
+  <Dialog
+    fullScreen
+    open={open}
+    onClose={handleClose}
+    TransitionComponent={Transition}
+  >
+    
+    <AppBar sx={{ position: 'relative' ,backgroundColor:"#FFA800"}}>
+      <Toolbar>
+        <IconButton
+          edge="start"
+          color="inherit"
+          onClick={handleClose}
+          aria-label="close"
+        >
+          <CloseIcon />
+        </IconButton>
+        <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+          View Pet
+        </Typography>         
+      </Toolbar>
+    </AppBar>
+    <List>
+     <PetDisplayAdmin petData={data}/>
+    </List>
+  </Dialog>
+</>
+             
+},
     {
       field: 'order', headerName: 'Pet Order', width: 120,
       renderCell: (params) =>
@@ -103,21 +142,9 @@ export default function ValueGetterGrid() {
                 if (order.petId === params.row.id) {
                   return order.status === 'pending' ? (
                     <>
-                      <IconButton onClick={() => handelViewOrder(params.row)} aria-label="order">
+                      <ThemeProvider theme={theme}>
                         <PetsIcon />
-                      </IconButton>
-                      <Dialog
-                        open={open}
-                        TransitionComponent={Transition}
-                        keepMounted
-                        onClose={handleClose}
-                        aria-describedby="alert-dialog-slide-description"
-                      >
-                        {orderPetData.map((order) => (
-                          <OrderAdopt order={order} />
-
-                        ))}
-                      </Dialog>
+                      </ThemeProvider>
                     </>
                   ) : (
                     <CheckCircleIcon />
@@ -145,13 +172,7 @@ export default function ValueGetterGrid() {
     },
   ];
 
-  const [orderPetData, setOrderPetData] = useState([]);
-  function handelViewOrder(params) {
-    const matchingOrderData = petOrderData.filter((order) => order.petId === params.id);
-    setOrderPetData(matchingOrderData);
-    handleClickOpen();
 
-  }
   //delet  pet 
   const deleteDocument = async (documentId) => {
     try {
@@ -191,8 +212,19 @@ export default function ValueGetterGrid() {
       // Handle error and display an error alert if necessary
     }
   }
-  return (
-    <Box className={"tbale-dash-user"} sx={{ height: 400, width: '100%' }}>
+    return(
+        <>
+        <SideBar/>
+        
+        <Box 
+        sx={{
+            marginLeft: 10,
+            marginTop: 5,
+            marginRight: 3,
+        }}
+        >
+         <h2>Pets</h2>
+         <Box className={"tbale-dash-user"} sx={{ height: '78vh', width: '100%' }}>
       {!loading ? (
         <>
           <DataGrid rows={petDataI} columns={columns} />
@@ -202,7 +234,11 @@ export default function ValueGetterGrid() {
         <Loding name={'reload'} />
       )}
     </Box>
-  );
+        </Box>
+        </>
+    )
 }
+
+
 
 
