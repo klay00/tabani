@@ -491,60 +491,18 @@ body {
   
 }
 
-.pet-title-img{
-  width: 137px;
-  height: 73px;
-  margin: 0 10px;
-  display: inline-block;
-   background-image: url('../public/images/pngpet.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
+ 
 
 .main-images-title{
   position: absolute;
 }
+ 
 .first-img{
-  height: 300px;
-  width: 250px;
-  background-image: url('../public/blogImage/greendog.jpg');
+  height: 100%;
+  width: 100%;
+  background-image: url('../public/blogImage/test.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-}
-.first-img{
-  height: 300px;
-  width: 250px;
-  background-image: url('../public/blogImage/greendog.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  border-radius: 30px;
-}
+ }
 
-.secndy-img{
-  height: 300px;
-  width: 250px;
-  background-image: url('../public/blogImage/catpink.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  border-radius: 30px;
-  bottom: 0;
-  right: 0;
-
-}
-.therrd-img{
-  height: 150px;
-  width: 175px;
-  background-image: url('../public/blogImage/title.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  right: 0;
-  top: 30px;
-}
-.fiefth-img{
-
-}
