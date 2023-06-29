@@ -172,8 +172,140 @@ export default function BlogPage() {
 
 
                 <Stack
-                    height={'70vh'}
+                    height={{
+                        xs: '100vh',
+                        sm: '100vh',
+                        md: '80vh',
+                        lg: '70vh',
+                    }}
+
+                    direction={{
+                        xs: 'column',
+                        sm: 'column',
+                        md: 'row',
+                        lg: 'row',
+                    }}
+                    marginTop={4}
+                    gap={5}
+
                 >
+                    <Box
+                        flex={1}
+                        position="relative"
+                    >
+                        <div className="daopt-image"></div>
+                        <div className="daopt-image2"></div>
+                    </Box>
+                    <Box
+                        flex={1}
+                    >
+                        <h2>Essential Pet Care Responsibilities</h2>
+                        <ul className="pet-cart">
+                            <li>Feeding and Hydration: Provide regular meals and fresh water. </li>
+
+                            <li>Exercise and Stimulation: Engage in play and provide mental stimulation. </li>
+
+                            <li>Grooming and Hygiene: Maintain cleanliness and perform necessary grooming.  </li>
+
+                            <li>Veterinary Care and Vaccinations: Schedule regular check-ups and vaccinations. </li>
+
+                            <li>Safe and Comfortable Environment: Create a secure and comfortable living space.</li>
+
+                        </ul>
+                    </Box>
+                </Stack>
+                <Stack
+                    height={'100%'}
+                    marginTop={4}
+                    gap={5}
+                >
+                    <Stack
+                        direction={{
+                            xs: 'column',
+                            sm: 'row',
+                            mdl: 'row',
+                            lg: 'row',
+                        }}
+                        sx={{
+                            height: {
+                                md: '40vh',
+                                sm: '50vh',
+                                xs: '50vh'
+                            },
+                            padding: 5,
+                            gap: 5,
+                            background: "linear-gradient(to right, #e9bdc18a, #ffc37161)",
+                            borderRadius: 5,
+                        }}
+                        justifyContent={'space-between'}
+                        alignItems={'center'}
+
+                    >
+                        <Typography
+                            sx={{
+                                fontSize: '30px',
+                                fontWeight: 'bold',
+                                marginBottom: 0,
+                            }}
+                            variant="h1" gutterBottom>
+                            What does
+                            <span style={{ color: '#FFA800', marginRight: 10, marginLeft: 10 }}>tabani</span>
+                            Tibani offer you
+                        </Typography>
+                        <div className="image-dog-tapan-png"></div>
+                    </Stack>
+
+                    <Stack
+                        direction={{
+                            xs: 'column',
+                            sm: 'row',
+                            mdl: 'row',
+                            lg: 'row',
+                        }}
+                        justifyContent={'center'}
+                        alignItems={'center'}
+                        sx={{
+                            height: {
+                                md: '60vh',
+                                sm: '100%',
+                                xs: '100%'
+                            },
+                            gap: 10
+                        }}>
+                        <article class="card card-image-pet1">
+                            <div class="temporary_text">
+ 
+                            </div>
+                            <div class="card_content">
+                                <span class="card_title">Offer for adoption</span>
+                                <span class="card_subtitle">If you own a pet and want to put it up for adoption, then tabani is the best fit for you.</span>
+                                <p class="card_description">You can offer your pet or if you are no longer able to take care of it in tabani and be one of the many animals available</p>
+
+                            </div>
+                        </article>
+                        <article class="card card-image-pet2">
+                            <div class="temporary_text">
+ 
+                            </div>
+                            <div class="card_content">
+                                <span class="card_title">Check out the available pets</span>
+                                <span class="card_subtitle">If you are interested in owning an animal,</span>
+                                <p class="card_description">  You can see many pets on the platform. Our platform has many animals that you can choose from, The multiplicity of varieties is what distinguishese</p>
+
+                            </div>
+                        </article>
+                        <article class="card card-image-pet3">
+                            <div class="temporary_text">
+ 
+                            </div>
+                            <div class="card_content">
+                                <span class="card_title">Apply for adoption</span>
+                                <span class="card_subtitle">You can easily adopt the desired animals </span>
+                                <p class="card_description">and communicate with the owner to acquire the new friend All you have to do is choose the required animal and fill in the fields with their requirements </p>
+
+                            </div>
+                        </article>
+                    </Stack>
 
                 </Stack>
             </Box>
