@@ -272,7 +272,7 @@ export default function BlogPage() {
                             },
                             gap: 10
                         }}>
-                        <article class="card card-image-pet1">
+                        <article class="card2 card-image-pet1">
                             <div class="temporary_text">
 
                             </div>
@@ -283,7 +283,7 @@ export default function BlogPage() {
 
                             </div>
                         </article>
-                        <article class="card card-image-pet2">
+                        <article class="card2 card-image-pet2">
                             <div class="temporary_text">
 
                             </div>
@@ -294,7 +294,7 @@ export default function BlogPage() {
 
                             </div>
                         </article>
-                        <article class="card card-image-pet3">
+                        <article class="card2 card-image-pet3">
                             <div class="temporary_text">
 
                             </div>

@@ -49,7 +49,7 @@ body {
   margin: 20px 10%;
 }
 
-.main >div {
+.main>div {
   border-radius: 18px;
 }
 
@@ -70,11 +70,13 @@ body {
   background-color: white;
 
 }
-.card-resp{
+
+.card-resp {
   max-height: 42vh;
-   max-width: 35vw;
-   min-width: 160px;
+  max-width: 35vw;
+  min-width: 160px;
 }
+
 .main .main-display-items {
   grid-column: 1/13;
   display: flex;
@@ -119,11 +121,13 @@ body {
   padding: 10px;
   border-radius: 10px;
   position: relative;
-} 
-.pet-main .pet-images .main-image :nth-child(1){
+}
+
+.pet-main .pet-images .main-image :nth-child(1) {
   border-radius: 10px;
 }
-.pet-main .pet-images .main-image .maim-img-pet{
+
+.pet-main .pet-images .main-image .maim-img-pet {
   border-radius: 10px;
   object-fit: contain;
   height: 100%;
@@ -131,16 +135,18 @@ body {
   z-index: 10;
   position: absolute;
 }
-.pet-main .pet-images .main-image .back-image{
+
+.pet-main .pet-images .main-image .back-image {
   border-radius: 20px;
   object-fit: cover;
   height: 100%;
   width: 100%;
-  filter:blur(10px);
+  filter: blur(10px);
   z-index: 9;
   position: absolute;
 }
-.maim-img-pet{
+
+.maim-img-pet {
   object-fit: contain;
   height: 100%;
   width: 100%;
@@ -207,12 +213,14 @@ body {
   align-items: center;
   margin-top: 20px;
 }
-.but-adobt  a{
+
+.but-adobt a {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .but-adobt button {
   border-radius: 30px;
   flex: 1;
@@ -227,55 +235,63 @@ body {
 .adoubt-input {
   width: 100%;
 }
-.adoubt-input button:first-child{
+
+.adoubt-input button:first-child {
   width: 100%;
- margin: 5px;
- padding: 10px;
- font-size: large;
+  margin: 5px;
+  padding: 10px;
+  font-size: large;
 }
-.adoubt-input button:first-child :hover{
+
+.adoubt-input button:first-child :hover {
   background-color: rgb(1, 113, 1);
 
 }
-.formik-dispy{
+
+.formik-dispy {
   margin: 10px 30px;
   color: red;
 }
-.formik-dispy  .form-inputs{
+
+.formik-dispy .form-inputs {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
 }
-.form-inputs  .input-lp{
+
+.form-inputs .input-lp {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  flex:  1 0 300px;
+  flex: 1 0 300px;
 }
-.form-inputs  .input-lp input,
-.form-inputs  .input-lp select
-{
+
+.form-inputs .input-lp input,
+.form-inputs .input-lp select {
   /* flex:  1 0 300px; */
 
-  padding:0px 10px;
+  padding: 0px 10px;
   height: 50px;
   border-radius: 30px;
   background-color: rgb(233, 236, 241);
   border: none;
   background-color: rgb(233, 236, 241);
 }
-.form-inputs .image input{
+
+.form-inputs .image input {
   background-color: transparent;
   border-radius: 0;
   outline: none;
   margin-top: 10px;
 }
-.form-inputs .input-lp label{
+
+.form-inputs .input-lp label {
   color: rgb(255, 170, 0);
   font-weight: bold;
   margin-left: 30px;
 }
-.formik-dispy button{
+
+.formik-dispy button {
   cursor: pointer;
   padding: 15px 0;
   width: 250px;
@@ -287,20 +303,23 @@ body {
   font-weight: bold;
   font-size: 18px;
 }
-.formik-dispy button:disabled{
+
+.formik-dispy button:disabled {
   background-color: rgb(202, 171, 109);
 }
 
 
 
-.dash{
-  margin:20px 10%;
+.dash {
+  margin: 20px 10%;
 }
-.dash .display-info{
+
+.dash .display-info {
   display: flex;
   gap: 10px;
 }
-.dash .display-info > div{
+
+.dash .display-info>div {
   flex: 1;
   background-color: white;
   box-shadow: 0 0px 40px -5px rgba(0, 0, 0, 0.13);
@@ -309,47 +328,52 @@ body {
   padding: 0 30px;
   border-radius: 20px;
 }
-.dash .display-info .buttom-add-pet{
+
+.dash .display-info .buttom-add-pet {
   display: block;
   background-color: transparent;
   box-shadow: none;
 }
-.dash .display-info .buttom-add-pet button{
+
+.dash .display-info .buttom-add-pet button {
   border-radius: 20px;
 }
+
 .dash .display-info .pending,
 .dash .display-info .avilble,
-.dash .display-info .adopted
-{
+.dash .display-info .adopted {
   gap: 30px;
 }
-.dash .display-info .pending h4{
+
+.dash .display-info .pending h4 {
   color: orange;
   font-size: 18px;
   font-weight: bold;
 }
-.dash .display-info .avilble h4{
+
+.dash .display-info .avilble h4 {
   color: rgb(25, 188, 144);
   font-size: 18px;
   font-weight: bold;
 }
-.dash .display-info .adopted h4{
+
+.dash .display-info .adopted h4 {
   color: rgb(54, 219, 255);
   font-size: 18px;
   font-weight: bold;
 }
 
 
-.dash .display-info .pending svg{
+.dash .display-info .pending svg {
   width: 50px;
-    padding: 14px;
-    background: rgba(255, 168, 0, 0.1);
-    fill: rgb(255, 168, 0);
-    border-radius: 8px;
-    display: block;
+  padding: 14px;
+  background: rgba(255, 168, 0, 0.1);
+  fill: rgb(255, 168, 0);
+  border-radius: 8px;
+  display: block;
 }
 
-.dash .display-info .avilble svg{
+.dash .display-info .avilble svg {
   width: 50px;
   padding: 14px;
   background: rgba(25, 188, 144, 0.1);
@@ -358,7 +382,7 @@ body {
   display: block;
 }
 
-.dash .display-info .adopted svg{
+.dash .display-info .adopted svg {
   width: 50px;
   padding: 14px;
   background: rgba(54, 219, 255, 0.1);
@@ -367,22 +391,23 @@ body {
   display: block;
 }
 
-.tbale-dash-user{
-  background-color: white!important;
+.tbale-dash-user {
+  background-color: white !important;
   margin-top: 20px;
   border-radius: 10px;
   box-shadow: 0 0px 40px -5px rgba(0, 0, 0, 0.13);
 
 }
+
 @media screen and (max-width:1000px) {
-  .dash .display-info{
+  .dash .display-info {
     flex-direction: column;
   }
-  
+
 }
 
-.main-log{
-  background-image: url("../public/images/loginImage.webp") ;
+.main-log {
+  background-image: url("../public/images/loginImage.webp");
   background-repeat: no-repeat;
   background-size: contain;
   background-position: bottom 0px left 0px;
@@ -391,11 +416,13 @@ body {
   display: flex;
   /* position: relative; */
 }
-.formik-dispy-log{
+
+.formik-dispy-log {
   color: red;
 }
-.main-log .platform{
-  width:350px;
+
+.main-log .platform {
+  width: 350px;
   position: absolute;
   right: 0;
   background-color: rgba(255, 255, 255, 0.684);
@@ -404,41 +431,46 @@ body {
   margin: 30px 5%;
   padding: 10px;
 }
+
 .main-log .platform .info {
   text-align: center;
 
 }
-.main-log .platform .info h1{
+
+.main-log .platform .info h1 {
   color: orange;
 }
-.main-log .platform .info span{
+
+.main-log .platform .info span {
   color: #14c7f8;
 }
-.main-log .platform .inputs{
+
+.main-log .platform .inputs {
   display: flex;
   flex-direction: column;
   gap: 20px;
   margin-top: 40px;
 }
-.main-log .platform .inputs  >div,
-.main-log .platform .inputs .email div
-{
-    width: 100%;
-    border-radius: 20px;
+
+.main-log .platform .inputs>div,
+.main-log .platform .inputs .email div {
+  width: 100%;
+  border-radius: 20px;
 }
 
-.main-log .platform  .btns{
+.main-log .platform .btns {
   display: flex;
   flex-direction: column;
   gap: 20px;
   margin: 30px 0px;
 }
-.main-log .platform  .btns a{
+
+.main-log .platform .btns a {
   width: 100%;
 }
-.main-log .platform  .btns a button,
-.main-log .platform  .btns button
-{
+
+.main-log .platform .btns a button,
+.main-log .platform .btns button {
   padding: 10px 0;
   border-radius: 20px;
   font-weight: bold;
@@ -447,66 +479,73 @@ body {
 }
 
 @media screen and (max-width:1200px) {
-  .main-log .platform{
+  .main-log .platform {
     left: 50%;
     top: 50%;
     margin: 0;
-    transform: translate(-50% ,-50%);
+    transform: translate(-50%, -50%);
   }
 }
+
 @media screen and (max-width:850px) {
   .main .first .input-search {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    
-  
+
+
   }
 }
 
 @media screen and (max-width:650px) {
-  .pet-main,.main , .dash{
+
+  .pet-main,
+  .main,
+  .dash {
     margin: 20px 10px;
   }
-  
-  
+
+
 }
 
-.noNote{
+.noNote {
   height: 300px;
   width: 100%;
   min-width: 200px;
 }
-.noNote .image{
+
+.noNote .image {
   width: 200px;
   height: 80%;
   background: url('../public/images/noNoteDog.gif')center no-repeat;
   background-size: calc(450px);
 }
-.noNote .text{
+
+.noNote .text {
   text-align: center;
 }
-.avatarprofile{
-  border-radius: 50%!important;
-  
+
+.avatarprofile {
+  border-radius: 50% !important;
+
 }
 
- 
 
-.main-images-title{
+
+.main-images-title {
   position: absolute;
 }
- 
-.first-img{
+
+.first-img {
   height: 100%;
   width: 100%;
   background-image: url('../public/blogImage/test.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
- }
+}
 
-.daopt-image{
+.daopt-image {
   width: 70%;
   height: 100%;
   background-image: url('../public/blogImage/blackdog.jpg');
@@ -515,7 +554,8 @@ body {
   background-position: center;
   border-radius: 20px;
 }
-.daopt-image2{
+
+.daopt-image2 {
   width: 50%;
   height: 60%;
   background-image: url('../public/blogImage/rebbit.jpg');
@@ -526,24 +566,25 @@ body {
   position: absolute;
   right: 0;
   top: 20%;
-  transform: translate(0%,10px);
-  box-shadow: 0 4px 35px rgba(0,0,0,.1);
+  transform: translate(0%, 10px);
+  box-shadow: 0 4px 35px rgba(0, 0, 0, .1);
 }
 
-ul.pet-cart{
+ul.pet-cart {
   height: 100%;
   display: flex;
   flex-direction: column;
   gap: 35px;
- }
- .image-dog-tapan-png{
+}
+
+.image-dog-tapan-png {
   width: 100%;
   height: 100%;
   background-image: url('../public/blogImage/pngpet.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
- }
+}
 
 
 
@@ -557,8 +598,8 @@ ul.pet-cart{
 
 
 
- /* card start ============ */
- .card {
+/* card start ============ */
+.card2 {
   position: relative;
   width: 250px;
   height: 280px;
@@ -568,17 +609,20 @@ ul.pet-cart{
   background-position: bottom;
   overflow: hidden;
   border-radius: 20px;
-  box-shadow: 0 4px 35px rgba(0,0,0,.1);
+  box-shadow: 0 4px 35px rgba(0, 0, 0, .1);
 }
-.card-image-pet1{
+
+.card-image-pet1 {
   background-image: url('../public/blogImage/smaledog.jpg');
 
 }
-.card-image-pet2{
+
+.card-image-pet2 {
   background-image: url('../public/blogImage/catpink.jpg');
 
 }
-.card-image-pet3{
+
+.card-image-pet3 {
   background-image: url('../public/blogImage/greendog.jpg');
 
 }
@@ -598,12 +642,12 @@ ul.pet-cart{
   position: absolute;
   left: 0;
   bottom: 0;
-    /* edit the width to fit card */
+  /* edit the width to fit card */
   width: 100%;
   padding: 20px;
   background: #f2f2f2;
   border-top-left-radius: 20px;
-    /* edit here to change the height of the content box */
+  /* edit here to change the height of the content box */
   transform: translateY(150px);
   transition: transform .25s;
 }
@@ -637,13 +681,13 @@ ul.pet-cart{
   transition: opacity .5s;
 }
 
-.card:hover .card_content {
+.card2:hover .card_content {
   transform: translateY(0);
 }
 
-.card:hover .card_description {
+.card2:hover .card_description {
   opacity: 1;
   transition-delay: .25s;
 }
 
- /* ================== */
+/* ================== */
