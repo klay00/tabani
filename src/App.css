@@ -16,7 +16,6 @@ a {
 body {
   background-color: rgb(244 244 244);
   font-family: 'Nunito', sans-serif;
-  /* background-image: url('../public/images/bg.png');   */
 
 }
 
@@ -232,6 +231,28 @@ body {
   background-color: rgb(3, 188, 3);
 }
 
+
+
+.but-adobt2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+.but-adobt2  a{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.but-adobt2 button {
+  border-radius: 30px;
+  flex: 1;
+  color: white;
+  font-weight: bold;
+}
+
+
 .adoubt-input {
   width: 100%;
 }
@@ -307,11 +328,15 @@ body {
 .formik-dispy button:disabled {
   background-color: rgb(202, 171, 109);
 }
+ 
 
 
+.input-lp .image input{
+  display: none;
+}
+.dash{
+  margin:20px 10%;
 
-.dash {
-  margin: 20px 10%;
 }
 
 .dash .display-info {
@@ -525,6 +550,7 @@ body {
   text-align: center;
 }
 
+
 .avatarprofile {
   border-radius: 50% !important;
 
@@ -691,3 +717,4 @@ ul.pet-cart {
 }
 
 /* ================== */
+

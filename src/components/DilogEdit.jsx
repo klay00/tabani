@@ -74,7 +74,7 @@ export default function DialogEdit({ name, icon, userId }) {
         setSelectedFile(file);
         setPreviewImage(URL.createObjectURL(file));
     };
-const [empty,setEmpty]=useState(false)
+
     const handleSubmit = async (event) => {
         setLoding(true)
         event.preventDefault();
