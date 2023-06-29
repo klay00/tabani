@@ -28,6 +28,7 @@ export default function BlogPage() {
                     md: 10,
                     lg: 20
                 }}
+                marginBottom={5}
             >
 
                 <Stack
@@ -239,7 +240,6 @@ export default function BlogPage() {
                         }}
                         justifyContent={'space-between'}
                         alignItems={'center'}
-
                     >
                         <Typography
                             sx={{
@@ -250,7 +250,7 @@ export default function BlogPage() {
                             variant="h1" gutterBottom>
                             What does
                             <span style={{ color: '#FFA800', marginRight: 10, marginLeft: 10 }}>tabani</span>
-                            Tibani offer you
+                            offer you
                         </Typography>
                         <div className="image-dog-tapan-png"></div>
                     </Stack>
@@ -274,7 +274,7 @@ export default function BlogPage() {
                         }}>
                         <article class="card card-image-pet1">
                             <div class="temporary_text">
- 
+
                             </div>
                             <div class="card_content">
                                 <span class="card_title">Offer for adoption</span>
@@ -285,7 +285,7 @@ export default function BlogPage() {
                         </article>
                         <article class="card card-image-pet2">
                             <div class="temporary_text">
- 
+
                             </div>
                             <div class="card_content">
                                 <span class="card_title">Check out the available pets</span>
@@ -296,7 +296,7 @@ export default function BlogPage() {
                         </article>
                         <article class="card card-image-pet3">
                             <div class="temporary_text">
- 
+
                             </div>
                             <div class="card_content">
                                 <span class="card_title">Apply for adoption</span>
@@ -309,6 +309,29 @@ export default function BlogPage() {
 
                 </Stack>
             </Box>
+            <Box
+                sx={{
+                    height: {
+                        lg: 80,
+                        md: 70,
+                        sm: 50,
+                        xs: 40,
+                    },
+
+                    width: '100%',
+                    backgroundColor: '#FFA800',
+                    borderTopLeftRadius: 70,
+                    borderTopRightRadius: 70,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    gap: 2,
+                }}
+            >
+                <PetsIcon />
+                <h3>tabani</h3>
+            </Box>
+
         </>
     );
 }
