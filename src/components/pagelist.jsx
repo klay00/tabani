@@ -1,5 +1,4 @@
 import React from 'react';
-import AllProduct from '../pages/allproduct';
 import NoPage from '../pages/nopage';
 import PetPage from '../pages/petpage';
 import Profile from '../pages/profile';
@@ -9,10 +8,11 @@ import PersonIcon from '@mui/icons-material/Person';
 import PetsIcon from '@mui/icons-material/Pets';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import WebIcon from '@mui/icons-material/Web';
+import BlogPage from '../pages/BlogPage';
 const pagelist = [
   {
-    path: '/allproduct',
-    page: <AllProduct />
+    path: '/blogbage',
+    page: <BlogPage />
   },
   {
     path: '/profile',
@@ -35,21 +35,12 @@ export const NavPages = [
     path: '/',
     page: <HomePage />
   },
-  // {
-  //   name:'All Pets',
-  //   path: '/allproduct',
-  //   page: <AllProduct />
-  // },
-  // {
-  //   name:'Cats',
-  //   path: '/allproduct',
-  //   page: <AllProduct />
-  // },
-  // {
-  //   name:'Dogs',
-  //   path: '/allproduct',
-  //   page: <AllProduct />
-  // },
+  {
+    name:'Blog',
+    path: '/blogbage',
+    page: <BlogPage />
+  },
+
 ];
 
 export const options = [

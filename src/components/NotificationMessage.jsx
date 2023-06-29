@@ -56,6 +56,7 @@ export default function NotificationMessage({ data }) {
         <div>
             <ThemeProvider theme={theme}>
                 <div >
+
                     <Button onClick={handleClickOpen}>
                         Pet request accepted {data.petName}
                     </Button>
