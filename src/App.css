@@ -718,3 +718,18 @@ ul.pet-cart {
 
 /* ================== */
 
+.in-image{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 22px;
+  background-color: rgb(233, 236, 241);;
+  border: 2px dashed #FFA800;
+  border-radius: 80px;
+}
+.in-image label{
+  margin: 0px!important;
+  cursor: pointer;
+  width: 100%;
+  font-size: 23px;
+ }
