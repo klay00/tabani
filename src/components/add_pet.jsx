@@ -61,12 +61,6 @@ export default function AddPet() {
         {/* start inputes formik */}
            
           <InputAddPet/>
-
-           
-          {/* <CompInput/> */}
-
-
-
       </Dialog>
       </ThemeProvider>
       
