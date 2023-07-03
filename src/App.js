@@ -71,21 +71,21 @@ function App() {
             <Route path='/login' element={<LogIn />} />
             <Route path='/signup' element={<SignUp />} />
             <Route path='*' element={<NoPage />} />
-            {/* {user && user.status === 'Admin' ? (
+            {user && user.status === 'Admin' ? (
             <>
               <Route path="/admin_dash" element={<AdminHome />} />
               <Route path="/user_admin" element={<UserAdmin />} />
               <Route path="/pet_admin" element={<PetAdmin />} />
               <Route path="/order_admin" element={<OrderAdmin />} />
             </>
-          ) : null} */}
+          ) : null}
             {haveUser ? (
               <>
                 <Route path="/dash_user" element={<DashUser />} />
-                <Route path="/admin_dash" element={<AdminHome />} />
+                {/* <Route path="/admin_dash" element={<AdminHome />} />
                 <Route path="/user_admin" element={<UserAdmin />} />
                 <Route path="/pet_admin" element={<PetAdmin />} />
-                <Route path="/order_admin" element={<OrderAdmin />} />
+                <Route path="/order_admin" element={<OrderAdmin />} /> */}
               </>
 
             ) : null}
