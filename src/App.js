@@ -16,6 +16,8 @@ import NoPage from './pages/nopage';
 import SignUp from './pages/signup';
 
 function App() {
+  const haveUser = localStorage.getItem('token')
+  console.log(haveUser);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -48,12 +50,12 @@ function App() {
       console.log('Error fetching user data:', error);
     }
   };
-console.log();
+  console.log();
   return (
     <>
       <BrowserRouter>
         <Routes path="./pages/">
-        <Route >
+          <Route >
             <Route index element={<HomePage />} />
             {
               pagelist.map((page) => {
@@ -67,19 +69,27 @@ console.log();
           </Route>
           <Route >
             <Route path='/login' element={<LogIn />} />
-            <Route path='/signup' element={<SignUp />} />                        
-            {user && user.status === 'Admin' ? (
+            <Route path='/signup' element={<SignUp />} />
+            <Route path='*' element={<NoPage />} />
+            {/* {user && user.status === 'Admin' ? (
             <>
               <Route path="/admin_dash" element={<AdminHome />} />
               <Route path="/user_admin" element={<UserAdmin />} />
               <Route path="/pet_admin" element={<PetAdmin />} />
               <Route path="/order_admin" element={<OrderAdmin />} />
             </>
-          ) : null}
-          {user ? (
-            <Route path="/dash_user" element={<DashUser />} />
-          ) : null}           
-            <Route path='*' element={<NoPage/>} />
+          ) : null} */}
+            {haveUser ? (
+              <>
+                <Route path="/dash_user" element={<DashUser />} />
+                <Route path="/admin_dash" element={<AdminHome />} />
+                <Route path="/user_admin" element={<UserAdmin />} />
+                <Route path="/pet_admin" element={<PetAdmin />} />
+                <Route path="/order_admin" element={<OrderAdmin />} />
+              </>
+
+            ) : null}
+
 
           </Route>
 
