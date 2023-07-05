@@ -70,19 +70,12 @@ body {
 
 }
 
-.card-resp {
-  max-height: 42vh;
-  max-width: 35vw;
-  min-width: 160px;
-}
-
 .main .main-display-items {
   grid-column: 1/13;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   width: 100%;
-  justify-content: center;
 }
 
 .main .first button {
@@ -239,12 +232,14 @@ body {
   align-items: center;
   margin-top: 20px;
 }
-.but-adobt2  a{
+
+.but-adobt2 a {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .but-adobt2 button {
   border-radius: 30px;
   flex: 1;
@@ -328,14 +323,15 @@ body {
 .formik-dispy button:disabled {
   background-color: rgb(202, 171, 109);
 }
- 
 
 
-.input-lp .image input{
+
+.input-lp .image input {
   display: none;
 }
-.dash{
-  margin:20px 10%;
+
+.dash {
+  margin: 20px 10%;
 
 }
 
@@ -716,20 +712,3 @@ ul.pet-cart {
   transition-delay: .25s;
 }
 
-/* ================== */
-
-.in-image{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 22px;
-  background-color: rgb(233, 236, 241);;
-  border: 2px dashed #FFA800;
-  border-radius: 80px;
-}
-.in-image label{
-  margin: 0px!important;
-  cursor: pointer;
-  width: 100%;
-  font-size: 23px;
- }
