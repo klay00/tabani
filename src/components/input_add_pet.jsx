@@ -45,8 +45,7 @@ export default function InputAddPet() {
     const fileList = event.target.files;
     const uploadedImages = Array.from(fileList).map((file) => file);
     setImages((prevImages) => [...prevImages, ...uploadedImages]);
-    console.log(images);
-  };
+   };
 
   const onSubmit = async (values) => {
     setLoading(true);
@@ -54,8 +53,7 @@ export default function InputAddPet() {
       const unsubscribe = auth.onAuthStateChanged(async (user) => {
         if (user) {
           const userId = user.uid;
-          console.log(userId);
-          try {
+           try {
             const imageUrls = [];
             const storage = getStorage();
 
@@ -65,8 +63,6 @@ export default function InputAddPet() {
               const imageUrl = await getDownloadURL(storageRef);
               imageUrls.push(imageUrl);
             }
-
-            console.log('Image URLs: ', imageUrls);
 
             await addDoc(collection(db, 'pets'), {
               userId: userId,
@@ -111,8 +107,7 @@ export default function InputAddPet() {
 
     return () => {
       clearInterval(timer);
-      console.log(currentTime);
-    };
+     };
   }, []);
   return (
     <div>

@@ -1,5 +1,5 @@
 
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import { collection, getDocs  } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import '../App.css';
 import { db } from '../firebase/firebase';
@@ -7,7 +7,7 @@ import OverflowCard from './cart';
 import { SkeltonCard } from './skelton_card';
 import { Autocomplete, Button, Stack, TextField, ThemeProvider } from "@mui/material";
 import theme from "../tools/theem";
-import { options, Location } from "./pagelist";
+import { options  } from "./pagelist";
 import Box from '@mui/material/Box';
 import SearchIcon from '@mui/icons-material/Search';
 import Lodaer from './loader';
@@ -81,8 +81,7 @@ export default function MainDisplay() {
   return (
     <div className="main">
       <div className="first">
-        {/* <Search /> */}
-        <div style={{ width: '100%' }}>
+         <div style={{ width: '100%' }}>
             <ThemeProvider theme={theme}>
                 <form onSubmit={handleSubmit} >
                     <div className="input-search" >
@@ -101,21 +100,7 @@ export default function MainDisplay() {
                                 renderInput={(params) => <TextField {...params} label="Pet" />}
                             />
                         </Box>
-                        {/* <Box
-                            sx={{
-                                width: "100%",
-                            }}
-                        >
-                            <Autocomplete
-                                disablePortal
-                                id="combo-box-dem"
-                                fullWidth
-                                options={Location}
-                                value={locationValue}
-                                onChange={(event, newValue) => setLocationValue(newValue)}
-                                renderInput={(params) => <TextField {...params} label="Location" />}
-                            />
-                        </Box>                           */}
+ 
                         <Button type="submit" variant="contained" sx={{ fontSize: 'md', pl: 5, pr: 5 }}>
                         {
                            loding? <Lodaer/>: <Stack direction={'row'}><SearchIcon />Search</Stack>

@@ -111,8 +111,7 @@ export default function DialogEdit({ name, icon, userId }) {
             }, { merge: true });
            window.location.href = '/'; 
         } catch (e) {
-            console.log(e);
-        }
+         }
         setLoding(false)
         
     }
@@ -129,8 +128,7 @@ export default function DialogEdit({ name, icon, userId }) {
             console.log('Document updated successfully!'); 
             window.location.href = '/';
         } catch (e) {
-            console.log(e);
-        }
+         }
 
         setLoding(false)
        

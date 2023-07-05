@@ -57,7 +57,7 @@ export default function NavBar() {
         setUser(null);
       }
     } catch (error) {
-      console.log('Error fetching user data:', error);
+
     }
   };
   const [notifc, setNotifc] = useState([]);
@@ -71,11 +71,11 @@ export default function NavBar() {
         }));
       setNotifc(notif)
     } catch (e) {
-      console.log(e);
+
     }
   }
-  console.log(user);
 
+  
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -94,13 +94,13 @@ export default function NavBar() {
     setAnchorElUser(null);
   };
   const token = localStorage.getItem('token');
-  // console.log(token);
+
   function handelRemovToken(path) {
     if (path === '/login') {
       localStorage.removeItem('token');
       userInfo.push('');
       setUser(null)
-      console.log('token deleted');
+
     }
   }
 
@@ -113,7 +113,7 @@ export default function NavBar() {
       <AppBar position="static" color='secondary'>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
+
             <Typography
               variant="h6"
               noWrap
@@ -171,7 +171,7 @@ export default function NavBar() {
                 ))}
               </Menu>
             </Box>
-            {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
+
             <Typography
               variant="h5"
               noWrap
@@ -181,7 +181,6 @@ export default function NavBar() {
                 mr: 2,
                 display: { xs: 'flex', md: 'none' },
                 flexGrow: 1,
-                // fontFamily: 'monospace',
                 fontWeight: 700,
                 letterSpacing: '.3rem',
                 color: 'inherit',
@@ -258,8 +257,6 @@ export default function NavBar() {
                 </Stack>
               </Box> : <Link to={'/login'}><Button sx={{ color: 'white' }} variant="outlined">LogIn</Button></Link>
             }
-
-
           </Toolbar>
         </Container>
       </AppBar>

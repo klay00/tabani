@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import '../App.css';
-import { Alert, Avatar, Snackbar} from '@mui/material';
+import {  Avatar } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import PetsIcon from '@mui/icons-material/Pets';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -29,12 +29,10 @@ export default function ValueGetterGrid() {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (authUser) => {
       if (authUser) {
-        console.log(authUser.uid);
         setUserId(authUser.uid);
         fetchPetData();
         fetchOrder();
       } else {
-        console.log('xxxxxxxxxxxx');
       }
     });
 
@@ -156,8 +154,7 @@ export default function ValueGetterGrid() {
   const deleteDocument = async (documentId) => {
     try {
       await deleteDoc(doc(db, 'pets', documentId));
-      console.log('Document deleted successfully');
-    } catch (error) {
+     } catch (error) {
       console.error('Error deleting document:', error);
     }
   };
@@ -171,8 +168,7 @@ export default function ValueGetterGrid() {
         return deleteObject(imageRef);
       });
       await Promise.all(promises);
-      console.log('Images deleted successfully');
-    } catch (error) {
+     } catch (error) {
       console.error('Error deleting images:', error);
     }
   };
