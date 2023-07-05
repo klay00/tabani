@@ -10,9 +10,6 @@ import { db } from "../firebase/firebase";
 export default function DashUser() {
   const data = useLocation();
   const userData = data.state;
-  console.log('============================');
-  console.log(userData);
-  console.log('============================');
   
   const initialCounts = {
     available: 0,

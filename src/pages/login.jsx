@@ -13,7 +13,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from '../tools/theem';
 import { Link } from "react-router-dom";
 import {  signInWithEmailAndPassword   } from 'firebase/auth';
-import { NavLink, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { auth } from "../firebase/firebase";
 import Lodaer from "../components/loader";
 
@@ -50,7 +50,6 @@ const onSubmit = async (values, { setSubmitting }) => {
           navigate('/');
         })
         .catch((error) => {
-          console.error('Error getting user token:', error);
           setLoding(false);
         });
     } else {
@@ -73,7 +72,6 @@ const onSubmit = async (values, { setSubmitting }) => {
     }
     
     setLoding(false);
-    console.log(errorMessage);
     setMesserr(errorMessage);
   }
 };

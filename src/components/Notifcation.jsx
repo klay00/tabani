@@ -17,7 +17,7 @@ export default function Notfcation({data}) {
     const handleClose = () => {
         setAnchorEl(null);
     };
-    console.log(data.length);
+
     return (
         <>
             <ThemeProvider theme={theme}>
