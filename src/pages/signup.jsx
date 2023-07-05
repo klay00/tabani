@@ -82,7 +82,7 @@ export default function SignUp() {
                 errorMessage = 'An error occurred. Please try again later.';
             }
             setLoding(false);
-            console.log(errorMessage);
+
             setmesserr(errorMessage);
         }
       };

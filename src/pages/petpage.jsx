@@ -15,14 +15,6 @@ import AlartMessageLogin from "../components/alert_message_login";
 
 export default function PetPage() {
 
-    const [open, setOpen] = React.useState(false);
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-    const handleClose = () => {
-        setOpen(false);
-    };
 
     const token=localStorage.getItem('token');
 
@@ -34,8 +26,6 @@ export default function PetPage() {
         console.log(location.state);
         featchUserData()
     }, []);
-    console.log(pet);
-
 
     const [imgUrl, setImgUrl] = useState([]);
     useEffect(() => {

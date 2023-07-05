@@ -2,7 +2,7 @@ import { Avatar } from "@mui/material";
 import { Stack } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import OverflowCard from "../components/cart";
-import NavBar, { userInfo } from "../components/navbar";
+import NavBar from "../components/navbar";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useLocation } from "react-router-dom";
 import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
@@ -15,7 +15,6 @@ import "../App.css"
 export default function Profile() {
   const data = useLocation();
   const userData = data.state;
-  // console.log(userData);
   const [loding, setLoding] = useState(false)
   const [petData, setPetData] = useState([]);
   const featchUserData = async () => {
@@ -69,12 +68,10 @@ export default function Profile() {
         setUser(null);
       }
     } catch (error) {
-      console.log('Error fetching user data:', error);
+
     }
   };
-  console.log('-------------------------');
-  console.log(user)
-  console.log('-------------------------');
+
   return (
     <>
       <NavBar />
