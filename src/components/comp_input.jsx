@@ -129,14 +129,6 @@ export default function CompInput({ pet }) {
                   <Field type="text" id="care" name="care" placeholder="Describe the methods of care used that you know about caring for a pet" />
                   <ErrorMessage name="care" component="div" />
                 </div>
-
-
-
-
-
-
-
-
               </div>
               <button type="submit">Submit</button>
             </Form>

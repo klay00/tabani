@@ -52,7 +52,6 @@ export default function PetDisplayAdmin({ petData }) {
             alert('Pet Hase been Posted')
             setLoding(false);
         } catch (e) {
-            console.log(e);
         }
     }
 
@@ -69,7 +68,7 @@ export default function PetDisplayAdmin({ petData }) {
             window.location.reload();
             setLoding(false);
         } catch (e) {
-            console.log(e);
+
         }
     }
 

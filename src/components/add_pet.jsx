@@ -10,7 +10,6 @@ import Slide from '@mui/material/Slide';
 import '../App.css';
 import { ThemeProvider } from "@mui/material/styles";
 import theme from '../tools/theem';
-import CompInput from './comp_input';
 import InputAddPet from './input_add_pet';
 
 

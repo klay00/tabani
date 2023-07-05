@@ -16,62 +16,54 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function FullScreenDialog({pet}) {
+export default function FullScreenDialog({ pet }) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
-   return  setOpen(true);
+    return setOpen(true);
   };
 
   const handleClose = () => {
-    return  setOpen(false);
+    return setOpen(false);
   };
 
   return (
-    
+
     <div className='adoubt-input'>
       <ThemeProvider theme={theme}>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Adobt now
-      </Button>
-      {
-        
-      }
-      <Dialog
-        fullScreen
-        open={open}
-        onClose={handleClose}
-        TransitionComponent={Transition}
-      >
-        <AppBar sx={{ position: 'relative' }}>
-          <Toolbar>
-            <IconButton
-              edge="start"
-              color="inherit"
-              onClick={handleClose}
-              aria-label="close"
-            >
-              <CloseIcon />
-            </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              Adopt pet
-            </Typography>          
-          </Toolbar>
-        </AppBar>
+        <Button variant="outlined" onClick={handleClickOpen}>
+          Adobt now
+        </Button>
+        {
 
-        {/* start inputes formik */}
-           
- 
+        }
+        <Dialog
+          fullScreen
+          open={open}
+          onClose={handleClose}
+          TransitionComponent={Transition}
+        >
+          <AppBar sx={{ position: 'relative' }}>
+            <Toolbar>
+              <IconButton
+                edge="start"
+                color="inherit"
+                onClick={handleClose}
+                aria-label="close"
+              >
+                <CloseIcon />
+              </IconButton>
+              <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+                Adopt pet
+              </Typography>
+            </Toolbar>
+          </AppBar>
 
-           <CompInput pet={pet}/>
-           
-          
-
-
-
-      </Dialog>
+          {/* start inputes formik */}
+          <CompInput pet={pet} />
+        </Dialog>
       </ThemeProvider>
-      
+
     </div>
   );
 }
