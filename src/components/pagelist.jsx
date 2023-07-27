@@ -19,7 +19,7 @@ const pagelist = [
     page: <Profile />
   },
   {
-    path: '/petpage',
+    path: '/petpage/:id',
     page: <PetPage />
   }
   ,
