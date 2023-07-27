@@ -35,13 +35,13 @@ export default function OverflowCard({
       >
         <CardOverflow fullWidth>
           <AspectRatio ratio="1.5">
-            <Link to={'../petpage'} state={pet}>
+            <Link to={`../petpage/${pet.id}`}>
               <img src={petImage} loading="lazy" alt="" />
             </Link>
           </AspectRatio>
         </CardOverflow>
         <Typography level="h2" sx={{ fontSize: 'md', mt: 1 }}>
-          <Link to={'../petpage'} state={pet}>
+          <Link to={`../petpage/${pet.id}`}>
             {petname}
           </Link>
         </Typography>
