@@ -3,7 +3,7 @@ import NavBar from "../components/navbar";
 import '../App.css';
 import { AspectRatio, Avatar, Button, Stack } from "@mui/joy";
 import MainButtom from "../components/buttom";
-import { Link, useLocation } from "react-router-dom";
+import { Link,  useParams } from "react-router-dom";
 import FullScreenDialog from "../components/adubt_inputs";
 import { collection, getDocs } from 'firebase/firestore';
 import '../App.css';
@@ -17,16 +17,29 @@ export default function PetPage() {
 
 
     const token=localStorage.getItem('token');
-
-
-    const location = useLocation();
+    const petId = useParams()
+    //const location = useLocation();
     const [pet, setpet] = useState([]);
     useEffect(() => {
-        setpet(location.state);
-        console.log(location.state);
-        featchUserData()
+        //setpet(location.state);
+        fetchPetData()
+        // featchUserData()
     }, []);
 
+    const fetchPetData = async () => {
+        try {
+            const q = await getDocs(collection(db, 'pets'));
+             const petData = q.docs.filter((doc) => doc.id === petId.id)
+            .map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+            }));
+            setpet(...petData);
+          } catch (error) {
+            console.error("Error fetching data:", error);
+          }
+      };
+  
     const [imgUrl, setImgUrl] = useState([]);
     useEffect(() => {
         if (pet.images && pet.images.length > 0) {
@@ -134,7 +147,7 @@ export default function PetPage() {
                         </table>
                         <div className="but-adobt">
                             {
-                                token?<FullScreenDialog pet={location.state} />:<AlartMessageLogin/>
+                                token?<FullScreenDialog pet={pet} />:<AlartMessageLogin/>
                             }
                         </div>
                     </div>
